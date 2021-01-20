@@ -154,7 +154,7 @@ class HtmlTextWithSubType:
     def __init__(
             self,
             sub: list[SubType] = None,
-            xhtml: list = None,
+            xhtml: list = None,  # TODO: check xhtml content
             lang: str = None,
             override: bool = False
     ):
@@ -189,7 +189,7 @@ class ProfileNoteType:
             self,
             tag: str,
             sub: list[SubType] = None,
-            xhtml: list = None,
+            xhtml: list = None,  # TODO: check xhtml content
             lang: str = None
     ):
         """
