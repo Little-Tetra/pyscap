@@ -3,6 +3,238 @@ import datetime
 from .enums import *
 
 
+# Text types
+
+class TextType:
+    """
+    Type for a simple text string with an @override attribute for controlling inheritance.
+    """
+
+    def __init__(
+            self,
+            content: str,
+            lang: str = None,
+            override: bool = False
+    ):
+        """
+
+        :param content: The content of the element.
+        :param lang:
+        :param override: Used to manage inheritance.
+        """
+
+        self.content = content
+        self.lang = lang
+        self.override = override
+
+
+class HtmlTextType:
+    """
+    The type for a string with optional XHTML elements and an @xml:lang attribute.
+    """
+
+    def __init__(
+            self,
+            xhtml: list = None,  # TODO: check xhtml content
+            lang: str = None,
+            override: bool = False
+    ):
+        """
+
+        :param xhtml: The xhtml content.
+        :param lang:
+        :param override: Used to manage inheritance.
+        """
+        if xhtml is None:
+            xhtml = []
+
+        self.xhtml = xhtml
+        self.lang = lang
+        self.override = override
+
+
+class IdrefType:
+    """
+    Data type for elements that contain a reference to another XCCDF element
+    """
+
+    def __init__(
+            self,
+            idref: str
+    ):
+        """
+
+        :param idref: The id value of another XCCDF element
+        """
+        self.idref = idref
+
+
+class IdrefListType:
+    """
+    Data type for elements contain list of references to other XCCDF elements
+    """
+
+    def __init__(
+            self,
+            idref: str
+    ):
+        """
+
+        :param idref: A space-separated list of id values from other XCCDF elements
+        """
+        self.idref = idref
+
+
+class CPE2idrefType:
+    """
+    Data type for <xccdf:platform> elements that do not need @override attributes. (I.e., <xccdf:platform> elements
+    that are in structures that cannot be extended, such as <xccdf:TestResult> and <xccdf:Benchmark> elements.) This
+    is used to identify the applicable target platform for its respective parent elements.
+    """
+
+    def __init__(
+            self,
+            idref: str
+    ):
+        """
+
+        :param idref: Should be a CPE 2.3 Applicability Language identifier using the Formatted String binding or the value of a <cpe:platform-specification> element's @id attribute, the latter acting as a reference to some expression defined using the CPE schema in the <xccdf:Benchmark> element's <cpe:platform-specification> element. The @idref may be a CPE Applicability Language identifier using the URI binding, although this is less preferred.
+        """
+        self.idref = idref
+
+
+class OverrideableCPE2idrefType(CPE2idrefType):
+    """
+    Data type for <xccdf:platform> elements that need @override attributes. (I.e., <xccdf:platform> elements that are
+    in structures that can be extended, such as Items and <xccdf:Profile> elements.) This is used to identify the
+    applicable target platform for its respective parent elements.
+    """
+
+    def __init__(
+            self,
+            override: bool = False,
+            **kwargs
+    ):
+        """
+
+        :param override: Used to manage inheritance.
+        """
+        super().__init__(**kwargs)
+        self.override = override
+
+
+class SubType(IdrefType):
+    """
+    The type used for <xccdf:sub> elements. The <xccdf:sub> element identifies replacement content that should appear
+    in place of the <xccdf:sub> element during text substitution. The subType consists of a regular idrefType with an
+    additional @use attribute to dictate the behavior of the <xccdf:sub> element under substitution. When the @idref
+    is to an <xccdf:Value>, the @use attribute indicates whether the <xccdf:Value> element's title or value should
+    replace the <xccdf:sub> element. The @use attribute is ignored when the @idref is to an <xccdf:plain-text>
+    element; the body of the <xccdf:plain-text> element is always used to replace the <xccdf:sub> element.
+    """
+
+    def __init__(
+            self,
+            use: SubUseEnumType = SubUseEnumType.value,
+            **kwargs
+    ):
+        """
+
+        :param use: Dictates the nature of the content inserted under text substitution processing.
+        """
+        super().__init__(**kwargs)
+        self.use = use
+
+
+class HtmlTextWithSubType:
+    """
+    The type for a string with optional XHTML elements, and an @xml:lang attribute.
+    """
+
+    def __init__(
+            self,
+            sub: list[SubType] = None,
+            xhtml: list = None,
+            lang: str = None,
+            override: bool = False
+    ):
+        """
+
+        :param sub: Specifies an <xccdf:Value> or <xccdf:plain-text> element to be used for text substitution.
+        :param xhtml:  The xhtml content.
+        :param lang:
+        :param override: Used to manage inheritance.
+        """
+        if sub is None:
+            sub = []
+        if xhtml is None:
+            xhtml = []
+
+        self.sub = sub
+        self.xhtml = xhtml
+        self.lang = lang
+        self.override = override
+
+
+class ProfileNoteType:
+    """
+    Type for an <xccdf:profile-note> within an <xccdf:Rule>. This element contains text that describes special
+    aspects of an <xccdf:Rule> relative to one or more <xccdf:Profile> elements. This allows an author to document
+    things within <xccdf:Rule> elements that are specific to a given <xccdf:Profile>. This information might then be
+    displayed to a reader based on the selection of a particular <xccdf:Profile>. The body text may include XHTML
+    mark-up as well as <xccdf:sub> elements.
+    """
+
+    def __init__(
+            self,
+            tag: str,
+            sub: list[SubType] = None,
+            xhtml: list = None,
+            lang: str = None
+    ):
+        """
+
+        :param tag: The identifier of this note.
+        :param sub: Specifies an <xccdf:Value> or <xccdf:plain-text> element to be used for text substitution.
+        :param xhtml:  The xhtml content.
+        :param lang:
+        """
+        if sub is None:
+            sub = []
+        if xhtml is None:
+            xhtml = []
+
+        self.tag = tag
+        self.sub = sub
+        self.xhtml = xhtml
+        self.lang = lang
+
+
+class TextWithSubType:
+    """
+    Type for a string with embedded <xccdf:Value> substitutions and an @override attribute to help manage inheritance.
+    """
+
+    def __init__(
+            self,
+            sub: list[SubType] = None,
+            lang: str = None,
+            override: bool = False
+    ):
+        """
+
+        :param sub: Specifies an <xccdf:Value> or <xccdf:plain-text> element to be used for text substitution.
+        :param lang:
+        :param override: Used to manage inheritance.
+        """
+        if sub is None:
+            sub = []
+
+        self.sub = sub
+        self.lang = lang
+        self.override = override
+
+
 # Global elements
 
 
