@@ -1,5 +1,102 @@
 import datetime
 
+from .enums import *
+
+
+# Global elements
+
+
+class Status:
+    """
+    The acceptance status of an element with an optional date attribute, which signifies the date of the status
+    change. If an element does not have its own <xccdf:status> element, its status is that of its parent element. If
+    there is more than one <xccdf:status> for a single element, then every instance of the <xccdf:status> element
+    must have a @date attribute, and the <xccdf:status> element with the latest date is considered the current status.
+    """
+
+    def __init__(
+            self,
+            content: StatusType,
+            date: datetime.date = None
+    ):
+        """
+
+        :param content: The content of the element
+        :param date: The date the parent element achieved the indicated status.
+        """
+        self.content = content
+        self.date = date
+
+
+class ParamType:
+    """
+    Type for a parameter used in the <xccdf:model> element, which records scoring model information. The contents of
+    this type represent a name-value pair, where the name is recorded in the @name attribute and the value appears in
+    the element body. <xccdf:param> elements with equal values for the @name attribute may not appear as children of
+    the same <xccdf:model> element.
+    """
+
+    def __init__(
+            self,
+            content: str,
+            name: str
+    ):
+        """
+
+        :param content: The content of the element.
+        :param name: The name associated with the contained value.
+        """
+        self.content = content
+        self.name = name
+
+
+class Model:
+    """
+    A suggested scoring model for an <xccdf:Benchmark>, also encapsulating any parameters needed by the model. Every
+    model is designated with a URI, which appears here as the system attribute. See the XCCDF specification for a
+    list of standard scoring models and their associated URIs. Vendors may define their own scoring models and
+    provide additional URIs to designate them. Some models may need additional parameters; to support such a model,
+    zero or more <xccdf:param> elements may appear as children of the <xccdf:model> element.
+    """
+
+    def __init__(
+            self,
+            system: str,
+            param: list[ParamType] = None
+    ):
+        """
+
+        :param system: A URI designating a scoring model.
+        :param param: Parameters provided as input to the designated scoring model.
+        """
+        if param is None:
+            param = []
+
+        self.system = system
+        self.param = param
+
+
+class VersionType:
+    """
+    Type for most <xccdf:version> elements.
+    """
+
+    def __init__(
+            self,
+            content: str,
+            time: datetime.datetime = None,
+            update: str = None
+    ):
+        """
+
+        :param content: The content of the element.
+        :param time: The time that this version of the associated element was completed.
+        :param update: A URI indicating a location where updates to the associated element may be obtained.
+        """
+        self.content = content
+        self.time = time
+        self.update = update
+
 
 # Base elements
 
@@ -24,57 +121,6 @@ class SelectableItemType(ItemType):
     """
     This abstract item type represents the basic data shared by all <xccdf:Group> and <xccdf:Rule> elements.
     """
-
-
-# Global elements
-
-class StatusType:
-    """
-    The statusType represents the possible levels of maturity or consensus level for its parent element as recorded
-    by an <xccdf:status> element.
-    """
-
-
-class Status(StatusType):
-    """
-    The acceptance status of an element with an optional date attribute, which signifies the date of the status
-    change. If an element does not have its own <xccdf:status> element, its status is that of its parent element. If
-    there is more than one <xccdf:status> for a single element, then every instance of the <xccdf:status> element
-    must have a @date attribute, and the <xccdf:status> element with the latest date is considered the current status.
-    """
-
-    def __init__(self, date=None, **kwargs):
-        """
-
-        :param date: The date the parent element achieved the indicated status.
-        :type date: datetime.date
-        """
-        super().__init__(**kwargs)
-        self.date = date
-
-
-class Model:
-    """
-    A suggested scoring model for an <xccdf:Benchmark>, also encapsulating any parameters needed by the model. Every
-    model is designated with a URI, which appears here as the system attribute. See the XCCDF specification for a
-    list of standard scoring models and their associated URIs. Vendors may define their own scoring models and
-    provide additional URIs to designate them. Some models may need additional parameters; to support such a model,
-    zero or more <xccdf:param> elements may appear as children of the <xccdf:model> element.
-    """
-
-    def __init__(self, system, param=None):
-        """
-
-        :param system: A URI designating a scoring model.
-        :type system: str
-        :param param: Parameters provided as input to the designated scoring model.
-        :type param: list[ParamType]
-        """
-        if param is None:
-            param = []
-
-        self.system = system
-        self.param = param
 
 
 # Main elements
