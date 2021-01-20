@@ -1,6 +1,9 @@
+from .types import *
+
+
 # Base elements
 
-class Item:
+class Item(ItemType):
     """
     An item is a named constituent of an <xccdf:Benchmark>. There are three types of items: <xccdf:Group>,
     <xccdf:Rule> and <xccdf:Value>. The <xccdf:Item> element type imposes constraints shared by all <xccdf:Group>,
@@ -11,7 +14,7 @@ class Item:
 
 # Global elements
 
-class Status:
+class Status(StatusType):
     """
     The acceptance status of an element with an optional date attribute, which signifies the date of the status
     change. If an element does not have its own <xccdf:status> element, its status is that of its parent element. If
@@ -32,14 +35,14 @@ class Model:
 
 # Main elements
 
-class Group:
+class Group(GroupType):
     """
     An item that can hold other items. It allows an author to collect related items into a common structure and
     provide descriptive text and references about them.
     """
 
 
-class Rule:
+class Rule(RuleType):
     """
     The <xccdf:Rule> element contains the description for a single item of guidance or constraint. <xccdf:Rule>
     elements form the basis for testing a target platform for compliance with an <xccdf:Benchmark>, for scoring,
@@ -47,14 +50,14 @@ class Rule:
     """
 
 
-class Value:
+class Value(ValueType):
     """
     The <xccdf:Value> element is a named parameter that can be substituted into properties of other elements within
     the <xccdf:Benchmark>, including the interior of structured check specifications and fix scripts.
     """
 
 
-class Profile:
+class Profile(ProfileType):
     """
     The <xccdf:Profile> element is a named tailoring for an <xccdf:Benchmark>. While an <xccdf:Benchmark> can be
     tailored in place by setting properties of various elements, <xccdf:Profile> elements allow one <xccdf:Benchmark>
@@ -62,7 +65,7 @@ class Profile:
     """
 
 
-class TestResult:
+class TestResult(TestResultType):
     """
     The <xccdf:TestResult> element encapsulates the results of a single application of an <xccdf:Benchmark> to a
     single target platform. The <xccdf:TestResult> element normally appears as the child of the <xccdf:Benchmark>
@@ -72,7 +75,7 @@ class TestResult:
     """
 
 
-class Tailoring:
+class Tailoring(TailoringType):
     """
     The <xccdf:Tailoring> element holds one or more <xccdf:Profile> elements. These <xccdf:Profile> elements record
     additional tailoring activities that apply to a given <xccdf:Benchmark>. <xccdf:Tailoring> elements are separate
