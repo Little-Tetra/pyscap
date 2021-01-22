@@ -8,5 +8,8 @@ setup(
     license='MIT',
     author='kevinju',
     author_email='',
-    description='Python package for handling Security Content Automation Protocol.'
+    description='Python package for handling Security Content Automation Protocol.',
+    install_requires=[
+        "xsdata"
+    ]
 )
