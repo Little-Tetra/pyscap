@@ -27,6 +27,7 @@ from .components import (
     FixTextType,
     FixType,
     CheckType,
+    ComplexCheckType,
     BenchmarkReferenceType,
     TailoringReferenceType,
     IdentityType,
@@ -166,7 +167,6 @@ class ValueType(ItemType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -175,7 +175,6 @@ class ValueType(ItemType):
         metadata={
             "name": "complex-value",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -183,7 +182,6 @@ class ValueType(ItemType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -192,7 +190,6 @@ class ValueType(ItemType):
         metadata={
             "name": "complex-default",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -200,7 +197,6 @@ class ValueType(ItemType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     lower_bound: List[SelNumType] = field(
@@ -208,7 +204,6 @@ class ValueType(ItemType):
         metadata={
             "name": "lower-bound",
             "type": "Element",
-            "namespace": "",
         }
     )
     upper_bound: List[SelNumType] = field(
@@ -216,28 +211,24 @@ class ValueType(ItemType):
         metadata={
             "name": "upper-bound",
             "type": "Element",
-            "namespace": "",
         }
     )
     choices: List[SelChoicesType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     source: List[UriRefType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     signature: Optional[SignatureType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -365,7 +356,6 @@ class RuleType(SelectableItemType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     impact_metric: Optional[str] = field(
@@ -373,7 +363,6 @@ class RuleType(SelectableItemType):
         metadata={
             "name": "impact-metric",
             "type": "Element",
-            "namespace": "",
         }
     )
     profile_note: List[ProfileNoteType] = field(
@@ -381,28 +370,24 @@ class RuleType(SelectableItemType):
         metadata={
             "name": "profile-note",
             "type": "Element",
-            "namespace": "",
         }
     )
     fixtext: List[FixTextType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     fix: List[FixType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     check: List[CheckType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     complex_check: Optional[ComplexCheckType] = field(
@@ -410,14 +395,12 @@ class RuleType(SelectableItemType):
         metadata={
             "name": "complex-check",
             "type": "Element",
-            "namespace": "",
         }
     )
     signature: Optional[SignatureType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -517,7 +500,6 @@ class GroupType(SelectableItemType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -662,7 +644,6 @@ class TestResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     tailoring_file: Optional[TailoringReferenceType] = field(
@@ -670,49 +651,42 @@ class TestResultType:
         metadata={
             "name": "tailoring-file",
             "type": "Element",
-            "namespace": "",
         }
     )
     title: List[TextType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     remark: List[TextType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     organization: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     identity: Optional[IdentityType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     profile: Optional[IdrefType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     target: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -721,7 +695,6 @@ class TestResultType:
         metadata={
             "name": "target-address",
             "type": "Element",
-            "namespace": "",
         }
     )
     target_facts: Optional[TargetFactsType] = field(
@@ -729,7 +702,6 @@ class TestResultType:
         metadata={
             "name": "target-facts",
             "type": "Element",
-            "namespace": "",
         }
     )
     target_id_ref: List[TargetIdRefType] = field(
@@ -737,7 +709,6 @@ class TestResultType:
         metadata={
             "name": "target-id-ref",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -753,7 +724,6 @@ class TestResultType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     set_value: List[ProfileSetValueType] = field(
@@ -761,7 +731,6 @@ class TestResultType:
         metadata={
             "name": "set-value",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -770,7 +739,6 @@ class TestResultType:
         metadata={
             "name": "set-complex-value",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -779,14 +747,12 @@ class TestResultType:
         metadata={
             "name": "rule-result",
             "type": "Element",
-            "namespace": "",
         }
     )
     score: List[ScoreType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -794,14 +760,12 @@ class TestResultType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     signature: Optional[SignatureType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -943,21 +907,18 @@ class ProfileType:
         metadata={
             "name": "dc-status",
             "type": "Element",
-            "namespace": "",
         }
     )
     version: Optional[VersionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     title: List[TextWithSubType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -965,28 +926,24 @@ class ProfileType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     reference: List[ReferenceType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     platform: List[OverrideableCpe2IdrefType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     select: List[ProfileSelectType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -995,7 +952,6 @@ class ProfileType:
         metadata={
             "name": "set-complex-value",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -1004,7 +960,6 @@ class ProfileType:
         metadata={
             "name": "set-value",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -1013,7 +968,6 @@ class ProfileType:
         metadata={
             "name": "refine-value",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -1022,7 +976,6 @@ class ProfileType:
         metadata={
             "name": "refine-rule",
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -1030,14 +983,12 @@ class ProfileType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     signature: Optional[SignatureType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -1159,7 +1110,6 @@ class TailoringType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     status: List[Status] = field(
@@ -1174,14 +1124,12 @@ class TailoringType:
         metadata={
             "name": "dc-status",
             "type": "Element",
-            "namespace": "",
         }
     )
     version: Optional[TailoringVersionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1189,7 +1137,6 @@ class TailoringType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     profile: List[Profile] = field(
@@ -1205,7 +1152,6 @@ class TailoringType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -1355,28 +1301,24 @@ class Benchmark:
         metadata={
             "name": "dc-status",
             "type": "Element",
-            "namespace": "",
         }
     )
     title: List[TextType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     description: List[HtmlTextWithSubType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     notice: List[NoticeType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     front_matter: List[HtmlTextWithSubType] = field(
@@ -1384,7 +1326,6 @@ class Benchmark:
         metadata={
             "name": "front-matter",
             "type": "Element",
-            "namespace": "",
         }
     )
     rear_matter: List[HtmlTextWithSubType] = field(
@@ -1392,14 +1333,12 @@ class Benchmark:
         metadata={
             "name": "rear-matter",
             "type": "Element",
-            "namespace": "",
         }
     )
     reference: List[ReferenceType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     plain_text: List[PlainTextType] = field(
@@ -1407,7 +1346,6 @@ class Benchmark:
         metadata={
             "name": "plain-text",
             "type": "Element",
-            "namespace": "",
         }
     )
     platform_specification: Optional[PlatformSpecification] = field(
@@ -1422,14 +1360,12 @@ class Benchmark:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     version: Optional[VersionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1437,7 +1373,6 @@ class Benchmark:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     model: List[Model] = field(
@@ -1487,7 +1422,6 @@ class Benchmark:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(

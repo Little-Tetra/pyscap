@@ -109,56 +109,48 @@ class ItemType:
         metadata={
             "name": "dc-status",
             "type": "Element",
-            "namespace": "",
         }
     )
     version: Optional[VersionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     title: List[TextWithSubType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     description: List[HtmlTextWithSubType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     warning: List[WarningType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     question: List[TextType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     reference: List[ReferenceType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     metadata: List[MetadataType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     abstract: bool = field(
@@ -294,28 +286,24 @@ class SelectableItemType(ItemType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     platform: List[OverrideableCpe2IdrefType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     requires: List[IdrefListType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     conflicts: List[IdrefType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     selected: bool = field(

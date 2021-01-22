@@ -237,7 +237,6 @@ class ComplexValueType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -320,7 +319,6 @@ class SelChoicesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     complex_choice: List[ComplexValueType] = field(
@@ -328,7 +326,6 @@ class SelChoicesType:
         metadata={
             "name": "complex-choice",
             "type": "Element",
-            "namespace": "",
         }
     )
     must_match: Optional[bool] = field(
@@ -685,14 +682,12 @@ class FixType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     instance: List[InstanceFixType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -981,7 +976,6 @@ class CheckType:
         metadata={
             "name": "check-import",
             "type": "Element",
-            "namespace": "",
         }
     )
     check_export: List[CheckExportType] = field(
@@ -989,7 +983,6 @@ class CheckType:
         metadata={
             "name": "check-export",
             "type": "Element",
-            "namespace": "",
         }
     )
     check_content_ref: List[CheckContentRefType] = field(
@@ -997,7 +990,6 @@ class CheckType:
         metadata={
             "name": "check-content-ref",
             "type": "Element",
-            "namespace": "",
         }
     )
     check_content: Optional[CheckContentType] = field(
@@ -1005,7 +997,6 @@ class CheckType:
         metadata={
             "name": "check-content",
             "type": "Element",
-            "namespace": "",
         }
     )
     system: Optional[str] = field(
@@ -1080,7 +1071,6 @@ class ComplexCheckType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     complex_check: List["ComplexCheckType"] = field(
@@ -1088,7 +1078,6 @@ class ComplexCheckType:
         metadata={
             "name": "complex-check",
             "type": "Element",
-            "namespace": "",
         }
     )
     operator: Optional[CcOperatorEnumType] = field(
@@ -1136,7 +1125,6 @@ class ProfileSelectType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     idref: Optional[str] = field(
@@ -1260,7 +1248,6 @@ class ProfileRefineValueType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     idref: Optional[str] = field(
@@ -1329,7 +1316,6 @@ class ProfileRefineRuleType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     idref: Optional[str] = field(
@@ -1490,7 +1476,6 @@ class TargetFactsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -1664,7 +1649,6 @@ class OverrideType:
         metadata={
             "name": "old-result",
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1673,7 +1657,6 @@ class OverrideType:
         metadata={
             "name": "new-result",
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1681,7 +1664,6 @@ class OverrideType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1838,7 +1820,6 @@ class RuleResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1846,49 +1827,42 @@ class RuleResultType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     ident: List[IdentType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     metadata: List[MetadataType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     message: List[MessageType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     instance: List[InstanceResultType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     fix: List[FixType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     check: List[CheckType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     complex_check: Optional[ComplexCheckType] = field(
@@ -1896,7 +1870,6 @@ class RuleResultType:
         metadata={
             "name": "complex-check",
             "type": "Element",
-            "namespace": "",
         }
     )
     idref: Optional[str] = field(

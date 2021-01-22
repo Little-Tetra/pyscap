@@ -97,7 +97,6 @@ class Model:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     system: Optional[str] = field(
@@ -364,7 +363,6 @@ class HtmlTextWithSubType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     w3_org_1999_xhtml_element: List[object] = field(
@@ -418,7 +416,6 @@ class ProfileNoteType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     w3_org_1999_xhtml_element: List[object] = field(
@@ -474,7 +471,6 @@ class TextWithSubType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     lang: Optional[str] = field(
