@@ -2,9 +2,23 @@
 
 Python package for handling Security Content Automation Protocol.
 
-## specifications
+*Warning: This project is still in the development stage, please do not use it in a production environment*
 
-Currently, all specifications are still in work.
+## Installing
+
+Install and update using pip:
+
+    pip install pyscap
+
+## Features
+
+* Load and dump SCAP files.
+
+Currently only supports:
+
+* XCCDF
+
+The following specs are still in work:
 
 * OVAL
 * OCIL
