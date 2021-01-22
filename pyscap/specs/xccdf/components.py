@@ -5,8 +5,18 @@ from typing import Dict, List, Optional
 from xsdata.models.datatype import XmlDateTime
 
 from .common import TextType, SubType, HtmlTextWithSubType
-from .enums import ValueTypeType, MsgSevEnumType, ResultEnumType, SeverityEnumType, RoleEnumType, ValueOperatorType, \
-    CcOperatorEnumType, FixStrategyEnumType, RatingEnumType, WarningCategoryEnumType
+from .enums import (
+    ValueTypeType,
+    MsgSevEnumType,
+    ResultEnumType,
+    SeverityEnumType,
+    RoleEnumType,
+    ValueOperatorType,
+    CcOperatorEnumType,
+    FixStrategyEnumType,
+    RatingEnumType,
+    WarningCategoryEnumType
+)
 
 
 # Benchmark-related types

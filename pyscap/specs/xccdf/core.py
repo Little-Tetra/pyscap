@@ -4,13 +4,49 @@ from typing import List, Optional
 from xsdata.models.datatype import XmlDateTime
 
 from .base import ItemType, SelectableItemType
-from .common import ProfileNoteType, TextType, IdrefType, Cpe2IdrefType, Status, VersionType, TextWithSubType, \
-    HtmlTextWithSubType, OverrideableCpe2IdrefType, Model
-from .components import SelStringType, SelComplexValueType, SelNumType, SelChoicesType, UriRefType, SignatureType, \
-    IdentType, FixTextType, FixType, CheckType, BenchmarkReferenceType, TailoringReferenceType, IdentityType, \
-    TargetFactsType, TargetIdRefType, ProfileSetValueType, ProfileSetComplexValueType, RuleResultType, ScoreType, \
-    MetadataType, DcStatusType, ReferenceType, ProfileSelectType, ProfileRefineValueType, ProfileRefineRuleType, \
-    TailoringBenchmarkReferenceType, TailoringVersionType, NoticeType, PlainTextType
+from .common import (
+    ProfileNoteType,
+    TextType,
+    IdrefType,
+    Cpe2IdrefType,
+    Status,
+    VersionType,
+    TextWithSubType,
+    HtmlTextWithSubType,
+    OverrideableCpe2IdrefType,
+    Model
+)
+from .components import (
+    SelStringType,
+    SelComplexValueType,
+    SelNumType,
+    SelChoicesType,
+    UriRefType,
+    SignatureType,
+    IdentType,
+    FixTextType,
+    FixType,
+    CheckType,
+    BenchmarkReferenceType,
+    TailoringReferenceType,
+    IdentityType,
+    TargetFactsType,
+    TargetIdRefType,
+    ProfileSetValueType,
+    ProfileSetComplexValueType,
+    RuleResultType,
+    ScoreType,
+    MetadataType,
+    DcStatusType,
+    ReferenceType,
+    ProfileSelectType,
+    ProfileRefineValueType,
+    ProfileRefineRuleType,
+    TailoringBenchmarkReferenceType,
+    TailoringVersionType,
+    NoticeType,
+    PlainTextType
+)
 from .enums import ValueTypeType, ValueOperatorType, InterfaceHintType, RoleEnumType, SeverityEnumType
 from ..cpe import PlatformSpecification
 

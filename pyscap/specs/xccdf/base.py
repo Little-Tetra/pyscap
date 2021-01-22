@@ -2,8 +2,15 @@ from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import List, Optional
 
-from .common import TextWithSubType, HtmlTextWithSubType, TextType, OverrideableCpe2IdrefType, IdrefListType, IdrefType, \
-    Status, VersionType
+from .common import (
+    TextWithSubType,
+    HtmlTextWithSubType,
+    TextType,
+    OverrideableCpe2IdrefType,
+    IdrefListType, IdrefType,
+    Status,
+    VersionType
+)
 from .components import DcStatusType, WarningType, ReferenceType, MetadataType
 
 
