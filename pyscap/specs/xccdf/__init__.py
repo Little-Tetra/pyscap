@@ -58,7 +58,6 @@ from .components import (
     TailoringBenchmarkReferenceType,
     TailoringVersionType
 )
-from .consts import XCCDF_NAMESPACE
 from .core import (
     ValueType,
     Value,
@@ -89,3 +88,4 @@ from .enums import (
     ValueTypeType,
     WarningCategoryEnumType
 )
+from .namespaces import XCCDF_NAMESPACE
