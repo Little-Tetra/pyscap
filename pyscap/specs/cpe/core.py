@@ -122,7 +122,6 @@ class LogicalTestType:
         metadata={
             "name": "logical-test",
             "type": "Element",
-            "namespace": "",
         }
     )
     fact_ref: List[FactRef] = field(
@@ -186,14 +185,12 @@ class PlatformBaseType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     remark: List[TextType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     logical_test: Optional[LogicalTest] = field(
