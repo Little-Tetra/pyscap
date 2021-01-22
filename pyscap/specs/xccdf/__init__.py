@@ -89,3 +89,4 @@ from .enums import (
     WarningCategoryEnumType
 )
 from .namespaces import XCCDF_NAMESPACE
+from .utils import load, dump
