@@ -2,24 +2,31 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import List, Optional, Union
 
-from .common import Notes as CommonNotes, GeneratorType
-from .enums import (
-    FamilyEnumeration,
-    OperatorEnumeration,
-    DatatypeEnumeration,
-    OperationEnumeration,
+from .common import (
     CheckEnumeration,
-    SimpleDatatypeEnumeration,
-    ExistenceEnumeration,
     ClassEnumeration,
-    EntityObjectIpaddressStringTypeDatatype,
-    FilterActionEnumeration,
-    SetOperatorEnumeration,
-    EntityStateIosversionTypeDatatype,
-    DateTimeFormatEnumeration,
-    ArithmeticEnumeration,
-    EntityStateIpaddressStringTypeDatatype
+    DatatypeEnumeration,
+    ExistenceEnumeration,
+    FamilyEnumeration,
+    GeneratorType,
+    OperationEnumeration,
+    OperatorEnumeration,
+    SimpleDatatypeEnumeration,
+    Notes as OvalCommonSchemaNotes,
 )
+from ...common.xmldsig import Signature
+
+__NAMESPACE__ = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+
+
+class ArithmeticEnumeration(Enum):
+    """The ArithmeticEnumeration simple type defines basic arithmetic
+    operations.
+
+    Currently add and multiply are defined.
+    """
+    ADD = "add"
+    MULTIPLY = "multiply"
 
 
 @dataclass
@@ -66,6 +73,512 @@ class CriterionType:
             "min_length": 1,
         }
     )
+
+
+class DateTimeFormatEnumeration(Enum):
+    """The DateTimeFormatEnumeration simple type defines the different date-
+    time formats that are understood by OVAL.
+
+    Note that in some cases there are a few different possibilities
+    within a given format. Each of these possibilities is unique though
+    and can be distinguished from each other. The different formats are
+    used to clarify the higher level structure of the date-time string
+    being used.
+
+    :cvar YEAR_MONTH_DAY: The year_month_day value specifies date-time
+        strings that follow the formats: 'yyyymmdd', 'yyyymmddThhmmss',
+        'yyyy/mm/dd hh:mm:ss', 'yyyy/mm/dd', 'yyyy-mm-dd hh:mm:ss', or
+        'yyyy-mm-dd'
+    :cvar MONTH_DAY_YEAR: The month_day_year value specifies date-time
+        strings that follow the formats: 'mm/dd/yyyy hh:mm:ss',
+        'mm/dd/yyyy', 'mm-dd-yyyy hh:mm:ss', 'mm-dd-yyyy', 'NameOfMonth,
+        dd yyyy hh:mm:ss' or 'NameOfMonth, dd yyyy',
+        'AbreviatedNameOfMonth, dd yyyy hh:mm:ss', or
+        'AbreviatedNameOfMonth, dd yyyy'
+    :cvar DAY_MONTH_YEAR: The day_month_year value specifies date-time
+        strings that follow the formats: 'dd/mm/yyyy hh:mm:ss',
+        'dd/mm/yyyy', 'dd-mm-yyyy hh:mm:ss', or 'dd-mm-yyyy'
+    :cvar WIN_FILETIME: The win_filetime value specifies date-time
+        strings that follow the windows file time format.
+    :cvar SECONDS_SINCE_EPOCH: The seconds_since_epoch value specifies
+        date-time values that represent the time in seconds since the
+        UNIX epoch.  The Unix epoch is the time 00:00:00 UTC on January
+        1, 1970.
+    :cvar CIM_DATETIME: The cim_datetime model is used by WMI and its
+        value specifies date-time strings that follow the format:
+        'yyyymmddHHMMSS.mmmmmmsUUU', and alternatively 'yyyy-mm-dd
+        HH:MM:SS:mmm' only when used in WMI Query Language queries.
+    """
+    YEAR_MONTH_DAY = "year_month_day"
+    MONTH_DAY_YEAR = "month_day_year"
+    DAY_MONTH_YEAR = "day_month_year"
+    WIN_FILETIME = "win_filetime"
+    SECONDS_SINCE_EPOCH = "seconds_since_epoch"
+    CIM_DATETIME = "cim_datetime"
+
+
+class EntityObjectIpaddressStringTypeDatatype(Enum):
+    """
+    :cvar BINARY: The binary datatype is used to represent hex-encoded
+        data that is in raw (non-printable) form. This datatype conforms
+        to the W3C Recommendation for binary data meaning that each
+        binary octet is encoded as a character tuple, consisting of two
+        hexadecimal digits {[0-9a-fA-F]} representing the octet code.
+        Expected operations within OVAL for binary values are 'equals'
+        and 'not equal'.
+    :cvar BOOLEAN: The boolean datatype represents standard boolean
+        data, either true or false.  This datatype conforms to the W3C
+        Recommendation for boolean data meaning that the following
+        literals are legal values: {true, false, 1, 0}.  Expected
+        operations within OVAL for boolean values are 'equals' and 'not
+        equal'.
+    :cvar EVR_STRING: The evr_string datatype represents the epoch,
+        version, and release fields as a single version string. It has
+        the form "EPOCH:VERSION-RELEASE". Comparisons involving this
+        datatype should follow the algorithm of librpm's rpmvercmp()
+        function. Expected operations within OVAL for evr_string values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', and 'less than or equal'.
+    :cvar DEBIAN_EVR_STRING: The debian_evr_string datatype represents
+        the epoch, upstream_version, and debian_revision fields, for a
+        Debian package, as a single version string. It has the form
+        "EPOCH:UPSTREAM_VERSION-DEBIAN_REVISION". Comparisons involving
+        this datatype should follow the algorithm outlined in Chapter 5
+        of the "Debian Policy Manual"
+        (https://www.debian.org/doc/debian-policy/ch-
+        controlfields.html#s-f-Version). Note that a null epoch is
+        equivalent to a value of '0'. An implementation of this is the
+        cmpversions() function in dpkg's enquiry.c. Expected operations
+        within OVAL for debian_evr_string values are 'equals', 'not
+        equal', 'greater than', 'greater than or equal', 'less than',
+        and 'less than or equal'.
+    :cvar FILESET_REVISION: The fileset_revision datatype represents the
+        version string related to filesets in HP-UX. An example would be
+        'A.03.61.00'. For more information, see the HP-UX "Software
+        Distributor Administration Guide"
+        (http://h20000.www2.hp.com/bc/docs/support/SupportManual/c01919399/c01919399.pdf).
+        Expected operations within OVAL for fileset_version values are
+        'equals', 'not equal', 'greater than', 'greater than or equal',
+        'less than', and 'less than or equal'.
+    :cvar FLOAT_VALUE: The float datatype describes standard float data.
+        This datatype conforms to the W3C Recommendation for float data
+        meaning it is patterned after the IEEE single-precision 32-bit
+        floating point type.  The format consists of a decimal followed,
+        optionally, by the character 'E' or 'e', followed by an integer
+        exponent.  The special values positive and negative infinity and
+        not-a-number have are represented by INF, -INF and NaN,
+        respectively.  Expected operations within OVAL for float values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', and 'less than or equal'.
+    :cvar IOS_VERSION: The ios_version datatype describes Cisco IOS
+        Train strings. These are in essence version strings for IOS.
+        Please refer to Cisco's IOS Reference Guide for information on
+        how to compare different Trains as they follow a very specific
+        pattern. Expected operations within OVAL for ios_version values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', and 'less than or equal'.
+    :cvar INT_VALUE: The int datatype describes standard integer data.
+        This datatype conforms to the W3C Recommendation for integer
+        data which follows the standard mathematical concept of the
+        integer numbers.  (no decimal point and infinite range)
+        Expected operations within OVAL for int values are 'equals',
+        'not equal', 'greater than', 'greater than or equal', 'less
+        than', 'less than or equal', 'bitwise and', and 'bitwise or'.
+    :cvar IPV4_ADDRESS:
+    :cvar IPV6_ADDRESS:
+    :cvar STRING:
+    :cvar VERSION: The version datatype represents a value that is a
+        hierarchical list of non-negative integers separated by a single
+        character delimiter.  Note that any non-number character can be
+        used as a delimiter and that different characters can be used
+        within the same version string.  So '#.#-#' is the same as
+        '#.#.#' or '#c#c#' where '#' is any non-negative integer.
+        Expected operations within OVAL for version values are 'equals',
+        'not equal', 'greater than', 'greater than or equal', 'less
+        than', and 'less than or equal'. For example '#.#.#' or
+        '#-#-#-#' where the numbers to the left are more significant
+        than the numbers to the right. When performing an 'equals'
+        operation on a version datatype, you should first check the left
+        most number for equality. If that fails, then the values are not
+        equal. If it succeeds, then check the second left most number
+        for equality. Continue checking the numbers from left to right
+        until the last number has been checked. If, after testing all
+        the previous numbers, the last number is equal then the two
+        versions are equal. When performing other operations, such as
+        'less than', 'less than or equal', 'greater than, or 'greater
+        than or equal', similar logic as above is used. Start with the
+        left most number and move from left to right. For each number,
+        check if it is less than the number you are testing against. If
+        it is, then the version in question is less than the version you
+        are testing against. If the number is equal, then move to check
+        the next number to the right. For example, to test if 5.7.23 is
+        less than or equal to 5.8.0 you first compare 5 to 5. They are
+        equal so you move on to compare 7 to 8. 7 is less than 8 so the
+        entire test succeeds and 5.7.23 is 'less than or equal' to
+        5.8.0. The difference between the 'less than' and 'less than or
+        equal' operations is how the last number is handled. If the last
+        number is reached, the check should use the given operation
+        (either 'less than' and 'less than or equal') to test the
+        number. For example, to test if 4.23.6 is greater than 4.23.6
+        you first compare 4 to 4. They are equal so you move on to
+        compare 23 to 23. They are equal so you move on to compare 6 to
+        6. This is the last number in the version and since 6 is not
+        greater than 6, the entire test fails and 4.23.6 is not greater
+        than 4.23.6. Version strings with a different number of
+        components shall be padded with zeros to make them the same
+        size. For example, if the version strings '1.2.3' and '6.7.8.9'
+        are being compared, then the short one should be padded to
+        become '1.2.3.0'.
+    """
+    BINARY = "binary"
+    BOOLEAN = "boolean"
+    EVR_STRING = "evr_string"
+    DEBIAN_EVR_STRING = "debian_evr_string"
+    FILESET_REVISION = "fileset_revision"
+    FLOAT_VALUE = "float"
+    IOS_VERSION = "ios_version"
+    INT_VALUE = "int"
+    IPV4_ADDRESS = "ipv4_address"
+    IPV6_ADDRESS = "ipv6_address"
+    STRING = "string"
+    VERSION = "version"
+
+
+class EntityStateIosversionTypeDatatype(Enum):
+    """
+    :cvar BINARY: The binary datatype is used to represent hex-encoded
+        data that is in raw (non-printable) form. This datatype conforms
+        to the W3C Recommendation for binary data meaning that each
+        binary octet is encoded as a character tuple, consisting of two
+        hexadecimal digits {[0-9a-fA-F]} representing the octet code.
+        Expected operations within OVAL for binary values are 'equals'
+        and 'not equal'.
+    :cvar BOOLEAN: The boolean datatype represents standard boolean
+        data, either true or false.  This datatype conforms to the W3C
+        Recommendation for boolean data meaning that the following
+        literals are legal values: {true, false, 1, 0}.  Expected
+        operations within OVAL for boolean values are 'equals' and 'not
+        equal'.
+    :cvar EVR_STRING: The evr_string datatype represents the epoch,
+        version, and release fields as a single version string. It has
+        the form "EPOCH:VERSION-RELEASE". Comparisons involving this
+        datatype should follow the algorithm of librpm's rpmvercmp()
+        function. Expected operations within OVAL for evr_string values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', and 'less than or equal'.
+    :cvar DEBIAN_EVR_STRING: The debian_evr_string datatype represents
+        the epoch, upstream_version, and debian_revision fields, for a
+        Debian package, as a single version string. It has the form
+        "EPOCH:UPSTREAM_VERSION-DEBIAN_REVISION". Comparisons involving
+        this datatype should follow the algorithm outlined in Chapter 5
+        of the "Debian Policy Manual"
+        (https://www.debian.org/doc/debian-policy/ch-
+        controlfields.html#s-f-Version). Note that a null epoch is
+        equivalent to a value of '0'. An implementation of this is the
+        cmpversions() function in dpkg's enquiry.c. Expected operations
+        within OVAL for debian_evr_string values are 'equals', 'not
+        equal', 'greater than', 'greater than or equal', 'less than',
+        and 'less than or equal'.
+    :cvar FILESET_REVISION: The fileset_revision datatype represents the
+        version string related to filesets in HP-UX. An example would be
+        'A.03.61.00'. For more information, see the HP-UX "Software
+        Distributor Administration Guide"
+        (http://h20000.www2.hp.com/bc/docs/support/SupportManual/c01919399/c01919399.pdf).
+        Expected operations within OVAL for fileset_version values are
+        'equals', 'not equal', 'greater than', 'greater than or equal',
+        'less than', and 'less than or equal'.
+    :cvar FLOAT_VALUE: The float datatype describes standard float data.
+        This datatype conforms to the W3C Recommendation for float data
+        meaning it is patterned after the IEEE single-precision 32-bit
+        floating point type.  The format consists of a decimal followed,
+        optionally, by the character 'E' or 'e', followed by an integer
+        exponent.  The special values positive and negative infinity and
+        not-a-number have are represented by INF, -INF and NaN,
+        respectively.  Expected operations within OVAL for float values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', and 'less than or equal'.
+    :cvar IOS_VERSION:
+    :cvar INT_VALUE: The int datatype describes standard integer data.
+        This datatype conforms to the W3C Recommendation for integer
+        data which follows the standard mathematical concept of the
+        integer numbers.  (no decimal point and infinite range)
+        Expected operations within OVAL for int values are 'equals',
+        'not equal', 'greater than', 'greater than or equal', 'less
+        than', 'less than or equal', 'bitwise and', and 'bitwise or'.
+    :cvar IPV4_ADDRESS: The ipv4_address datatype represents IPv4
+        addresses and IPv4 address prefixes. Its value space consists of
+        the set of ordered pairs of integers where the first element of
+        each pair is in the range [0,2^32) (the representable range of a
+        32-bit unsigned int), and the second is in the range [0,32]. The
+        first element is an address, and the second is a prefix length.
+        The lexical space is dotted-quad CIDR-like notation ('a.b.c.d'
+        where 'a', 'b', 'c', and 'd' are integers from 0-255),
+        optionally followed by a slash ('/') and either a prefix length
+        (an integer from 0-32) or a netmask represented in the dotted-
+        quad notation described previously. Examples of legal values are
+        '192.0.2.0', '192.0.2.0/32', and '192.0.2.0/255.255.255.255'.
+        Additionally, leading zeros are permitted such that '192.0.2.0'
+        is equal to '192.000.002.000'. If a prefix length is not
+        specified, it is implicitly equal to 32. The expected operations
+        within OVAL for ipv4_address values are 'equals', 'not equal',
+        'greater than', 'greater than or equal', 'less than', 'less than
+        or equal', 'subset of', and 'superset of'. All operations are
+        defined in terms of the value space. Let A and B be ipv4_address
+        values (i.e. ordered pairs from the value space). The following
+        definitions assume that bits outside the prefix have been zeroed
+        out. By zeroing the low order bits, they are effectively ignored
+        for all operations. Implementations of the following operations
+        MUST behave as if this has been done. The following defines how
+        to perform each operation for the ipv4_address datatype. Let
+        P_addr mean the first element of ordered pair P and P_prefix
+        mean the second element. equals: A equals B if and only if
+        A_addr == B_addr and A_prefix == B_prefix. not equal: A is not
+        equal to B if and only if they don't satisfy the criteria for
+        operator "equals". greater than: A is greater than B if and only
+        if A_prefix == B_prefix and A_addr &gt; B_addr. If A_prefix !=
+        B_prefix, i.e. prefix lengths are not equal, an error MUST be
+        reported. greater than or equal: A is greater than or equal to B
+        if and only if A_prefix == B_prefix and they satisfy either the
+        criteria for operators "equal" or "greater than". If A_prefix !=
+        B_prefix, i.e. prefix lengths are not equal, an error MUST be
+        reported. less than: A is less than B if and only if A_prefix ==
+        B_prefix and they don't satisfy the criteria for operator
+        "greater than or equal". If A_prefix != B_prefix, i.e. prefix
+        lengths are not equal, an error MUST be reported. less than or
+        equal: A is less than or equal to B if and only if A_prefix ==
+        B_prefix and they don't satisfy the criteria for operator
+        "greater than". If A_prefix != B_prefix, i.e. prefix lengths are
+        not equal, an error MUST be reported. subset of: A is a subset
+        of B if and only if every IPv4 address in subnet A is present in
+        subnet B. In other words, A_prefix &gt;= B_prefix and the high
+        B_prefix bits of A_addr and B_addr are equal. superset of: A is
+        a superset of B if and only if B is a subset of A.
+    :cvar IPV6_ADDRESS: The ipv6_address datatype represents IPv6
+        addresses and IPv6 address prefixes. Its value space consists of
+        the set of ordered pairs of integers where the first element of
+        each pair is in the range [0,2^128) (the representable range of
+        a 128-bit unsigned int), and the second is in the range [0,128].
+        The first element is an address, and the second is a prefix
+        length. The lexical space is CIDR notation given in IETF
+        specification RFC 4291 for textual representations of IPv6
+        addresses and IPv6 address prefixes (see sections 2.2 and 2.3).
+        If a prefix-length is not specified, it is implicitly equal to
+        128. The expected operations within OVAL for ipv6_address values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', 'less than or equal', 'subset of', and
+        'superset of'. All operations are defined in terms of the value
+        space. Let A and B be ipv6_address values (i.e. ordered pairs
+        from the value space). The following definitions assume that
+        bits outside the prefix have been zeroed out. By zeroing the low
+        order bits, they are effectively ignored for all operations.
+        Implementations of the following operations MUST behave as if
+        this has been done. The following defines how to perform each
+        operation for the ipv6_address datatype. Let P_addr mean the
+        first element of ordered pair P and P_prefix mean the second
+        element. equals: A equals B if and only if A_addr == B_addr and
+        A_prefix == B_prefix. not equal: A is not equal to B if and only
+        if they don't satisfy the criteria for operator "equals".
+        greater than: A is greater than B if and only if A_prefix ==
+        B_prefix and A_addr &gt; B_addr. If A_prefix != B_prefix, an
+        error MUST be reported. greater than or equal: A is greater than
+        or equal to B if and only if A_prefix == B_prefix and they
+        satisfy either the criteria for operators "equal" or "greater
+        than". If A_prefix != B_prefix, an error MUST be reported. less
+        than: A is less than B if and only if A_prefix == B_prefix and
+        they don't satisfy the criteria for operator "greater than or
+        equal". If A_prefix != B_prefix, an error MUST be reported. less
+        than or equal: A is less than or equal to B if and only if
+        A_prefix == B_prefix and they don't satisfy the criteria for
+        operator "greater than". If A_prefix != B_prefix, an error MUST
+        be reported. subset of: A is a subset of B if and only if every
+        IPv6 address in subnet A is present in subnet B. In other words,
+        A_prefix &gt;= B_prefix and the high B_prefix bits of A_addr and
+        B_addr are equal. superset of: A is a superset of B if and only
+        if B is a subset of A.
+    :cvar STRING: 'string' is included to allow for regular expressions
+        on IOS version strings.
+    :cvar VERSION: The version datatype represents a value that is a
+        hierarchical list of non-negative integers separated by a single
+        character delimiter.  Note that any non-number character can be
+        used as a delimiter and that different characters can be used
+        within the same version string.  So '#.#-#' is the same as
+        '#.#.#' or '#c#c#' where '#' is any non-negative integer.
+        Expected operations within OVAL for version values are 'equals',
+        'not equal', 'greater than', 'greater than or equal', 'less
+        than', and 'less than or equal'. For example '#.#.#' or
+        '#-#-#-#' where the numbers to the left are more significant
+        than the numbers to the right. When performing an 'equals'
+        operation on a version datatype, you should first check the left
+        most number for equality. If that fails, then the values are not
+        equal. If it succeeds, then check the second left most number
+        for equality. Continue checking the numbers from left to right
+        until the last number has been checked. If, after testing all
+        the previous numbers, the last number is equal then the two
+        versions are equal. When performing other operations, such as
+        'less than', 'less than or equal', 'greater than, or 'greater
+        than or equal', similar logic as above is used. Start with the
+        left most number and move from left to right. For each number,
+        check if it is less than the number you are testing against. If
+        it is, then the version in question is less than the version you
+        are testing against. If the number is equal, then move to check
+        the next number to the right. For example, to test if 5.7.23 is
+        less than or equal to 5.8.0 you first compare 5 to 5. They are
+        equal so you move on to compare 7 to 8. 7 is less than 8 so the
+        entire test succeeds and 5.7.23 is 'less than or equal' to
+        5.8.0. The difference between the 'less than' and 'less than or
+        equal' operations is how the last number is handled. If the last
+        number is reached, the check should use the given operation
+        (either 'less than' and 'less than or equal') to test the
+        number. For example, to test if 4.23.6 is greater than 4.23.6
+        you first compare 4 to 4. They are equal so you move on to
+        compare 23 to 23. They are equal so you move on to compare 6 to
+        6. This is the last number in the version and since 6 is not
+        greater than 6, the entire test fails and 4.23.6 is not greater
+        than 4.23.6. Version strings with a different number of
+        components shall be padded with zeros to make them the same
+        size. For example, if the version strings '1.2.3' and '6.7.8.9'
+        are being compared, then the short one should be padded to
+        become '1.2.3.0'.
+    """
+    BINARY = "binary"
+    BOOLEAN = "boolean"
+    EVR_STRING = "evr_string"
+    DEBIAN_EVR_STRING = "debian_evr_string"
+    FILESET_REVISION = "fileset_revision"
+    FLOAT_VALUE = "float"
+    IOS_VERSION = "ios_version"
+    INT_VALUE = "int"
+    IPV4_ADDRESS = "ipv4_address"
+    IPV6_ADDRESS = "ipv6_address"
+    STRING = "string"
+    VERSION = "version"
+
+
+class EntityStateIpaddressStringTypeDatatype(Enum):
+    """
+    :cvar BINARY: The binary datatype is used to represent hex-encoded
+        data that is in raw (non-printable) form. This datatype conforms
+        to the W3C Recommendation for binary data meaning that each
+        binary octet is encoded as a character tuple, consisting of two
+        hexadecimal digits {[0-9a-fA-F]} representing the octet code.
+        Expected operations within OVAL for binary values are 'equals'
+        and 'not equal'.
+    :cvar BOOLEAN: The boolean datatype represents standard boolean
+        data, either true or false.  This datatype conforms to the W3C
+        Recommendation for boolean data meaning that the following
+        literals are legal values: {true, false, 1, 0}.  Expected
+        operations within OVAL for boolean values are 'equals' and 'not
+        equal'.
+    :cvar EVR_STRING: The evr_string datatype represents the epoch,
+        version, and release fields as a single version string. It has
+        the form "EPOCH:VERSION-RELEASE". Comparisons involving this
+        datatype should follow the algorithm of librpm's rpmvercmp()
+        function. Expected operations within OVAL for evr_string values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', and 'less than or equal'.
+    :cvar DEBIAN_EVR_STRING: The debian_evr_string datatype represents
+        the epoch, upstream_version, and debian_revision fields, for a
+        Debian package, as a single version string. It has the form
+        "EPOCH:UPSTREAM_VERSION-DEBIAN_REVISION". Comparisons involving
+        this datatype should follow the algorithm outlined in Chapter 5
+        of the "Debian Policy Manual"
+        (https://www.debian.org/doc/debian-policy/ch-
+        controlfields.html#s-f-Version). Note that a null epoch is
+        equivalent to a value of '0'. An implementation of this is the
+        cmpversions() function in dpkg's enquiry.c. Expected operations
+        within OVAL for debian_evr_string values are 'equals', 'not
+        equal', 'greater than', 'greater than or equal', 'less than',
+        and 'less than or equal'.
+    :cvar FILESET_REVISION: The fileset_revision datatype represents the
+        version string related to filesets in HP-UX. An example would be
+        'A.03.61.00'. For more information, see the HP-UX "Software
+        Distributor Administration Guide"
+        (http://h20000.www2.hp.com/bc/docs/support/SupportManual/c01919399/c01919399.pdf).
+        Expected operations within OVAL for fileset_version values are
+        'equals', 'not equal', 'greater than', 'greater than or equal',
+        'less than', and 'less than or equal'.
+    :cvar FLOAT_VALUE: The float datatype describes standard float data.
+        This datatype conforms to the W3C Recommendation for float data
+        meaning it is patterned after the IEEE single-precision 32-bit
+        floating point type.  The format consists of a decimal followed,
+        optionally, by the character 'E' or 'e', followed by an integer
+        exponent.  The special values positive and negative infinity and
+        not-a-number have are represented by INF, -INF and NaN,
+        respectively.  Expected operations within OVAL for float values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', and 'less than or equal'.
+    :cvar IOS_VERSION: The ios_version datatype describes Cisco IOS
+        Train strings. These are in essence version strings for IOS.
+        Please refer to Cisco's IOS Reference Guide for information on
+        how to compare different Trains as they follow a very specific
+        pattern. Expected operations within OVAL for ios_version values
+        are 'equals', 'not equal', 'greater than', 'greater than or
+        equal', 'less than', and 'less than or equal'.
+    :cvar INT_VALUE: The int datatype describes standard integer data.
+        This datatype conforms to the W3C Recommendation for integer
+        data which follows the standard mathematical concept of the
+        integer numbers.  (no decimal point and infinite range)
+        Expected operations within OVAL for int values are 'equals',
+        'not equal', 'greater than', 'greater than or equal', 'less
+        than', 'less than or equal', 'bitwise and', and 'bitwise or'.
+    :cvar IPV4_ADDRESS:
+    :cvar IPV6_ADDRESS:
+    :cvar STRING:
+    :cvar VERSION: The version datatype represents a value that is a
+        hierarchical list of non-negative integers separated by a single
+        character delimiter.  Note that any non-number character can be
+        used as a delimiter and that different characters can be used
+        within the same version string.  So '#.#-#' is the same as
+        '#.#.#' or '#c#c#' where '#' is any non-negative integer.
+        Expected operations within OVAL for version values are 'equals',
+        'not equal', 'greater than', 'greater than or equal', 'less
+        than', and 'less than or equal'. For example '#.#.#' or
+        '#-#-#-#' where the numbers to the left are more significant
+        than the numbers to the right. When performing an 'equals'
+        operation on a version datatype, you should first check the left
+        most number for equality. If that fails, then the values are not
+        equal. If it succeeds, then check the second left most number
+        for equality. Continue checking the numbers from left to right
+        until the last number has been checked. If, after testing all
+        the previous numbers, the last number is equal then the two
+        versions are equal. When performing other operations, such as
+        'less than', 'less than or equal', 'greater than, or 'greater
+        than or equal', similar logic as above is used. Start with the
+        left most number and move from left to right. For each number,
+        check if it is less than the number you are testing against. If
+        it is, then the version in question is less than the version you
+        are testing against. If the number is equal, then move to check
+        the next number to the right. For example, to test if 5.7.23 is
+        less than or equal to 5.8.0 you first compare 5 to 5. They are
+        equal so you move on to compare 7 to 8. 7 is less than 8 so the
+        entire test succeeds and 5.7.23 is 'less than or equal' to
+        5.8.0. The difference between the 'less than' and 'less than or
+        equal' operations is how the last number is handled. If the last
+        number is reached, the check should use the given operation
+        (either 'less than' and 'less than or equal') to test the
+        number. For example, to test if 4.23.6 is greater than 4.23.6
+        you first compare 4 to 4. They are equal so you move on to
+        compare 23 to 23. They are equal so you move on to compare 6 to
+        6. This is the last number in the version and since 6 is not
+        greater than 6, the entire test fails and 4.23.6 is not greater
+        than 4.23.6. Version strings with a different number of
+        components shall be padded with zeros to make them the same
+        size. For example, if the version strings '1.2.3' and '6.7.8.9'
+        are being compared, then the short one should be padded to
+        become '1.2.3.0'.
+    """
+    BINARY = "binary"
+    BOOLEAN = "boolean"
+    EVR_STRING = "evr_string"
+    DEBIAN_EVR_STRING = "debian_evr_string"
+    FILESET_REVISION = "fileset_revision"
+    FLOAT_VALUE = "float"
+    IOS_VERSION = "ios_version"
+    INT_VALUE = "int"
+    IPV4_ADDRESS = "ipv4_address"
+    IPV6_ADDRESS = "ipv6_address"
+    STRING = "string"
+    VERSION = "version"
 
 
 @dataclass
@@ -115,6 +628,22 @@ class ExtendDefinitionType:
             "min_length": 1,
         }
     )
+
+
+class FilterActionEnumeration(Enum):
+    """
+    The FilterActionEnumeration simple type defines the different options for
+    filtering sets of items.
+
+    :cvar EXCLUDE: The exclude value specifies that all items that match
+        the filter shall be excluded from set that the filter is applied
+        to.
+    :cvar INCLUDE: The include value specifies that only items that
+        match the filter shall be included in the set that the filter is
+        applied to.
+    """
+    EXCLUDE = "exclude"
+    INCLUDE = "include"
 
 
 @dataclass
@@ -248,6 +777,40 @@ class ReferenceType:
     )
 
 
+class SetOperatorEnumeration(Enum):
+    """The SetOperatorEnumeration simple type defines acceptable set
+    operations.
+
+    Set operations are used to take multiple different sets of objects
+    within OVAL and merge them into a single unique set. The different
+    operators that guide this merge are defined below. For each
+    operator, if only a single object has been supplied, then the
+    resulting set is simply that complete object.
+
+    :cvar COMPLEMENT: The complement operator is defined in OVAL as a
+        relative complement. The resulting unique set contains
+        everything that belongs to the first declared set that is not
+        part of the second declared set. If A and B are sets (with A
+        being the first declared set), then the relative complement is
+        the set of elements in A, but not in B, with the duplicates
+        removed.
+    :cvar INTERSECTION: The intersection of two sets in OVAL results in
+        a unique set that contains everything that belongs to both sets
+        in the collection, but nothing else. If A and B are sets, then
+        the intersection of A and B contains all the elements of A that
+        also belong to B, but no other elements, with the duplicates
+        removed.
+    :cvar UNION: The union of two sets in OVAL results in a unique set
+        that contains everything that belongs to either of the original
+        sets. If A and B are sets, then the union of A and B contains
+        all the elements of A and all elements of B, with the duplicates
+        removed.
+    """
+    COMPLEMENT = "COMPLEMENT"
+    INTERSECTION = "INTERSECTION"
+    UNION = "UNION"
+
+
 @dataclass
 class StateRefType:
     """The StateRefType complex type defines a state reference to be used by
@@ -302,6 +865,7 @@ class Notes:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
 
@@ -342,12 +906,14 @@ class AffectedType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     product: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     family: Optional[FamilyEnumeration] = field(
@@ -387,18 +953,21 @@ class CriteriaType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     criterion: List[CriterionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     extend_definition: List[ExtendDefinitionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     applicability_check: Optional[bool] = field(
@@ -2231,7 +2800,7 @@ class ObjectType:
     signifies that an id is no longer to be used or referenced but the
     information has been kept around for historic purposes.
     """
-    signature: Optional[str] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "name": "Signature",
@@ -2246,7 +2815,7 @@ class ObjectType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -2334,7 +2903,7 @@ class StateType:
     attribute into account, and then combine everything using the
     operator.
     """
-    signature: Optional[str] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "name": "Signature",
@@ -2349,7 +2918,7 @@ class StateType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -2405,7 +2974,7 @@ class TestType:
     An OVAL Test evaluates to true if both the check_existence  and check attributes are satisfied during evaluation. The evaluation result for a test is determined by first evaluating the check_existence attribute. If the result of evaluating the check_existence attribute is true then the check attribute is evaluated. An interpreter may choose to always evaluate both the check_existence and the check attributes, but once the check_existence attribute evaluation has resulted in false the overall test result after evaluating the check attribute will not be affected.
     The optional state_operator attribute provides the logical operator that combines the evaluation results from each referenced state on a per item basis.  Each matching item is compared to each referenced state. The result of comparing each state to a single item is combined based on the specified state_operator value to determine one result for each item. Finally, the results for each item are combined based on the specified check value.  Note that if the test does not contain any references to OVAL States, then the state_operator attribute has no meaning and can be ignored during evaluation. Referencing multiple states in one test allows ranges of possible values to be expressed. For example, one state can check that a value greater than 8 is found and another state can check that a value of less than 16 is found.  In this example the referenced states are combined with a state_operator = 'AND' indicating that the conditions of all referenced states must be satisfied and that the value must be between 8 AND 16.  The valid state_operation values are explained in the description of the OperatorEnumeration simple type.
     """
-    signature: Optional[str] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "name": "Signature",
@@ -2420,7 +2989,7 @@ class TestType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -2514,7 +3083,7 @@ class VariableType:
     :ivar comment:
     :ivar deprecated:
     """
-    signature: Optional[str] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "name": "Signature",
@@ -2529,7 +3098,7 @@ class VariableType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -2627,6 +3196,7 @@ class EntityObjectRecordType(EntityComplexBaseType):
         metadata={
             "name": "field",
             "type": "Element",
+            "namespace": "",
         }
     )
 
@@ -2780,90 +3350,105 @@ class GlobToRegexFunctionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     split: Optional["SplitFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring: Optional["SubstringFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     time_difference: Optional["TimeDifferenceFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     regex_capture: Optional["RegexCaptureFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     unique: Optional["UniqueFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     count: Optional["CountFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_to_regex: Optional["GlobToRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_noescape: bool = field(
@@ -2901,6 +3486,7 @@ class MetadataType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
             "required": True,
         }
     )
@@ -2908,18 +3494,21 @@ class MetadataType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     reference: List[ReferenceType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     description: Optional[str] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
             "required": True,
         }
     )
@@ -2956,6 +3545,7 @@ class PossibleRestrictionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     operator: OperatorEnumeration = field(
@@ -2996,6 +3586,7 @@ class ConstantVariable(VariableType):
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -3075,6 +3666,7 @@ class Set:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "pattern": r"oval:[A-Za-z0-9_\-\.]+:obj:[1-9][0-9]*",
         }
@@ -3186,6 +3778,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3193,6 +3786,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3200,6 +3794,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3207,6 +3802,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3214,6 +3810,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3221,6 +3818,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3228,6 +3826,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3235,6 +3834,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3242,6 +3842,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3249,6 +3850,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3256,6 +3858,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3263,6 +3866,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3270,6 +3874,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3277,6 +3882,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3284,6 +3890,7 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -3328,7 +3935,7 @@ class DefinitionType:
     deprecated, but an interpreter may evaluate the definition to "not
     evaluated".
     """
-    signature: Optional[str] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "name": "Signature",
@@ -3340,6 +3947,7 @@ class DefinitionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
             "required": True,
         }
     )
@@ -3350,7 +3958,7 @@ class DefinitionType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -3362,6 +3970,7 @@ class DefinitionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -3831,6 +4440,7 @@ class EntityStateRecordType(EntityStateComplexBaseType):
         metadata={
             "name": "field",
             "type": "Element",
+            "namespace": "",
         }
     )
 
@@ -3969,12 +4579,14 @@ class ExternalVariable(VariableType):
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     possible_restriction: List[PossibleRestrictionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
 
@@ -4003,6 +4615,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4010,6 +4623,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4017,6 +4631,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4024,6 +4639,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4031,6 +4647,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4038,6 +4655,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4045,6 +4663,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4052,6 +4671,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4059,6 +4679,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4066,6 +4687,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4073,6 +4695,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4080,6 +4703,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4087,6 +4711,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4094,6 +4719,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4101,6 +4727,7 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "sequential": True,
         }
     )
@@ -4153,90 +4780,105 @@ class RegexCaptureFunctionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     split: Optional["SplitFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring: Optional["SubstringFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     time_difference: Optional["TimeDifferenceFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     regex_capture: Optional["RegexCaptureFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     pattern: Optional[str] = field(
@@ -4257,6 +4899,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4265,6 +4908,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4273,6 +4917,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4281,6 +4926,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4289,6 +4935,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4297,6 +4944,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4305,6 +4953,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4313,6 +4962,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4321,6 +4971,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4329,6 +4980,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4337,6 +4989,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4345,6 +4998,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4353,6 +5007,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4361,6 +5016,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4369,6 +5025,7 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4413,90 +5070,105 @@ class SubstringFunctionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     split: Optional["SplitFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring: Optional["SubstringFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring_start: Optional[int] = field(
@@ -4542,90 +5214,105 @@ class SplitFunctionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     split: Optional["SplitFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     delimiter: Optional[str] = field(
@@ -4649,90 +5336,105 @@ class EscapeRegexFunctionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     split: Optional[SplitFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
 
@@ -4754,90 +5456,105 @@ class EndFunctionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     escape_regex: Optional[EscapeRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     split: Optional[SplitFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     character: Optional[str] = field(
@@ -4870,6 +5587,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4878,6 +5596,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4886,6 +5605,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4894,6 +5614,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4902,6 +5623,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4910,6 +5632,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4918,6 +5641,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4926,6 +5650,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4934,6 +5659,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4942,6 +5668,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4950,6 +5677,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4958,6 +5686,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4966,6 +5695,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4974,6 +5704,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -4982,6 +5713,7 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5004,90 +5736,105 @@ class BeginFunctionType:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     concat: Optional[ConcatFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     end: Optional[EndFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     escape_regex: Optional[EscapeRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     split: Optional[SplitFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     character: Optional[str] = field(
@@ -5120,6 +5867,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5128,6 +5876,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5136,6 +5885,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5144,6 +5894,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5152,6 +5903,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5160,6 +5912,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5168,6 +5921,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5176,6 +5930,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5184,6 +5939,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5192,6 +5948,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5200,6 +5957,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5208,6 +5966,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5216,6 +5975,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5224,6 +5984,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5232,6 +5993,7 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
+            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5272,90 +6034,105 @@ class LocalVariable(VariableType):
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     arithmetic: Optional[ArithmeticFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     begin: Optional[BeginFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     concat: Optional[ConcatFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     end: Optional[EndFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     escape_regex: Optional[EscapeRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     split: Optional[SplitFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
 
@@ -5435,6 +6212,7 @@ class OvalDefinitions:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
             "required": True,
         }
     )
@@ -5442,33 +6220,38 @@ class OvalDefinitions:
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     tests: Optional[TestsType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     objects: Optional[ObjectsType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     states: Optional[StatesType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
     variables: Optional[VariablesType] = field(
         default=None,
         metadata={
             "type": "Element",
+            "namespace": "",
         }
     )
-    signature: Optional[str] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "name": "Signature",
