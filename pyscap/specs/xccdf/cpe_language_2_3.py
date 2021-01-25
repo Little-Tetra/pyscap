@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
+from enum import Enum
 from typing import List, Optional
 
-from .common import TextType
-from .enums import OperatorEnumeration
+__NAMESPACE__ = "http://cpe.mitre.org/language/2.0"
 
 
 @dataclass
@@ -16,11 +16,37 @@ class FactRefType:
 
 
 @dataclass
+class TextType:
+    """
+    This type allows the xml:lang attribute to associate a specific language
+    with an element's string content.
+    """
+    value: Optional[str] = field(
+        default=None,
+    )
+    lang: Optional[str] = field(
+        default=None,
+        metadata={
+            "type": "Attribute",
+            "namespace": "http://www.w3.org/XML/1998/namespace",
+        }
+    )
+
+
+class OperatorEnumeration(Enum):
+    """The OperatorEnumeration simple type defines acceptable operators.
+
+    Each operator defines how to evaluate multiple arguments.
+    """
+    AND_VALUE = "AND"
+    OR_VALUE = "OR"
+
+
+@dataclass
 class CpefactRefType(FactRefType):
     """
     A reference to a CPE Name that always evaluates to a Boolean result.
     """
-
     class Meta:
         name = "CPEFactRefType"
 
@@ -32,13 +58,6 @@ class CpefactRefType(FactRefType):
             "pattern": r"[c][pP][eE]:/[AHOaho]?(:[A-Za-z0-9\._\-~%]*){0,6}",
         }
     )
-
-
-@dataclass
-class FactRef(CpefactRefType):
-    class Meta:
-        name = "fact-ref"
-        namespace = "http://cpe.mitre.org/language/2.0"
 
 
 @dataclass
@@ -84,6 +103,13 @@ class CheckFactRefType(FactRefType):
 class CheckFactRef(CheckFactRefType):
     class Meta:
         name = "check-fact-ref"
+        namespace = "http://cpe.mitre.org/language/2.0"
+
+
+@dataclass
+class FactRef(CpefactRefType):
+    class Meta:
+        name = "fact-ref"
         namespace = "http://cpe.mitre.org/language/2.0"
 
 
@@ -222,6 +248,13 @@ class PlatformType(PlatformBaseType):
 
 
 @dataclass
+class PlatformConfiguration(PlatformBaseType):
+    class Meta:
+        name = "platform-configuration"
+        namespace = "http://cpe.mitre.org/language/2.0"
+
+
+@dataclass
 class Platform(PlatformType):
     class Meta:
         name = "platform"
@@ -249,14 +282,6 @@ class PlatformSpecification(PlatformSpecificationType):
     This element is the root element of a CPE Applicability Language XML
     document and therefore acts as a container for child platform definitions.
     """
-
     class Meta:
         name = "platform-specification"
-        namespace = "http://cpe.mitre.org/language/2.0"
-
-
-@dataclass
-class PlatformConfiguration(PlatformBaseType):
-    class Meta:
-        name = "platform-configuration"
         namespace = "http://cpe.mitre.org/language/2.0"

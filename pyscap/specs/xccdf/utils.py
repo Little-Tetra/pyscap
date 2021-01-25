@@ -2,9 +2,8 @@ from xsdata.formats.dataclass.context import XmlContext
 from xsdata.formats.dataclass.parsers import XmlParser, JsonParser
 from xsdata.formats.dataclass.serializers import XmlSerializer, JsonSerializer
 
-from .core import Benchmark
-from .namespaces import XCCDF_NAMESPACE
-from ..cpe import CPE_NAMESPACE
+from .cpe_language_2_3 import __NAMESPACE__ as CPE_LANGUAGE_2_3_NAMESPACE
+from .xccdf_1_2 import __NAMESPACE__ as XCCDF_1_2_NAMESPACE, Benchmark
 from ...common.namespaces import HTML_NAMESPACE, XHTML_NAMESPACE, DC_NAMESPACE
 
 context = XmlContext()
@@ -14,8 +13,8 @@ serializer = XmlSerializer(context=context)
 json_serializer = JsonSerializer(context=context)
 
 xccdf_ns_map = {
-    None: XCCDF_NAMESPACE,
-    "cpe2": CPE_NAMESPACE,
+    None: XCCDF_1_2_NAMESPACE,
+    "cpe2": CPE_LANGUAGE_2_3_NAMESPACE,
     "html": HTML_NAMESPACE,
     "xhtml": XHTML_NAMESPACE,
     "dc": DC_NAMESPACE
