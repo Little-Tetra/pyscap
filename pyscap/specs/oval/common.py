@@ -27,7 +27,6 @@ class DeprecatedInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
             "pattern": r"[0-9]+\.[0-9]+(\.[0-9]+)?(:[0-9]+\.[0-9]+(\.[0-9]+)?)?",
         }
@@ -36,7 +35,6 @@ class DeprecatedInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -44,7 +42,6 @@ class DeprecatedInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -86,7 +83,6 @@ class NotesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -131,7 +127,6 @@ class ElementMapType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -139,21 +134,18 @@ class ElementMapType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     state: Optional[ElementMapItemType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     item: Optional[ElementMapItemType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -207,21 +199,18 @@ class GeneratorType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     product_version: Optional[str] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     schema_version: List[SchemaVersionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -229,7 +218,6 @@ class GeneratorType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
