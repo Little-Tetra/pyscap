@@ -2,8 +2,6 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import List, Optional
 
-__NAMESPACE__ = "http://cpe.mitre.org/language/2.0"
-
 
 @dataclass
 class FactRefType:
@@ -47,6 +45,7 @@ class CpefactRefType(FactRefType):
     """
     A reference to a CPE Name that always evaluates to a Boolean result.
     """
+
     class Meta:
         name = "CPEFactRefType"
 
@@ -282,6 +281,7 @@ class PlatformSpecification(PlatformSpecificationType):
     This element is the root element of a CPE Applicability Language XML
     document and therefore acts as a container for child platform definitions.
     """
+
     class Meta:
         name = "platform-specification"
         namespace = "http://cpe.mitre.org/language/2.0"
