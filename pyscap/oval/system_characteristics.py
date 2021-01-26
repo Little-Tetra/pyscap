@@ -1825,14 +1825,23 @@ class SystemDataType:
 
     Each item defines a specific piece of data on the system.
     """
-    item: List[Item] = field(
+    item: List[object] = field(
         default_factory=list,
         metadata={
-            "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-system-characteristics-5",
+            "type": "Wildcard",
+            "namespace": "##any",
+            "mixed": True,
             "min_occurs": 1,
         }
     )
+    # item: List[Item] = field(
+    #     default_factory=list,
+    #     metadata={
+    #         "type": "Element",
+    #         "namespace": "http://oval.mitre.org/XMLSchema/oval-system-characteristics-5",
+    #         "min_occurs": 1,
+    #     }
+    # )
 
 
 @dataclass

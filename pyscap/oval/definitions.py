@@ -4451,14 +4451,24 @@ class ObjectsType:
     description of the object element for more information about an
     individual object.
     """
-    object: List[Object] = field(
+    object_value: List[object] = field(
         default_factory=list,
         metadata={
-            "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "name": "object",
+            "type": "Wildcard",
+            "namespace": "##any",
+            "mixed": True,
             "min_occurs": 1,
         }
     )
+    # object: List[Object] = field(
+    #     default_factory=list,
+    #     metadata={
+    #         "type": "Element",
+    #         "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+    #         "min_occurs": 1,
+    #     }
+    # )
 
 
 @dataclass
@@ -4471,14 +4481,23 @@ class StatesType:
     description of the state element for more information about an
     individual state.
     """
-    state: List[State] = field(
+    state: List[object] = field(
         default_factory=list,
         metadata={
-            "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "type": "Wildcard",
+            "namespace": "##any",
+            "mixed": True,
             "min_occurs": 1,
         }
     )
+    # state: List[State] = field(
+    #     default_factory=list,
+    #     metadata={
+    #         "type": "Element",
+    #         "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+    #         "min_occurs": 1,
+    #     }
+    # )
 
 
 @dataclass
@@ -4490,14 +4509,23 @@ class TestsType:
     description of the TestType for more information about an individual
     test.
     """
-    test: List[Test] = field(
+    test: List[object] = field(
         default_factory=list,
         metadata={
-            "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "type": "Wildcard",
+            "namespace": "##any",
+            "mixed": True,
             "min_occurs": 1,
         }
     )
+    # test: List[Test] = field(
+    #     default_factory=list,
+    #     metadata={
+    #         "type": "Element",
+    #         "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+    #         "min_occurs": 1,
+    #     }
+    # )
 
 
 @dataclass
