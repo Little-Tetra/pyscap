@@ -1,1 +1,1 @@
-from .specs import xccdf
+from . import xccdf

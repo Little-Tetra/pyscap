@@ -6,6 +6,8 @@ from typing import Dict, List, Optional
 from xsdata.models.datatype import XmlDate, XmlDateTime
 
 from .cpe_language_2_3 import PlatformSpecification
+from .namespaces import XCCDF_NAMESPACE_MAP
+from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 
 
 @dataclass
@@ -4459,3 +4461,23 @@ class Benchmark:
             "namespace": "http://www.w3.org/XML/1998/namespace",
         }
     )
+
+    @classmethod
+    def load(cls, file):
+        with open(file, "rb") as fp:
+            benchmark = scap_parser.parse(fp, cls)
+        return benchmark
+
+    @classmethod
+    def load_json(cls, file):
+        with open(file, "rb") as fp:
+            benchmark = scap_json_parser.parse(fp, cls)
+        return benchmark
+
+    def dump(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_serializer.write(fp, self, ns_map=XCCDF_NAMESPACE_MAP)
+
+    def dump_json(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_json_serializer.write(fp, self)

@@ -1,4 +1,4 @@
-from ...common.namespaces import (
+from ..common.namespaces import (
     DC_NAMESPACE,
     DSIG_NAMESPACE,
     XML_NAMESPACE,
