@@ -25,3 +25,10 @@ The following specs are still in work:
 * XCCDF
 * DS
 * ARF
+
+## Usage
+
+    from pyscap.xccdf import Benchmark
+    
+    my_benchmark = Benchmark.load("my_benchmark.xml")
+    print(my_benchmark.title)
