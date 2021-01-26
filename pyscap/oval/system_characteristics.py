@@ -8,9 +8,9 @@ from .common import (
     MessageType,
     SimpleDatatypeEnumeration,
 )
-from ...common.xmldsig import Signature
-
-__NAMESPACE__ = "http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"
+from .namespaces import OVAL_NAMESPACE_MAP
+from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.xmldsig import Signature
 
 
 class EntityItemIpaddressStringTypeDatatype(Enum):
@@ -226,7 +226,6 @@ class InterfaceType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -234,7 +233,6 @@ class InterfaceType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -242,7 +240,6 @@ class InterfaceType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1506,7 +1503,6 @@ class InterfacesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -1550,7 +1546,6 @@ class ItemType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 50,
         }
     )
@@ -1634,21 +1629,18 @@ class ObjectType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_value: List[VariableValueType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     reference: List[ReferenceType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -1699,7 +1691,6 @@ class CollectedObjectsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -1723,7 +1714,6 @@ class EntityItemRecordType(EntityItemComplexBaseType):
         metadata={
             "name": "field",
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -1769,7 +1759,6 @@ class SystemInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1777,7 +1766,6 @@ class SystemInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1785,7 +1773,6 @@ class SystemInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1793,7 +1780,6 @@ class SystemInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1801,7 +1787,6 @@ class SystemInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1886,7 +1871,6 @@ class OvalSystemCharacteristics:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1894,7 +1878,6 @@ class OvalSystemCharacteristics:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -1902,14 +1885,12 @@ class OvalSystemCharacteristics:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     system_data: Optional[SystemDataType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     signature: Optional[Signature] = field(
@@ -1920,3 +1901,23 @@ class OvalSystemCharacteristics:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
+
+    @classmethod
+    def load(cls, file):
+        with open(file, "rb") as fp:
+            system_characteristics = scap_parser.parse(fp, cls)
+        return system_characteristics
+
+    @classmethod
+    def load_json(cls, file):
+        with open(file, "rb") as fp:
+            system_characteristics = scap_json_parser.parse(fp, cls)
+        return system_characteristics
+
+    def dump(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+
+    def dump_json(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_json_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)

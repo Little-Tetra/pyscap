@@ -6,9 +6,9 @@ from .common import (
     NotesType,
     SimpleDatatypeEnumeration,
 )
-from ...common.xmldsig import Signature
-
-__NAMESPACE__ = "http://oval.mitre.org/XMLSchema/oval-variables-5"
+from .namespaces import OVAL_NAMESPACE_MAP
+from ..common.utils import scap_json_parser, scap_serializer, scap_json_serializer, scap_parser
+from ..common.xmldsig import Signature
 
 
 @dataclass
@@ -34,7 +34,6 @@ class VariableType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -42,7 +41,6 @@ class VariableType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -88,7 +86,6 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -117,7 +114,6 @@ class OvalVariables:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -125,7 +121,6 @@ class OvalVariables:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     signature: Optional[Signature] = field(
@@ -136,3 +131,23 @@ class OvalVariables:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
+
+    @classmethod
+    def load(cls, file):
+        with open(file, "rb") as fp:
+            variables = scap_parser.parse(fp, cls)
+        return variables
+
+    @classmethod
+    def load_json(cls, file):
+        with open(file, "rb") as fp:
+            variables = scap_json_parser.parse(fp, cls)
+        return variables
+
+    def dump(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+
+    def dump_json(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_json_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)

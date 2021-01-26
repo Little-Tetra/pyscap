@@ -2,13 +2,10 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 
 from .common import GeneratorType
-from .results import (
-    ClassDirectivesType,
-    DefaultDirectivesType,
-)
-from ...common.xmldsig import Signature
-
-__NAMESPACE__ = "http://oval.mitre.org/XMLSchema/oval-directives-5"
+from .namespaces import OVAL_NAMESPACE_MAP
+from .results import ClassDirectivesType, DefaultDirectivesType
+from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.xmldsig import Signature
 
 
 @dataclass
@@ -55,7 +52,6 @@ class OvalDirectives:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -63,7 +59,6 @@ class OvalDirectives:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -71,7 +66,6 @@ class OvalDirectives:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 5,
         }
     )
@@ -83,3 +77,23 @@ class OvalDirectives:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
+
+    @classmethod
+    def load(cls, file):
+        with open(file, "rb") as fp:
+            directives = scap_parser.parse(fp, cls)
+        return directives
+
+    @classmethod
+    def load_json(cls, file):
+        with open(file, "rb") as fp:
+            directives = scap_json_parser.parse(fp, cls)
+        return directives
+
+    def dump(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+
+    def dump_json(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_json_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)

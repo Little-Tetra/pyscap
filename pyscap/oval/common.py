@@ -4,8 +4,6 @@ from typing import List, Optional
 
 from xsdata.models.datatype import XmlDateTime
 
-__NAMESPACE__ = "http://oval.mitre.org/XMLSchema/oval-common-5"
-
 
 class CheckEnumeration(Enum):
     """The CheckEnumeration simple type defines acceptable check values, which
@@ -220,7 +218,7 @@ class DatatypeEnumeration(Enum):
         A_addr == B_addr and A_prefix == B_prefix. not equal: A is not
         equal to B if and only if they don't satisfy the criteria for
         operator "equals". greater than: A is greater than B if and only
-        if A_prefix == B_prefix and A_addr &gt; B_addr. If A_prefix !=
+        if A_prefix == B_prefix and A_addr > B_addr. If A_prefix !=
         B_prefix, i.e. prefix lengths are not equal, an error MUST be
         reported. greater than or equal: A is greater than or equal to B
         if and only if A_prefix == B_prefix and they satisfy either the
@@ -235,7 +233,7 @@ class DatatypeEnumeration(Enum):
         "greater than". If A_prefix != B_prefix, i.e. prefix lengths are
         not equal, an error MUST be reported. subset of: A is a subset
         of B if and only if every IPv4 address in subnet A is present in
-        subnet B. In other words, A_prefix &gt;= B_prefix and the high
+        subnet B. In other words, A_prefix >= B_prefix and the high
         B_prefix bits of A_addr and B_addr are equal. superset of: A is
         a superset of B if and only if B is a subset of A.
     :cvar IPV6_ADDRESS: The ipv6_address datatype represents IPv6
@@ -264,7 +262,7 @@ class DatatypeEnumeration(Enum):
         A_prefix == B_prefix. not equal: A is not equal to B if and only
         if they don't satisfy the criteria for operator "equals".
         greater than: A is greater than B if and only if A_prefix ==
-        B_prefix and A_addr &gt; B_addr. If A_prefix != B_prefix, an
+        B_prefix and A_addr > B_addr. If A_prefix != B_prefix, an
         error MUST be reported. greater than or equal: A is greater than
         or equal to B if and only if A_prefix == B_prefix and they
         satisfy either the criteria for operators "equal" or "greater
@@ -277,7 +275,7 @@ class DatatypeEnumeration(Enum):
         operator "greater than". If A_prefix != B_prefix, an error MUST
         be reported. subset of: A is a subset of B if and only if every
         IPv6 address in subnet A is present in subnet B. In other words,
-        A_prefix &gt;= B_prefix and the high B_prefix bits of A_addr and
+        A_prefix >= B_prefix and the high B_prefix bits of A_addr and
         B_addr are equal. superset of: A is a superset of B if and only
         if B is a subset of A.
     :cvar STRING: The string datatype describes standard string data.
@@ -369,7 +367,6 @@ class DeprecatedInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
             "pattern": r"[0-9]+\.[0-9]+(\.[0-9]+)?(:[0-9]+\.[0-9]+(\.[0-9]+)?)?",
         }
@@ -378,7 +375,6 @@ class DeprecatedInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -386,7 +382,6 @@ class DeprecatedInfoType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -536,7 +531,6 @@ class NotesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -790,7 +784,7 @@ class SimpleDatatypeEnumeration(Enum):
         A_addr == B_addr and A_prefix == B_prefix. not equal: A is not
         equal to B if and only if they don't satisfy the criteria for
         operator "equals". greater than: A is greater than B if and only
-        if A_prefix == B_prefix and A_addr &gt; B_addr. If A_prefix !=
+        if A_prefix == B_prefix and A_addr > B_addr. If A_prefix !=
         B_prefix, i.e. prefix lengths are not equal, an error MUST be
         reported. greater than or equal: A is greater than or equal to B
         if and only if A_prefix == B_prefix and they satisfy either the
@@ -805,7 +799,7 @@ class SimpleDatatypeEnumeration(Enum):
         "greater than". If A_prefix != B_prefix, i.e. prefix lengths are
         not equal, an error MUST be reported. subset of: A is a subset
         of B if and only if every IPv4 address in subnet A is present in
-        subnet B. In other words, A_prefix &gt;= B_prefix and the high
+        subnet B. In other words, A_prefix >= B_prefix and the high
         B_prefix bits of A_addr and B_addr are equal. superset of: A is
         a superset of B if and only if B is a subset of A.
     :cvar IPV6_ADDRESS: The ipv6_address datatype represents IPv6
@@ -834,7 +828,7 @@ class SimpleDatatypeEnumeration(Enum):
         A_prefix == B_prefix. not equal: A is not equal to B if and only
         if they don't satisfy the criteria for operator "equals".
         greater than: A is greater than B if and only if A_prefix ==
-        B_prefix and A_addr &gt; B_addr. If A_prefix != B_prefix, an
+        B_prefix and A_addr > B_addr. If A_prefix != B_prefix, an
         error MUST be reported. greater than or equal: A is greater than
         or equal to B if and only if A_prefix == B_prefix and they
         satisfy either the criteria for operators "equal" or "greater
@@ -847,7 +841,7 @@ class SimpleDatatypeEnumeration(Enum):
         operator "greater than". If A_prefix != B_prefix, an error MUST
         be reported. subset of: A is a subset of B if and only if every
         IPv6 address in subnet A is present in subnet B. In other words,
-        A_prefix &gt;= B_prefix and the high B_prefix bits of A_addr and
+        A_prefix >= B_prefix and the high B_prefix bits of A_addr and
         B_addr are equal. superset of: A is a superset of B if and only
         if B is a subset of A.
     :cvar STRING: The string datatype describes standard string data.
@@ -927,7 +921,6 @@ class ElementMapType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -935,21 +928,18 @@ class ElementMapType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     state: Optional[ElementMapItemType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     item: Optional[ElementMapItemType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -1003,21 +993,18 @@ class GeneratorType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     product_version: Optional[str] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     schema_version: List[SchemaVersionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -1025,7 +1012,6 @@ class GeneratorType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )

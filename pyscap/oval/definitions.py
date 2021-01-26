@@ -14,9 +14,9 @@ from .common import (
     SimpleDatatypeEnumeration,
     Notes as OvalCommonSchemaNotes,
 )
-from ...common.xmldsig import Signature
-
-__NAMESPACE__ = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+from .namespaces import OVAL_NAMESPACE_MAP
+from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.xmldsig import Signature
 
 
 class ArithmeticEnumeration(Enum):
@@ -335,7 +335,7 @@ class EntityStateIosversionTypeDatatype(Enum):
         A_addr == B_addr and A_prefix == B_prefix. not equal: A is not
         equal to B if and only if they don't satisfy the criteria for
         operator "equals". greater than: A is greater than B if and only
-        if A_prefix == B_prefix and A_addr &gt; B_addr. If A_prefix !=
+        if A_prefix == B_prefix and A_addr > B_addr. If A_prefix !=
         B_prefix, i.e. prefix lengths are not equal, an error MUST be
         reported. greater than or equal: A is greater than or equal to B
         if and only if A_prefix == B_prefix and they satisfy either the
@@ -350,7 +350,7 @@ class EntityStateIosversionTypeDatatype(Enum):
         "greater than". If A_prefix != B_prefix, i.e. prefix lengths are
         not equal, an error MUST be reported. subset of: A is a subset
         of B if and only if every IPv4 address in subnet A is present in
-        subnet B. In other words, A_prefix &gt;= B_prefix and the high
+        subnet B. In other words, A_prefix >= B_prefix and the high
         B_prefix bits of A_addr and B_addr are equal. superset of: A is
         a superset of B if and only if B is a subset of A.
     :cvar IPV6_ADDRESS: The ipv6_address datatype represents IPv6
@@ -379,7 +379,7 @@ class EntityStateIosversionTypeDatatype(Enum):
         A_prefix == B_prefix. not equal: A is not equal to B if and only
         if they don't satisfy the criteria for operator "equals".
         greater than: A is greater than B if and only if A_prefix ==
-        B_prefix and A_addr &gt; B_addr. If A_prefix != B_prefix, an
+        B_prefix and A_addr > B_addr. If A_prefix != B_prefix, an
         error MUST be reported. greater than or equal: A is greater than
         or equal to B if and only if A_prefix == B_prefix and they
         satisfy either the criteria for operators "equal" or "greater
@@ -392,7 +392,7 @@ class EntityStateIosversionTypeDatatype(Enum):
         operator "greater than". If A_prefix != B_prefix, an error MUST
         be reported. subset of: A is a subset of B if and only if every
         IPv6 address in subnet A is present in subnet B. In other words,
-        A_prefix &gt;= B_prefix and the high B_prefix bits of A_addr and
+        A_prefix >= B_prefix and the high B_prefix bits of A_addr and
         B_addr are equal. superset of: A is a superset of B if and only
         if B is a subset of A.
     :cvar STRING: 'string' is included to allow for regular expressions
@@ -865,7 +865,6 @@ class Notes:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -906,14 +905,12 @@ class AffectedType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     product: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     family: Optional[FamilyEnumeration] = field(
@@ -953,21 +950,18 @@ class CriteriaType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     criterion: List[CriterionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     extend_definition: List[ExtendDefinitionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     applicability_check: Optional[bool] = field(
@@ -3196,7 +3190,6 @@ class EntityObjectRecordType(EntityComplexBaseType):
         metadata={
             "name": "field",
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -3350,105 +3343,90 @@ class GlobToRegexFunctionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     split: Optional["SplitFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring: Optional["SubstringFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     time_difference: Optional["TimeDifferenceFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     regex_capture: Optional["RegexCaptureFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     unique: Optional["UniqueFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     count: Optional["CountFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_to_regex: Optional["GlobToRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_noescape: bool = field(
@@ -3486,7 +3464,6 @@ class MetadataType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -3494,21 +3471,18 @@ class MetadataType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     reference: List[ReferenceType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     description: Optional[str] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -3545,7 +3519,6 @@ class PossibleRestrictionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     operator: OperatorEnumeration = field(
@@ -3586,7 +3559,6 @@ class ConstantVariable(VariableType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -3666,7 +3638,6 @@ class Set:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "pattern": r"oval:[A-Za-z0-9_\-\.]+:obj:[1-9][0-9]*",
         }
@@ -3778,7 +3749,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3786,7 +3756,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3794,7 +3763,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3802,7 +3770,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3810,7 +3777,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3818,7 +3784,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3826,7 +3791,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3834,7 +3798,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3842,7 +3805,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3850,7 +3812,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3858,7 +3819,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3866,7 +3826,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3874,7 +3833,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3882,7 +3840,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3890,7 +3847,6 @@ class CountFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -3947,7 +3903,6 @@ class DefinitionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -3970,7 +3925,6 @@ class DefinitionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     id: Optional[str] = field(
@@ -4440,7 +4394,6 @@ class EntityStateRecordType(EntityStateComplexBaseType):
         metadata={
             "name": "field",
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -4579,14 +4532,12 @@ class ExternalVariable(VariableType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     possible_restriction: List[PossibleRestrictionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -4615,7 +4566,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4623,7 +4573,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4631,7 +4580,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4639,7 +4587,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4647,7 +4594,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4655,7 +4601,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4663,7 +4608,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4671,7 +4615,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4679,7 +4622,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4687,7 +4629,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4695,7 +4636,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4703,7 +4643,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4711,7 +4650,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4719,7 +4657,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4727,7 +4664,6 @@ class UniqueFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "sequential": True,
         }
     )
@@ -4780,105 +4716,90 @@ class RegexCaptureFunctionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     split: Optional["SplitFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring: Optional["SubstringFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     time_difference: Optional["TimeDifferenceFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     regex_capture: Optional["RegexCaptureFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     pattern: Optional[str] = field(
@@ -4899,7 +4820,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4908,7 +4828,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4917,7 +4836,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4926,7 +4844,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4935,7 +4852,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4944,7 +4860,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4953,7 +4868,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4962,7 +4876,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4971,7 +4884,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4980,7 +4892,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4989,7 +4900,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -4998,7 +4908,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -5007,7 +4916,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -5016,7 +4924,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -5025,7 +4932,6 @@ class TimeDifferenceFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 2,
             "sequential": True,
         }
@@ -5070,105 +4976,90 @@ class SubstringFunctionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     split: Optional["SplitFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring: Optional["SubstringFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring_start: Optional[int] = field(
@@ -5214,105 +5105,90 @@ class SplitFunctionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     split: Optional["SplitFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     delimiter: Optional[str] = field(
@@ -5336,105 +5212,90 @@ class EscapeRegexFunctionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     escape_regex: Optional["EscapeRegexFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     split: Optional[SplitFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -5456,105 +5317,90 @@ class EndFunctionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     concat: Optional["ConcatFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     end: Optional["EndFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     escape_regex: Optional[EscapeRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     split: Optional[SplitFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     character: Optional[str] = field(
@@ -5587,7 +5433,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5596,7 +5441,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5605,7 +5449,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5614,7 +5457,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5623,7 +5465,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5632,7 +5473,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5641,7 +5481,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5650,7 +5489,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5659,7 +5497,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5668,7 +5505,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5677,7 +5513,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5686,7 +5521,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5695,7 +5529,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5704,7 +5537,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5713,7 +5545,6 @@ class ConcatFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5736,105 +5567,90 @@ class BeginFunctionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     arithmetic: Optional["ArithmeticFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     begin: Optional["BeginFunctionType"] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     concat: Optional[ConcatFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     end: Optional[EndFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     escape_regex: Optional[EscapeRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     split: Optional[SplitFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     character: Optional[str] = field(
@@ -5867,7 +5683,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5876,7 +5691,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5885,7 +5699,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5894,7 +5707,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5903,7 +5715,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5912,7 +5723,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5921,7 +5731,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5930,7 +5739,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5939,7 +5747,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5948,7 +5755,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5957,7 +5763,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5966,7 +5771,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5975,7 +5779,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5984,7 +5787,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -5993,7 +5795,6 @@ class ArithmeticFunctionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 2,
             "sequential": True,
         }
@@ -6034,105 +5835,90 @@ class LocalVariable(VariableType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variable_component: Optional[VariableComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     literal_component: Optional[LiteralComponentType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     arithmetic: Optional[ArithmeticFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     begin: Optional[BeginFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     concat: Optional[ConcatFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     end: Optional[EndFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     escape_regex: Optional[EscapeRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     split: Optional[SplitFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     substring: Optional[SubstringFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     time_difference: Optional[TimeDifferenceFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     regex_capture: Optional[RegexCaptureFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     unique: Optional[UniqueFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     count: Optional[CountFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     glob_to_regex: Optional[GlobToRegexFunctionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
 
@@ -6212,7 +5998,6 @@ class OvalDefinitions:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -6220,35 +6005,30 @@ class OvalDefinitions:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     tests: Optional[TestsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     objects: Optional[ObjectsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     states: Optional[StatesType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     variables: Optional[VariablesType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     signature: Optional[Signature] = field(
@@ -6259,3 +6039,23 @@ class OvalDefinitions:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
+
+    @classmethod
+    def load(cls, file):
+        with open(file, "rb") as fp:
+            definitions = scap_parser.parse(fp, cls)
+        return definitions
+
+    @classmethod
+    def load_json(cls, file):
+        with open(file, "rb") as fp:
+            definitions = scap_json_parser.parse(fp, cls)
+        return definitions
+
+    def dump(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+
+    def dump_json(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_json_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)

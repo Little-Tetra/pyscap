@@ -11,10 +11,10 @@ from .common import (
     OperatorEnumeration,
 )
 from .definitions import OvalDefinitions
+from .namespaces import OVAL_NAMESPACE_MAP
 from .system_characteristics import OvalSystemCharacteristics
-from ...common.xmldsig import Signature
-
-__NAMESPACE__ = "http://oval.mitre.org/XMLSchema/oval-results-5"
+from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.xmldsig import Signature
 
 
 class ContentEnumeration(Enum):
@@ -343,7 +343,6 @@ class TestedItemType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     item_id: Optional[int] = field(
@@ -393,21 +392,18 @@ class CriteriaType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     criterion: List[CriterionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     extend_definition: List[ExtendDefinitionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     applicability_check: Optional[bool] = field(
@@ -452,7 +448,6 @@ class DirectivesType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -460,7 +455,6 @@ class DirectivesType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -468,7 +462,6 @@ class DirectivesType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -476,7 +469,6 @@ class DirectivesType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -484,7 +476,6 @@ class DirectivesType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -492,7 +483,6 @@ class DirectivesType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -587,21 +577,18 @@ class TestType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     tested_item: List[TestedItemType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     tested_variable: List[TestedVariableType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     test_id: Optional[str] = field(
@@ -727,14 +714,12 @@ class DefinitionType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     criteria: Optional[CriteriaType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     definition_id: Optional[str] = field(
@@ -786,7 +771,6 @@ class TestsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -805,7 +789,6 @@ class DefinitionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -827,14 +810,12 @@ class SystemType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     tests: Optional[TestsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
         }
     )
     oval_system_characteristics: Optional[OvalSystemCharacteristics] = field(
@@ -860,7 +841,6 @@ class ResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "min_occurs": 1,
         }
     )
@@ -910,7 +890,6 @@ class OvalResults:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -918,7 +897,6 @@ class OvalResults:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -926,7 +904,6 @@ class OvalResults:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "",
             "max_occurs": 5,
         }
     )
@@ -941,7 +918,6 @@ class OvalResults:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "",
             "required": True,
         }
     )
@@ -953,3 +929,23 @@ class OvalResults:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
+
+    @classmethod
+    def load(cls, file):
+        with open(file, "rb") as fp:
+            results = scap_parser.parse(fp, cls)
+        return results
+
+    @classmethod
+    def load_json(cls, file):
+        with open(file, "rb") as fp:
+            results = scap_json_parser.parse(fp, cls)
+        return results
+
+    def dump(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+
+    def dump_json(self, file):
+        with open(file, "w", encoding="utf8") as fp:
+            scap_json_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
