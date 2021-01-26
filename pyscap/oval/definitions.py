@@ -12,7 +12,7 @@ from .common import (
     OperationEnumeration,
     OperatorEnumeration,
     SimpleDatatypeEnumeration,
-    Notes as OvalCommonSchemaNotes,
+    Notes as CommonNotes,
 )
 from .namespaces import OVAL_NAMESPACE_MAP
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
@@ -2809,7 +2809,7 @@ class ObjectType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -2912,7 +2912,7 @@ class StateType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -2983,7 +2983,7 @@ class TestType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -3092,7 +3092,7 @@ class VariableType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
         default=None,
         metadata={
             "name": "notes",
@@ -3913,7 +3913,7 @@ class DefinitionType:
             "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
         }
     )
-    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[OvalCommonSchemaNotes] = field(
+    oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
         default=None,
         metadata={
             "name": "notes",
