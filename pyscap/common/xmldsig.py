@@ -1,8 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List, Optional
 
-__NAMESPACE__ = "http://www.w3.org/2000/09/xmldsig#"
-
 
 @dataclass
 class CanonicalizationMethodType:
