@@ -96,4 +96,4 @@ class OvalDirectives:
 
     def dump_json(self, file):
         with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+            scap_json_serializer.write(fp, self)
