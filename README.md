@@ -12,17 +12,16 @@ Install and update using pip:
 
 ## Features
 
-* Load and dump SCAP files.
+* Load and dump files related to SCAP.
 
 Currently only supports:
 
 * XCCDF
+* OVAL
 
 The following specs are still in work:
 
-* OVAL
 * OCIL
-* XCCDF
 * DS
 * ARF
 
