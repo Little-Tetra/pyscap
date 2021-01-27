@@ -5,9 +5,9 @@ from typing import Dict, List, Optional
 
 from xsdata.models.datatype import XmlDate, XmlDateTime
 
-from .cpe_language_2_3 import PlatformSpecification
 from .namespaces import XCCDF_NAMESPACE_MAP
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..cpe import PlatformSpecification
 
 
 @dataclass

@@ -45,7 +45,6 @@ class CpefactRefType(FactRefType):
     """
     A reference to a CPE Name that always evaluates to a Boolean result.
     """
-
     class Meta:
         name = "CPEFactRefType"
 
@@ -281,7 +280,6 @@ class PlatformSpecification(PlatformSpecificationType):
     This element is the root element of a CPE Applicability Language XML
     document and therefore acts as a container for child platform definitions.
     """
-
     class Meta:
         name = "platform-specification"
         namespace = "http://cpe.mitre.org/language/2.0"

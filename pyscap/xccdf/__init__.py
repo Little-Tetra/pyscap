@@ -1,25 +1,4 @@
-from .cpe_language_2_3 import (
-    FactRefType,
-    TextType,
-    OperatorEnumeration,
-    CpefactRefType,
-    CheckFactRefType,
-    CheckFactRef,
-    FactRef,
-    LogicalTestType,
-    LogicalTest,
-    PlatformBaseType,
-    PlatformType,
-    PlatformConfiguration,
-    Platform,
-    PlatformSpecificationType,
-    PlatformSpecification
-)
-from .namespaces import (
-    CPE2_NAMESPACE,
-    CPE2_DICT_NAMESPACE,
-    XCCDF_NAMESPACE
-)
+from .namespaces import XCCDF_NAMESPACE
 from .xccdf_1_2 import (
     Cpe2IdrefType,
     BenchmarkReferenceType,
