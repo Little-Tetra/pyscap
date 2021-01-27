@@ -374,14 +374,14 @@ class DataStreamCollection:
     @classmethod
     def load(cls, file):
         with open(file, "rb") as fp:
-            benchmark = scap_parser.parse(fp, cls)
-        return benchmark
+            data_stream_collection = scap_parser.parse(fp, cls)
+        return data_stream_collection
 
     @classmethod
     def load_json(cls, file):
         with open(file, "rb") as fp:
-            benchmark = scap_json_parser.parse(fp, cls)
-        return benchmark
+            data_stream_collection = scap_json_parser.parse(fp, cls)
+        return data_stream_collection
 
     def dump(self, file):
         with open(file, "w", encoding="utf8") as fp:

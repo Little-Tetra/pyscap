@@ -3137,14 +3137,14 @@ class Ocil(Ociltype):
     @classmethod
     def load(cls, file):
         with open(file, "rb") as fp:
-            benchmark = scap_parser.parse(fp, cls)
-        return benchmark
+            ocil = scap_parser.parse(fp, cls)
+        return ocil
 
     @classmethod
     def load_json(cls, file):
         with open(file, "rb") as fp:
-            benchmark = scap_json_parser.parse(fp, cls)
-        return benchmark
+            ocil = scap_json_parser.parse(fp, cls)
+        return ocil
 
     def dump(self, file):
         with open(file, "w", encoding="utf8") as fp:
