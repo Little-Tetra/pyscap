@@ -2549,215 +2549,6 @@ class FixTextType(HtmlTextWithSubType):
 
 
 @dataclass
-class ProfileType:
-    """Data type for the <xccdf:Profile> element, which holds a specific
-    tailoring of the <xccdf:Benchmark>. The main part of an.
-
-    <xccdf:Profile> is the selectors: <xccdf:select>,
-    <xccdf:set-value>, <xccdf:set-complex-value>,
-    <xccdf:refine-rule>, and <xccdf:refine-value>. An
-    <xccdf:Profile> may also be signed with an XML-Signature.
-
-    :ivar status: Status of the <xccdf:Profile> and date at
-        which it attained that status. Authors may use this element to
-        record the                         maturity or consensus level
-        of an <xccdf:Profile>. If the
-        <xccdf:status> is not given explicitly, then the
-        <xccdf:Profile>                         is taken to have
-        the same status as its parent
-        <xccdf:Benchmark>.
-    :ivar dc_status: Holds additional status information using the
-        Dublin Core format.
-    :ivar version: Version information about this
-        <xccdf:Profile>.
-    :ivar title: Title of the <xccdf:Profile>.
-    :ivar description: Text that describes the <xccdf:Profile>.
-    :ivar reference: A reference where the user can learn more about
-        the subject of this <xccdf:Profile>.
-    :ivar platform: A target platform for this
-        <xccdf:Profile>.
-    :ivar select: Select or deselect <xccdf:Group> and
-        <xccdf:Rule> elements.
-    :ivar set_complex_value: Set the value of an <xccdf:Value> to
-        a list.
-    :ivar set_value: Set the value of an <xccdf:Value> to
-        a simple data value.
-    :ivar refine_value: Customize the properties of an
-        <xccdf:Value>.
-    :ivar refine_rule: Customize the properties of an
-        <xccdf:Rule> or <xccdf:Group>.
-    :ivar metadata: Metadata associated with this
-        <xccdf:Profile>.
-    :ivar signature: A digital signature asserting authorship and
-        allowing verification of the integrity of the
-        <xccdf:Profile>.
-    :ivar id: Unique identifier for this
-        <xccdf:Profile>.
-    :ivar prohibit_changes: Whether or not products should prohibit
-        changes to                     this <xccdf:Profile>.
-    :ivar abstract: If true, then this <xccdf:Profile> exists
-        solely to be extended by other <xccdf:Profile> elements.
-    :ivar note_tag: Tag identifier to specify which
-        <xccdf:profile-note> element from an <xccdf:Rule>
-        should be                     associated with this
-        <xccdf:Profile>.
-    :ivar extends: The id of an <xccdf:Profile> on which to base
-        this <xccdf:Profile>.
-    :ivar base:
-    :ivar id_attribute: An identifier used for referencing elements
-        included in an XML signature.
-    """
-
-    class Meta:
-        name = "profileType"
-
-    status: List[Status] = field(
-        default_factory=list,
-        metadata={
-            "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
-        }
-    )
-    dc_status: List[DcStatusType] = field(
-        default_factory=list,
-        metadata={
-            "name": "dc-status",
-            "type": "Element",
-        }
-    )
-    version: Optional[VersionType] = field(
-        default=None,
-        metadata={
-            "type": "Element",
-        }
-    )
-    title: List[TextWithSubType] = field(
-        default_factory=list,
-        metadata={
-            "type": "Element",
-            "min_occurs": 1,
-        }
-    )
-    description: List[HtmlTextWithSubType] = field(
-        default_factory=list,
-        metadata={
-            "type": "Element",
-        }
-    )
-    reference: List[ReferenceType] = field(
-        default_factory=list,
-        metadata={
-            "type": "Element",
-        }
-    )
-    platform: List[OverrideableCpe2IdrefType] = field(
-        default_factory=list,
-        metadata={
-            "type": "Element",
-        }
-    )
-    select: List[ProfileSelectType] = field(
-        default_factory=list,
-        metadata={
-            "type": "Element",
-            "sequential": True,
-        }
-    )
-    set_complex_value: List[ProfileSetComplexValueType] = field(
-        default_factory=list,
-        metadata={
-            "name": "set-complex-value",
-            "type": "Element",
-            "sequential": True,
-        }
-    )
-    set_value: List[ProfileSetValueType] = field(
-        default_factory=list,
-        metadata={
-            "name": "set-value",
-            "type": "Element",
-            "sequential": True,
-        }
-    )
-    refine_value: List[ProfileRefineValueType] = field(
-        default_factory=list,
-        metadata={
-            "name": "refine-value",
-            "type": "Element",
-            "sequential": True,
-        }
-    )
-    refine_rule: List[ProfileRefineRuleType] = field(
-        default_factory=list,
-        metadata={
-            "name": "refine-rule",
-            "type": "Element",
-            "sequential": True,
-        }
-    )
-    metadata: List[MetadataType] = field(
-        default_factory=list,
-        metadata={
-            "type": "Element",
-        }
-    )
-    signature: Optional[SignatureType] = field(
-        default=None,
-        metadata={
-            "type": "Element",
-        }
-    )
-    id: Optional[str] = field(
-        default=None,
-        metadata={
-            "type": "Attribute",
-            "required": True,
-            "pattern": r"xccdf_[^_]+_profile_.+",
-        }
-    )
-    prohibit_changes: bool = field(
-        default=False,
-        metadata={
-            "name": "prohibitChanges",
-            "type": "Attribute",
-        }
-    )
-    abstract: bool = field(
-        default=False,
-        metadata={
-            "type": "Attribute",
-        }
-    )
-    note_tag: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "note-tag",
-            "type": "Attribute",
-        }
-    )
-    extends: Optional[str] = field(
-        default=None,
-        metadata={
-            "type": "Attribute",
-        }
-    )
-    base: Optional[str] = field(
-        default=None,
-        metadata={
-            "type": "Attribute",
-            "namespace": "http://www.w3.org/XML/1998/namespace",
-        }
-    )
-    id_attribute: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "Id",
-            "type": "Attribute",
-        }
-    )
-
-
-@dataclass
 class RuleResultType:
     """Type for the <xccdf:rule-result> element within an
     <xccdf:TestResult>.
@@ -2954,100 +2745,216 @@ class WarningType(HtmlTextWithSubType):
 
 
 @dataclass
-class Profile(ProfileType):
-    """The <xccdf:Profile> element is a named tailoring for an
-    <xccdf:Benchmark>.
+class Profile:
+    """
 
-    While an <xccdf:Benchmark> can be tailored in place by setting
-    properties of various elements, <xccdf:Profile> elements allow
-    one <xccdf:Benchmark> document to hold several independent
-    tailorings.
+    The <xccdf:Profile> element is a named tailoring for an <xccdf:Benchmark>. While an <xccdf:Benchmark> can be
+    tailored in place by setting properties of various elements, <xccdf:Profile> elements allow one <xccdf:Benchmark>
+    document to hold several independent tailorings.
+
+    :ivar status: Status of the <xccdf:Profile> and date at which it attained that status. Authors may use this element to record the maturity or consensus level of an <xccdf:Profile>. If the <xccdf:status> is not given explicitly, then the <xccdf:Profile> is taken to have the same status as its parent <xccdf:Benchmark>.
+    :ivar dc_status: Holds additional status information using the Dublin Core format.
+    :ivar version: Version information about this <xccdf:Profile>.
+    :ivar title: Title of the <xccdf:Profile>.
+    :ivar description: Text that describes the <xccdf:Profile>.
+    :ivar reference: A reference where the user can learn more about the subject of this <xccdf:Profile>.
+    :ivar platform: A target platform for this <xccdf:Profile>.
+    :ivar select: Select or deselect <xccdf:Group> and <xccdf:Rule> elements.
+    :ivar set_complex_value: Set the value of an <xccdf:Value> to a list.
+    :ivar set_value: Set the value of an <xccdf:Value> to a simple data value.
+    :ivar refine_value: Customize the properties of an <xccdf:Value>.
+    :ivar refine_rule: Customize the properties of an <xccdf:Rule> or <xccdf:Group>.
+    :ivar metadata: Metadata associated with this <xccdf:Profile>.
+    :ivar signature: A digital signature asserting authorship and allowing verification of the integrity of the <xccdf:Profile>.
+    :ivar id: Unique identifier for this <xccdf:Profile>.
+    :ivar prohibit_changes: Whether or not products should prohibit changes to this <xccdf:Profile>.
+    :ivar abstract: If true, then this <xccdf:Profile> exists solely to be extended by other <xccdf:Profile> elements.
+    :ivar note_tag: Tag identifier to specify which <xccdf:profile-note> element from an <xccdf:Rule> should be associated with this <xccdf:Profile>.
+    :ivar extends: The id of an <xccdf:Profile> on which to base this <xccdf:Profile>.
+    :ivar base:
+    :ivar id_attribute: An identifier used for referencing elements included in an XML signature.
     """
 
     class Meta:
         namespace = "http://checklists.nist.gov/xccdf/1.2"
 
+    status: List[Status] = field(
+        default_factory=list,
+        metadata={
+            "type": "Element",
+            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+        }
+    )
+    dc_status: List[DcStatusType] = field(
+        default_factory=list,
+        metadata={
+            "name": "dc-status",
+            "type": "Element",
+        }
+    )
+    version: Optional[VersionType] = field(
+        default=None,
+        metadata={
+            "type": "Element",
+        }
+    )
+    title: List[TextWithSubType] = field(
+        default_factory=list,
+        metadata={
+            "type": "Element",
+            "min_occurs": 1,
+        }
+    )
+    description: List[HtmlTextWithSubType] = field(
+        default_factory=list,
+        metadata={
+            "type": "Element",
+        }
+    )
+    reference: List[ReferenceType] = field(
+        default_factory=list,
+        metadata={
+            "type": "Element",
+        }
+    )
+    platform: List[OverrideableCpe2IdrefType] = field(
+        default_factory=list,
+        metadata={
+            "type": "Element",
+        }
+    )
+    select: List[ProfileSelectType] = field(
+        default_factory=list,
+        metadata={
+            "type": "Element",
+            "sequential": True,
+        }
+    )
+    set_complex_value: List[ProfileSetComplexValueType] = field(
+        default_factory=list,
+        metadata={
+            "name": "set-complex-value",
+            "type": "Element",
+            "sequential": True,
+        }
+    )
+    set_value: List[ProfileSetValueType] = field(
+        default_factory=list,
+        metadata={
+            "name": "set-value",
+            "type": "Element",
+            "sequential": True,
+        }
+    )
+    refine_value: List[ProfileRefineValueType] = field(
+        default_factory=list,
+        metadata={
+            "name": "refine-value",
+            "type": "Element",
+            "sequential": True,
+        }
+    )
+    refine_rule: List[ProfileRefineRuleType] = field(
+        default_factory=list,
+        metadata={
+            "name": "refine-rule",
+            "type": "Element",
+            "sequential": True,
+        }
+    )
+    metadata: List[MetadataType] = field(
+        default_factory=list,
+        metadata={
+            "type": "Element",
+        }
+    )
+    signature: Optional[SignatureType] = field(
+        default=None,
+        metadata={
+            "type": "Element",
+        }
+    )
+    id: Optional[str] = field(
+        default=None,
+        metadata={
+            "type": "Attribute",
+            "required": True,
+            "pattern": r"xccdf_[^_]+_profile_.+",
+        }
+    )
+    prohibit_changes: bool = field(
+        default=False,
+        metadata={
+            "name": "prohibitChanges",
+            "type": "Attribute",
+        }
+    )
+    abstract: bool = field(
+        default=False,
+        metadata={
+            "type": "Attribute",
+        }
+    )
+    note_tag: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "note-tag",
+            "type": "Attribute",
+        }
+    )
+    extends: Optional[str] = field(
+        default=None,
+        metadata={
+            "type": "Attribute",
+        }
+    )
+    base: Optional[str] = field(
+        default=None,
+        metadata={
+            "type": "Attribute",
+            "namespace": "http://www.w3.org/XML/1998/namespace",
+        }
+    )
+    id_attribute: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "Id",
+            "type": "Attribute",
+        }
+    )
+
 
 @dataclass
-class ItemType:
-    """This abstract itemType represents the basic data shared by all
-    <xccdf:Group>, <xccdf:Rule> and <xccdf:Value> elements.
+class Item:
+    """
 
-    All elements in an itemType are optional, although each element that
-    builds on the itemType may add its own elements, some of which will
-    be required for that element.
+    An item is a named constituent of an <xccdf:Benchmark>. There are three types of items: <xccdf:Group>,
+    <xccdf:Rule> and <xccdf:Value>. The <xccdf:Item> element type imposes constraints shared by all <xccdf:Group>,
+    <xccdf:Rule> and <xccdf:Value> elements. The itemType is abstract, so the element <xccdf:Item> can never appear
+    in a valid XCCDF document.
 
-    :ivar status: Status of the item and date at which it
-        attained that status. <xccdf:Benchmark> authors may use
-        this element                         to record the maturity or
-        consensus level for elements in the
-        <xccdf:Benchmark>. If an item does not have an explicit
-        <xccdf:status> given, then its status is that of its
-        parent.
-    :ivar dc_status: Holds additional status information using the
-        Dublin Core format.
+
+    :ivar status: Status of the item and date at which it attained that status. <xccdf:Benchmark> authors may use this element to record the maturity or consensus level for elements in the <xccdf:Benchmark>. If an item does not have an explicit <xccdf:status> given, then its status is that of its parent.
+    :ivar dc_status: Holds additional status information using the Dublin Core format.
     :ivar version: Version information about this item.
-    :ivar title: Title of the item. Every item should have an
-        <xccdf:title>, because this helps people understand the
-        purpose of the                         item.
+    :ivar title: Title of the item. Every item should have an <xccdf:title>, because this helps people understand the purpose of the item.
     :ivar description: Text that describes the item.
-    :ivar warning: A note or caveat about the item intended to
-        convey important cautionary information for the
-        <xccdf:Benchmark> user                         (e.g.,
-        “Complying with this rule will cause the system to reject all IP
-        packets”). If multiple <xccdf:warning> elements appear,
-        benchmark                         consumers should concatenate
-        them for generating reports or documents.
-        Benchmark consumers may present this information in a special
-        manner in                         generated documents.
-    :ivar question: Interrogative text to present to the user
-        during tailoring. It may also be included into a generated
-        document. For                         <xccdf:Rule> and
-        <xccdf:Group> elements, the
-        <xccdf:question> text should be a simple binary (yes/no)
-        question                         because it is supporting the
-        selection aspect of tailoring. For
-        <xccdf:Value> elements, the <xccdf:question> should
-        solicit the                         user to provide a specific
-        value. Tools may also display constraints on
-        values and any defaults as specified by the other
-        <xccdf:Value>                         properties.
-    :ivar reference: References where the user can learn more about
-        the subject of this item.
-    :ivar metadata: XML metadata associated with this item, such as
-        sources, special information, or other details.
-    :ivar abstract: If true, then this item is abstract and exists only
-        to be extended. The use of this attribute for
-        <xccdf:Group> elements is                     deprecated
-        and should be avoided.
-    :ivar cluster_id: An identifier to be used as a means to identify
-        (refer to) related items. It designates membership in a cluster
-        of items, which                     are used for controlling
-        items via <xccdf:Profile> elements. All the items
-        with the same cluster identifier belong to the same cluster. A
-        selector in an                     <xccdf:Profile> may
-        refer to a cluster, thus making it easier for authors
-        to create and maintain <xccdf:Profile> elements in a
-        complex                     <xccdf:Benchmark>.
-    :ivar extends: The identifier of an item on which to base this
-        item. If present, it must have a value equal to the @id
-        attribute of another                     item. The use of this
-        attribute for <xccdf:Group> elements is deprecated
-        and should be avoided.
-    :ivar hidden: If this item should be excluded from any generated
-        documents although it may still be used during assessments.
-    :ivar prohibit_changes: If benchmark producers should prohibit
-        changes to                     this item during tailoring. An
-        author should use this when they do not want to
-        allow end users to change the item.
+    :ivar warning: A note or caveat about the item intended to convey important cautionary information for the <xccdf:Benchmark> user (e.g., “Complying with this rule will cause the system to reject all IP packets”). If multiple <xccdf:warning> elements appear, benchmark consumers should concatenate them for generating reports or documents. Benchmark consumers may present this information in a special manner in generated documents.
+    :ivar question: Interrogative text to present to the user during tailoring. It may also be included into a generated document. For <xccdf:Rule> and <xccdf:Group> elements, the <xccdf:question> text should be a simple binary (yes/no) question because it is supporting the selection aspect of tailoring. For <xccdf:Value> elements, the <xccdf:question> should solicit the user to provide a specific value. Tools may also display constraints on values and any defaults as specified by the other <xccdf:Value> properties.
+    :ivar reference: References where the user can learn more about the subject of this item.
+    :ivar metadata: XML metadata associated with this item, such as sources, special information, or other details.
+    :ivar abstract: If true, then this item is abstract and exists only to be extended. The use of this attribute for <xccdf:Group> elements is  deprecated and should be avoided.
+    :ivar cluster_id: An identifier to be used as a means to identify (refer to) related items. It designates membership in a cluster of items, which  are used for controlling items via <xccdf:Profile> elements. All the items with the same cluster identifier belong to the same cluster. A selector in an  <xccdf:Profile> may refer to a cluster, thus making it easier for authors to create and maintain <xccdf:Profile> elements in a complex <xccdf:Benchmark>.
+    :ivar extends: The identifier of an item on which to base this item. If present, it must have a value equal to the @id attribute of another  item. The use of this attribute for <xccdf:Group> elements is deprecated and should be avoided.
+    :ivar hidden: If this item should be excluded from any generated documents although it may still be used during assessments.
+    :ivar prohibit_changes: If benchmark producers should prohibit changes to  this item during tailoring. An author should use this when they do not want to allow end users to change the item.
     :ivar lang:
     :ivar base:
-    :ivar id: An identifier used for referencing elements
-        included in an XML signature
+    :ivar id: An identifier used for referencing elements included in an XML signature
     """
 
     class Meta:
-        name = "itemType"
+        namespace = "http://checklists.nist.gov/xccdf/1.2"
 
     status: List[Status] = field(
         default_factory=list,
@@ -3161,120 +3068,44 @@ class ItemType:
 
 
 @dataclass
-class TestResultType:
-    """Data type for the <xccdf:TestResult> element, which holds the
-    results of one application of the <xccdf:Benchmark>. The.
+class TestResult:
+    """
 
-    <xccdf:TestResult> element normally appears as the child of
-    the <xccdf:Benchmark> element, although it may also appear as
-    the top-level element of an XCCDF results document. XCCDF is not
-    intended to be a database format for detailed results; the
-    <xccdf:TestResult> element offers a way to store the results
-    of individual tests in modest detail, with the ability to reference
-    lower-level testing data. Although several of the child elements of
-    this type technically support the @override attribute, the
-    <xccdf:TestResult> element cannot be extended. Therefore,
-    @override has no meaning within an <xccdf:TestResult> element
-    and its children, and should not be used for them.
+    The <xccdf:TestResult> element encapsulates the results of a single application of an <xccdf:Benchmark> to a
+    single target platform. The <xccdf:TestResult> element normally appears as the child of the <xccdf:Benchmark>
+    element, although it may also appear as the top-level element of an XCCDF results document. XCCDF is not intended
+    to be a database format for detailed results; the <xccdf:TestResult> element offers a way to store the results of
+    individual tests in modest detail, with the ability to reference lower-level testing data.
 
-    :ivar benchmark: Reference to the <xccdf:Benchmark> for
-        which the <xccdf:TestResult> records results. This
-        property is                         required if this
-        <xccdf:TestResult> element is the top-level element
-        and optional otherwise.
-    :ivar tailoring_file: The tailoring file element contains attributes
-        used to identify an <xccdf:Tailoring> element used to
-        guide the                         assessment reported on in this
-        <xccdf:TestResult>. The tailoring
-        element is required in an <xccdf:TestResult> if and only
-        if an                         <xccdf:Tailoring> element
-        guided the assessment recorded in the
-        <xccdf:TestResult> or if the <xccdf:Tailoring>
-        element records                         manual tailoring actions
-        applied to this assessment.
+    :ivar benchmark: Reference to the <xccdf:Benchmark> for which the <xccdf:TestResult> records results. This property is required if this <xccdf:TestResult> element is the top-level element and optional otherwise.
+    :ivar tailoring_file: The tailoring file element contains attributes used to identify an <xccdf:Tailoring> element used to guide the assessment reported on in this <xccdf:TestResult>. The tailoring element is required in an <xccdf:TestResult> if and only if an <xccdf:Tailoring> element guided the assessment recorded in the <xccdf:TestResult> or if the <xccdf:Tailoring> element records manual tailoring actions applied to this assessment.
     :ivar title: Title of the test.
-    :ivar remark: A remark about the test, possibly supplied by
-        the person administering the <xccdf:Benchmark>
-        assessment
-    :ivar organization: The name of the organization or other entity
-        responsible for applying this <xccdf:Benchmark> and
-        generating this                         result. When multiple
-        <xccdf:organization> elements are used to
-        indicate multiple organization names in a hierarchical
-        organization, the                         highest-level
-        organization should appear first.
-    :ivar identity: Information about the system identity or user
-        employed during application of the <xccdf:Benchmark>. If
-        used,                         specifies the name of the
-        authenticated identity.
-    :ivar profile: The <xccdf:profile> element holds the
-        value of the @id attribute value of the <xccdf:Profile>
-        selected to be                         used in the assessment
-        reported on by this <xccdf:TestResult>. This
-        <xccdf:Profile> might be from the <xccdf:Benchmark>
-        or from an                         <xccdf:Tailoring> file,
-        if used. This element should appear if and
-        only if an <xccdf:Profile> was selected to guide the
-        assessment.
-    :ivar target: Name or description of the target system whose
-        test results are recorded in the <xccdf:TestResult>
-        element (the                         system to which an
-        <xccdf:Benchmark> test was applied). Each
-        appearance of the element supplies a name by which the target
-        host or device                         was identified at the
-        time the test was run. The name may be any string, but
-        applications should include the fully qualified DNS name
-        whenever possible.
-    :ivar target_address: Network address of the target system to which
-        an <xccdf:Benchmark> test was applied. Typical forms for
-        the address                         include IP version 4 (IPv4),
-        IP version 6 (IPv6), and Ethernet media access
-        control (MAC).
-    :ivar target_facts: A list of named facts about the target system
-        or platform.
-    :ivar target_id_ref: References to external structures with
-        identifying information about the target of this
-        assessment.
-    :ivar other_element: Identifying information expressed in other
-        XML formats can be included here.
-    :ivar platform: A platform on the target system. There should
-        be one instance of this property for every platform that the
-        target system                         was found to meet.
-    :ivar set_value: Specific setting for a single
-        <xccdf:Value> element used during the test.
-    :ivar set_complex_value: Specific setting for a single
-        <xccdf:Value> element used during the test when the given
-        value is                             set to a complex type, such
-        as a list.
-    :ivar rule_result: The result of a single instance of an
-        <xccdf:Rule> application against the target. The
-        <xccdf:TestResult> must include at least one
-        <xccdf:rule-result>                         record for
-        each <xccdf:Rule> that was selected in the resolved
-        <xccdf:Benchmark>.
-    :ivar score: An overall score for this
-        <xccdf:Benchmark> test.
-    :ivar metadata: XML metadata associated with this
-        <xccdf:TestResult>.
-    :ivar signature: A digital signature asserting authorship and
-        allowing verification of the integrity of the
-        <xccdf:TestResult>.
-    :ivar id: Unique identifier for this                     element.
+    :ivar remark: A remark about the test, possibly supplied by the person administering the <xccdf:Benchmark> assessment
+    :ivar organization: The name of the organization or other entity responsible for applying this <xccdf:Benchmark> and generating this result. When multiple <xccdf:organization> elements are used to indicate multiple organization names in a hierarchical organization, the highest-level organization should appear first.
+    :ivar identity: Information about the system identity or user employed during application of the <xccdf:Benchmark>. If used, specifies the name of the authenticated identity.
+    :ivar profile: The <xccdf:profile> element holds the value of the @id attribute value of the <xccdf:Profile> selected to be used in the assessment reported on by this <xccdf:TestResult>. This <xccdf:Profile> might be from the <xccdf:Benchmark> or from an <xccdf:Tailoring> file, if used. This element should appear if and only if an <xccdf:Profile> was selected to guide the assessment.
+    :ivar target: Name or description of the target system whose test results are recorded in the <xccdf:TestResult> element (the system to which an <xccdf:Benchmark> test was applied). Each appearance of the element supplies a name by which the target host or device was identified at the time the test was run. The name may be any string, but applications should include the fully qualified DNS name whenever possible.
+    :ivar target_address: Network address of the target system to which an <xccdf:Benchmark> test was applied. Typical forms for the address include IP version 4 (IPv4), IP version 6 (IPv6), and Ethernet media access control (MAC).
+    :ivar target_facts: A list of named facts about the target system or platform.
+    :ivar target_id_ref: References to external structures with identifying information about the target of this assessment.
+    :ivar other_element: Identifying information expressed in other XML formats can be included here.
+    :ivar platform: A platform on the target system. There should be one instance of this property for every platform that the target system was found to meet.
+    :ivar set_value: Specific setting for a single <xccdf:Value> element used during the test.
+    :ivar set_complex_value: Specific setting for a single <xccdf:Value> element used during the test when the given value is set to a complex type, such as a list.
+    :ivar rule_result: The result of a single instance of an <xccdf:Rule> application against the target. The <xccdf:TestResult> must include at least one <xccdf:rule-result> record for each <xccdf:Rule> that was selected in the resolved <xccdf:Benchmark>.
+    :ivar score: An overall score for this <xccdf:Benchmark> test.
+    :ivar metadata: XML metadata associated with this <xccdf:TestResult>.
+    :ivar signature: A digital signature asserting authorship and allowing verification of the integrity of the <xccdf:TestResult>.
+    :ivar id: Unique identifier for this  element.
     :ivar start_time: Time when testing began.
-    :ivar end_time: Time when testing was completed and the results
-        recorded.
-    :ivar test_system: Name of the benchmark consumer program that
-        generated this <xccdf:TestResult> element; should be
-        either a CPE name or                     a CPE applicability
-        language expression.
-    :ivar version: The version number string copied from the
-        <xccdf:Benchmark> used to direct this assessment.
-    :ivar id_attribute: An identifier used for referencing elements
-        included in an XML signature.
+    :ivar end_time: Time when testing was completed and the results recorded.
+    :ivar test_system: Name of the benchmark consumer program that generated this <xccdf:TestResult> element; should be either a CPE name or a CPE applicability language expression.
+    :ivar version: The version number string copied from the <xccdf:Benchmark> used to direct this assessment.
+    :ivar id_attribute: An identifier used for referencing elements included in an XML signature.
     """
 
     class Meta:
-        name = "testResultType"
+        namespace = "http://checklists.nist.gov/xccdf/1.2"
 
     benchmark: Optional[BenchmarkReferenceType] = field(
         default=None,
@@ -3450,95 +3281,21 @@ class TestResultType:
 
 
 @dataclass
-class Item(ItemType):
-    """An item is a named constituent of an.
+class SelectableItem(Item):
+    """
 
-    <xccdf:Benchmark>. There are three types of items:
-    <xccdf:Group>, <xccdf:Rule> and <xccdf:Value>. The
-    <xccdf:Item> element type imposes constraints shared by all
-    <xccdf:Group>, <xccdf:Rule> and <xccdf:Value>
-    elements. The itemType is abstract, so the element
-    <xccdf:Item> can never appear in a valid XCCDF document.
+    This abstract item type represents the basic data shared by all <xccdf:Group> and <xccdf:Rule> elements.
+
+    :ivar rationale: Descriptive text giving rationale or motivations for abiding by this <xccdf:Group>/<xccdf:Rule> (i.e., why it is important to the security of the target platform).
+    :ivar platform: Platforms to which this <xccdf:Group>/<xccdf:Rule> applies.
+    :ivar requires: The identifiers of other <xccdf:Group> or <xccdf:Rule> elements that must be selected for this <xccdf:Group>/<xccdf:Rule> to be evaluated and scored properly. Each <xccdf:requires> element specifies a list of one or more required items by their identifiers. If at least one of the specified <xccdf:Group> or <xccdf:Rule> elements is selected, the requirement is met.
+    :ivar conflicts: The identifier of another <xccdf:Group> or <xccdf:Rule> that must be unselected for this <xccdf:Group>/<xccdf:Rule> to be evaluated and scored properly. Each <xccdf:conflicts> element specifies a single conflicting item using its idref attribute. If the specified <xccdf:Group> or <xccdf:Rule> element is not selected, the requirement is met.
+    :ivar selected: If true, this <xccdf:Group>/<xccdf:Rule> is selected to be processed as part of the <xccdf:Benchmark> when it is applied to a target system. An unselected <xccdf:Group> does not get processed, and its contents are not processed either (i.e., all descendants of an unselected <xccdf:Group> are implicitly unselected). An unselected <xccdf:Rule> is not checked and does not contribute to scoring.
+    :ivar weight: The relative scoring weight of this <xccdf:Group>/<xccdf:Rule>, for computing a score, expressed as a non-negative real number. It denotes the importance of an <xccdf:Group>/<xccdf:Rule>. Under some scoring models, scoring is computed independently for each collection of sibling <xccdf:Group> and <xccdf:Rule> elements, then normalized as part of the overall scoring process.
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
-
-
-@dataclass
-class TestResult(TestResultType):
-    """The <xccdf:TestResult> element encapsulates the results of a
-    single application of an <xccdf:Benchmark> to a single target
-    platform. The <xccdf:TestResult> element normally appears as the
-    child of the.
-
-    <xccdf:Benchmark> element, although it may also appear as the
-    top-level element of an XCCDF results document. XCCDF is not
-    intended to be a database format for detailed results; the
-    <xccdf:TestResult> element offers a way to store the results
-    of individual tests in modest detail, with the ability to reference
-    lower-level testing data.
-    """
-
-    class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
-
-
-@dataclass
-class SelectableItemType(ItemType):
-    """
-    This abstract item type represents the basic data shared by all
-    <xccdf:Group> and <xccdf:Rule> elements.
-
-    :ivar rationale: Descriptive text giving rationale or
-        motivations for abiding by this
-        <xccdf:Group>/<xccdf:Rule> (i.e., why it is
-        important to                                 the security of the
-        target platform).
-    :ivar platform: Platforms to which this
-        <xccdf:Group>/<xccdf:Rule> applies.
-    :ivar requires: The identifiers of other
-        <xccdf:Group> or <xccdf:Rule> elements that must be
-        selected for this <xccdf:Group>/<xccdf:Rule> to be
-        evaluated and scored properly. Each <xccdf:requires>
-        element                                 specifies a list of one
-        or more required items by their identifiers.
-        If at least one of the specified <xccdf:Group> or
-        <xccdf:Rule> elements is selected, the requirement is met.
-    :ivar conflicts: The identifier of another
-        <xccdf:Group> or <xccdf:Rule> that must be
-        unselected                                 for this
-        <xccdf:Group>/<xccdf:Rule> to be evaluated and
-        scored properly. Each <xccdf:conflicts> element specifies
-        a                                 single conflicting item using
-        its idref attribute. If the specified
-        <xccdf:Group> or <xccdf:Rule> element is not
-        selected,                                 the requirement is
-        met.
-    :ivar selected: If true, this
-        <xccdf:Group>/<xccdf:Rule> is selected to be
-        processed as                             part of the
-        <xccdf:Benchmark> when it is applied to a target
-        system. An unselected <xccdf:Group> does not get
-        processed, and                             its contents are not
-        processed either (i.e., all descendants of an
-        unselected <xccdf:Group> are implicitly unselected). An
-        unselected                             <xccdf:Rule> is not
-        checked and does not contribute to scoring.
-    :ivar weight: The relative scoring weight of this
-        <xccdf:Group>/<xccdf:Rule>, for computing a score,
-        expressed                             as a non-negative real
-        number. It denotes the importance of an
-        <xccdf:Group>/<xccdf:Rule>. Under some scoring
-        models,                             scoring is computed
-        independently for each collection of sibling
-        <xccdf:Group> and <xccdf:Rule> elements, then
-        normalized as                             part of the overall
-        scoring process.
-    """
-
-    class Meta:
-        name = "selectableItemType"
+        name = "selectableItem"
 
     rationale: List[HtmlTextWithSubType] = field(
         default_factory=list,
@@ -3581,54 +3338,28 @@ class SelectableItemType(ItemType):
 
 
 @dataclass
-class TailoringType:
-    """Data type for the <xccdf:Tailoring> element. The.
+class Tailoring:
+    """
 
-    <xccdf:Tailoring> element allows named tailorings (i.e.,
-    <xccdf:Profile> elements) of an <xccdf:Benchmark> to be
-    defined separately from the <xccdf:Benchmark> itself. The
-    <xccdf:Profile> elements in an <xccdf:Tailoring> element
-    can be used in two ways: First, an organization might wish to pre-
-    define a set of tailoring actions to be applied on top of or instead
-    of the tailoring performed by an <xccdf:Benchmark> element's
-    <xccdf:Profile> elements. Second, an <xccdf:Tailoring>
-    element can be used to record manual tailoring actions performed
-    during the course of an assessment.
+    The <xccdf:Tailoring> element holds one or more <xccdf:Profile> elements. These <xccdf:Profile> elements record
+    additional tailoring activities that apply to a given <xccdf:Benchmark>. <xccdf:Tailoring> elements are separate
+    from <xccdf:Benchmark> documents, but each <xccdf:Tailoring> element is associated with a specific
+    <xccdf:Benchmark> document. By defining these tailoring actions separately from the <xccdf:Benchmark> document to
+    which they apply, these actions can be recorded without affecting the integrity of the source itself.
 
-    :ivar benchmark: Identifies the <xccdf:Benchmark> to which
-        this tailoring applies. A <xccdf:Tailoring> document is
-        only                         applicable to a single
-        <xccdf:Benchmark>. Note, however, that this is
-        a purely informative field.
-    :ivar status: Status of the tailoring and date at which it
-        attained that status. Authors may use this element to record the
-        maturity or                         consensus level of an
-        <xccdf:Tailoring> element.
-    :ivar dc_status: Holds additional status information using the
-        Dublin Core format.
-    :ivar version: The version of this <xccdf:Tailoring>
-        element, with a required @time attribute that records when the
-        <xccdf:Tailoring> element was created. This timestamp is
-        necessary                         because, under some
-        circumstances, a copy of an <xccdf:Tailoring>
-        document might be automatically generated. Without the version
-        and                         timestamp, tracking of these
-        automatically created <xccdf:Tailoring>
-        documents could become problematic.
-    :ivar metadata: XML metadata for the <xccdf:Tailoring>
-        element.
-    :ivar profile: <xccdf:Profile> elements that reference
-        and customize sets of items in an <xccdf:Benchmark>.
-    :ivar signature: A digital signature asserting authorship and
-        allowing verification of the integrity of the
-        <xccdf:Tailoring>.
-    :ivar id: Unique identifier for this                     element.
-    :ivar id_attribute: An identifier used for referencing elements
-        included in an XML signature.
+    :ivar benchmark: Identifies the <xccdf:Benchmark> to which this tailoring applies. A <xccdf:Tailoring> document is only applicable to a single <xccdf:Benchmark>. Note, however, that this is a purely informative field.
+    :ivar status: Status of the tailoring and date at which it attained that status. Authors may use this element to record the maturity or consensus level of an <xccdf:Tailoring> element.
+    :ivar dc_status: Holds additional status information using the Dublin Core format.
+    :ivar version: The version of this <xccdf:Tailoring> element, with a required @time attribute that records when the <xccdf:Tailoring> element was created. This timestamp is necessary because, under some circumstances, a copy of an <xccdf:Tailoring> document might be automatically generated. Without the version and timestamp, tracking of these automatically created <xccdf:Tailoring> documents could become problematic.
+    :ivar metadata: XML metadata for the <xccdf:Tailoring> element.
+    :ivar profile: <xccdf:Profile> elements that reference and customize sets of items in an <xccdf:Benchmark>.
+    :ivar signature: A digital signature asserting authorship and allowing verification of the integrity of the <xccdf:Tailoring>.
+    :ivar id: Unique identifier for this element.
+    :ivar id_attribute: An identifier used for referencing elements included in an XML signature.
     """
 
     class Meta:
-        name = "tailoringType"
+        namespace = "http://checklists.nist.gov/xccdf/1.2"
 
     benchmark: Optional[TailoringBenchmarkReferenceType] = field(
         default=None,
@@ -3696,115 +3427,31 @@ class TailoringType:
 
 
 @dataclass
-class ValueType(ItemType):
+class Value(Item):
     """
-    Data type for the <xccdf:Value> element, which is a named parameter
-    that can be substituted into properties of other elements within the
-    <xccdf:Benchmark>, including the interior of structured check
-    specifications and fix scripts.
 
-    :ivar value: A simple (number, string, or
-        boolean) value associated with this <xccdf:Value>. At any
-        time an <xccdf:Value> has one active (simple or complex)
-        value. If a selector value has been provided under
-        <xccdf:Profile> selection or tailoring then the active
-        <xccdf:value>/<xccdf:complex-value> is the one with
-        a matching @selector. If there is no provided selector or if the
-        provided selector does not match the @selector attribute of any
-        <xccdf:value> or <xccdf:complex-value>, the active
-        <xccdf:value>/<xccdf:complex-value> is the one with
-        an empty or absent @selector or, failing that, the first
-        <xccdf:value> or <xccdf:complex-value> in the XML.
-        When an <xccdf:Value> is exported or used in text
-        substitution, it is the currently active <xccdf:value> or
-        <xccdf:complex-value> that is actually used. If there are
-        multiple <xccdf:value> and/or <xccdf:complex-value>
-        elements, only one may omit a @selector attribute and no two may
-        have the same @selector value.
-    :ivar complex_value: A complex (list) value associated
-        with this <xccdf:Value>. See the description of the
-        <xccdf:value> property for <xccdf:Rule> elements
-        regarding activation of an <xccdf:complex-value>.
-    :ivar default: The default value displayed to the
-        user as a suggestion by benchmark producers during tailoring of
-        this <xccdf:Value> element. (This is not the default value
-        of an <xccdf:Value>; it is just the default display.) If
-        there are multiple <xccdf:default> and/or
-        <xccdf:complex-default> elements, only one may omit a
-        @selector attribute and no two may have the same @selector
-        value.
-    :ivar complex_default: The default
-        <xccdf:complex-value> displayed to the user as a
-        suggestion by benchmark producers during tailoring of this
-        <xccdf:Value> element. (This is not the default value of
-        an <xccdf:Value>; it is just the default display.) If
-        there are multiple <xccdf:default> and
-        <xccdf:complex-default> elements, only one may omit a
-        @selector attribute and no two may have the same @selector
-        value.
-    :ivar match: A Perl Compatible Regular Expression
-        that a benchmark producer may apply during tailoring to validate
-        a                                 user’s input for the
-        <xccdf:Value>. It uses implicit
-        anchoring. It applies only when the @type property is “string”
-        or                                 “number” or a list of strings
-        and/or numbers.
-    :ivar lower_bound: Minimum legal value for this
-        <xccdf:Value>. It is used to constrain value input during
-        tailoring, when the @type property is “number”. Values supplied
-        by                                 the user for tailoring the
-        <xccdf:Benchmark> must be equal to
-        or greater than this number.
-    :ivar upper_bound: Maximum legal value for this
-        <xccdf:Value>. It is used to constrain value input during
-        tailoring, when the @type is “number”. Values supplied by the
-        user                                 for tailoring the
-        <xccdf:Benchmark> must be less than or equal
-        to than this number.
-    :ivar choices: A list of legal or suggested choices
-        (values) for an <xccdf:Value> element, to be used during
-        tailoring and document generation.
-    :ivar source: URI indicating where the tool may
-        acquire values, value bounds, or value choices for this
-        <xccdf:Value> element. XCCDF does not attach any meaning
-        to                                 the URI; it may be an
-        arbitrary community or tool-specific value, or
-        a pointer directly to a resource. If several instances of the
-        <xccdf:source> property appear, then they represent
-        alternative means or locations for obtaining the value in
-        descending                                 order of preference
-        (i.e., most preferred first).
-    :ivar signature: A digital signature asserting
-        authorship and allowing verification of the integrity of the
-        <xccdf:Value>.
+    The <xccdf:Value> element is a named parameter that can be substituted into properties of other elements within
+    the <xccdf:Benchmark>, including the interior of structured check specifications and fix scripts.
+
+    :ivar value: A simple (number, string, or boolean) value associated with this <xccdf:Value>. At any time an <xccdf:Value> has one active (simple or complex) value. If a selector value has been provided under <xccdf:Profile> selection or tailoring then the active <xccdf:value>/<xccdf:complex-value> is the one with a matching @selector. If there is no provided selector or if the provided selector does not match the @selector attribute of any <xccdf:value> or <xccdf:complex-value>, the active <xccdf:value>/<xccdf:complex-value> is the one with an empty or absent @selector or, failing that, the first <xccdf:value> or <xccdf:complex-value> in the XML. When an <xccdf:Value> is exported or used in text substitution, it is the currently active <xccdf:value> or <xccdf:complex-value> that is actually used. If there are multiple <xccdf:value> and/or <xccdf:complex-value> elements, only one may omit a @selector attribute and no two may have the same @selector value.
+    :ivar complex_value: A complex (list) value associated with this <xccdf:Value>. See the description of the <xccdf:value> property for <xccdf:Rule> elements regarding activation of an <xccdf:complex-value>.
+    :ivar default: The default value displayed to the user as a suggestion by benchmark producers during tailoring of this <xccdf:Value> element. (This is not the default value of an <xccdf:Value>; it is just the default display.) If there are multiple <xccdf:default> and/or <xccdf:complex-default> elements, only one may omit a @selector attribute and no two may have the same @selector value.
+    :ivar complex_default: The default <xccdf:complex-value> displayed to the user as a suggestion by benchmark producers during tailoring of this <xccdf:Value> element. (This is not the default value of an <xccdf:Value>; it is just the default display.) If there are multiple <xccdf:default> and <xccdf:complex-default> elements, only one may omit a @selector attribute and no two may have the same @selector value.
+    :ivar match: A Perl Compatible Regular Expression that a benchmark producer may apply during tailoring to validate a user’s input for the <xccdf:Value>. It uses implicit anchoring. It applies only when the @type property is “string” or “number” or a list of strings and/or numbers.
+    :ivar lower_bound: Minimum legal value for this <xccdf:Value>. It is used to constrain value input during tailoring, when the @type property is “number”. Values supplied by the user for tailoring the <xccdf:Benchmark> must be equal to or greater than this number.
+    :ivar upper_bound: Maximum legal value for this <xccdf:Value>. It is used to constrain value input during tailoring, when the @type is “number”. Values supplied by the user for tailoring the <xccdf:Benchmark> must be less than or equal to than this number.
+    :ivar choices: A list of legal or suggested choices (values) for an <xccdf:Value> element, to be used during tailoring and document generation.
+    :ivar source: URI indicating where the tool may acquire values, value bounds, or value choices for this <xccdf:Value> element. XCCDF does not attach any meaning to the URI; it may be an arbitrary community or tool-specific value, or a pointer directly to a resource. If several instances of the <xccdf:source> property appear, then they represent alternative means or locations for obtaining the value in descending order of preference (i.e., most preferred first).
+    :ivar signature: A digital signature asserting authorship and allowing verification of the integrity of the <xccdf:Value>.
     :ivar id: The unique identifier for this element.
-    :ivar type: The data type of the <xccdf:Value>. A
-        tool may choose any convenient form to store an
-        <xccdf:Value>                             element’s
-        <xccdf:value> element, but the @type attribute conveys
-        how the <xccdf:Value> should be treated for user input
-        validation                             purposes during tailoring
-        processing. The @type attribute may also be
-        used to give additional guidance to the user or to validate the
-        user’s                             input. In the case of a list
-        of values, the @type attribute, if present,
-        applies to all elements of the list individually.
-    :ivar operator: The operator to be used for comparing this
-        <xccdf:Value> to some part of the test system’s
-        configuration                             during
-        <xccdf:Rule> checking.
-    :ivar interactive: Whether tailoring for this
-        <xccdf:Value> should be performed during
-        <xccdf:Benchmark>                             application.
-        The benchmark consumer may ignore the attribute if asking
-        the user is not feasible or not supported.
-    :ivar interface_hint: A hint or recommendation to a benchmark
-        consumer or producer about how the user might select or adjust
-        the                             <xccdf:Value>.
+    :ivar type: The data type of the <xccdf:Value>. A tool may choose any convenient form to store an <xccdf:Value> element’s <xccdf:value> element, but the @type attribute conveys how the <xccdf:Value> should be treated for user input validation purposes during tailoring processing. The @type attribute may also be used to give additional guidance to the user or to validate the user’s input. In the case of a list of values, the @type attribute, if present, applies to all elements of the list individually.
+    :ivar operator: The operator to be used for comparing this <xccdf:Value> to some part of the test system’s configuration during <xccdf:Rule> checking.
+    :ivar interactive: Whether tailoring for this <xccdf:Value> should be performed during <xccdf:Benchmark> application. The benchmark consumer may ignore the attribute if asking the user is not feasible or not supported.
+    :ivar interface_hint: A hint or recommendation to a benchmark consumer or producer about how the user might select or adjust the <xccdf:Value>.
     """
 
     class Meta:
-        name = "valueType"
+        namespace = "http://checklists.nist.gov/xccdf/1.2"
 
     value: List[SelStringType] = field(
         default_factory=list,
@@ -3910,109 +3557,29 @@ class ValueType(ItemType):
 
 
 @dataclass
-class Tailoring(TailoringType):
-    """The <xccdf:Tailoring> element holds one or more.
+class Rule(SelectableItem):
+    """
 
-    <xccdf:Profile> elements. These <xccdf:Profile> elements
-    record additional tailoring activities that apply to a given
-    <xccdf:Benchmark>. <xccdf:Tailoring> elements are
-    separate from <xccdf:Benchmark> documents, but each
-    <xccdf:Tailoring> element is associated with a specific
-    <xccdf:Benchmark> document. By defining these tailoring
-    actions separately from the <xccdf:Benchmark> document to
-    which they apply, these actions can be recorded without affecting
-    the integrity of the source itself.
+    The <xccdf:Rule> element contains the description for a single item of guidance or constraint. <xccdf:Rule>
+    elements form the basis for testing a target platform for compliance with an <xccdf:Benchmark>, for scoring,
+    and for conveying descriptive prose, identifiers, references, and remediation information.
+
+    :ivar ident: A globally meaningful identifier for this <xccdf:Rule>. This may be the name or identifier of a security configuration issue or vulnerability that the <xccdf:Rule> assesses.
+    :ivar impact_metric: The potential impact of failure to conform to the <xccdf:Rule>, expressed as a CVSS 2.0 base vector.
+    :ivar profile_note: Text that describes special aspects of the <xccdf:Rule> related to one or more <xccdf:Profile> elements. This allows an author to document things within <xccdf:Rule> elements that are specific to a given <xccdf:Profile>, and then select the appropriate text based on the selected <xccdf:Profile> and display it to the reader.
+    :ivar fixtext: Data that describes how to bring a target system into compliance with this <xccdf:Rule>.
+    :ivar fix: A command string, script, or other system modification statement that, if executed on the target system, can bring it into full, or at least better, compliance with this <xccdf:Rule>.
+    :ivar check: The definition of, or a reference to, the target system check needed to test compliance with this <xccdf:Rule>. Sibling <xccdf:check> elements must have different values for the combination of their @selector and @system attributes, and must have different values for their @id attribute (if any).
+    :ivar complex_check: A boolean expression composed of operators (and, or, not) and individual checks.
+    :ivar signature: A digital signature asserting authorship and allowing verification of the integrity of the <xccdf:Rule>.
+    :ivar id: Unique element identifier used by other elements to refer to this element.
+    :ivar role: The <xccdf:Rule> element’s role in scoring and reporting.
+    :ivar severity: Severity level code to be used for metrics and tracking.
+    :ivar multiple: Applicable in cases where there are multiple instances of a target. For example, an <xccdf:Rule> may provide a recommendation about the configuration of application user accounts, but an application may have many user accounts. Each account would be considered an instance of the broader assessment target of user accounts. If the @multiple attribute is set to true, each instance of the target to which the <xccdf:Rule> can apply should be tested separately and the results should be recorded separately. If @multiple is set to false, the test results of such instances should be combined. If the checking system does not combine these results automatically, the results of each instance should be ANDed together to produce a single result. If the benchmark consumer cannot perform multiple instantiation, or if multiple instantiation of the <xccdf:Rule> is not applicable for the target system, then the benchmark consumer may ignore this attribute.
     """
 
     class Meta:
         namespace = "http://checklists.nist.gov/xccdf/1.2"
-
-
-@dataclass
-class Value(ValueType):
-    """The <xccdf:Value> element is a named parameter that can be
-    substituted into properties of other elements within the.
-
-    <xccdf:Benchmark>, including the interior of structured check
-    specifications and fix scripts.
-    """
-
-    class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
-
-
-@dataclass
-class RuleType(SelectableItemType):
-    """
-    Data type for the <xccdf:Rule> element that represents a specific
-    <xccdf:Benchmark> test.
-
-    :ivar ident: A globally meaningful identifier for
-        this <xccdf:Rule>. This may be the name or identifier of a
-        security configuration issue or vulnerability that the
-        <xccdf:Rule> assesses.
-    :ivar impact_metric: The potential impact of failure to
-        conform to the <xccdf:Rule>, expressed as a CVSS 2.0 base
-        vector.
-    :ivar profile_note: Text that describes special aspects of
-        the <xccdf:Rule> related to one or more
-        <xccdf:Profile>                                 elements.
-        This allows an author to document things within
-        <xccdf:Rule> elements that are specific to a given
-        <xccdf:Profile>, and then select the appropriate text
-        based on                                 the selected
-        <xccdf:Profile> and display it to the
-        reader.
-    :ivar fixtext: Data that describes how to bring a
-        target system into compliance with this
-        <xccdf:Rule>.
-    :ivar fix: A command string, script, or other
-        system modification statement that, if executed on the target
-        system, can bring it into full, or at least better, compliance
-        with                                 this <xccdf:Rule>.
-    :ivar check: The definition of, or a reference
-        to, the target system check needed to test compliance with this
-        <xccdf:Rule>. Sibling <xccdf:check> elements must
-        have different values for the combination of their @selector and
-        @system attributes, and must have different values for their @id
-        attribute (if any).
-    :ivar complex_check: A boolean expression composed of
-        operators (and, or, not) and individual
-        checks.
-    :ivar signature: A digital signature asserting
-        authorship and allowing verification of the integrity of the
-        <xccdf:Rule>.
-    :ivar id: Unique element identifier used by other
-        elements to refer to this element.
-    :ivar role: The <xccdf:Rule> element’s role in
-        scoring and reporting.
-    :ivar severity: Severity level code to be used for metrics
-        and tracking.
-    :ivar multiple: Applicable in cases where there are
-        multiple instances of a target. For example, an
-        <xccdf:Rule> may                             provide a
-        recommendation about the configuration of application user
-        accounts, but an application may have many user accounts. Each
-        account                             would be considered an
-        instance of the broader assessment target of user
-        accounts. If the @multiple attribute is set to true, each
-        instance of                             the target to which the
-        <xccdf:Rule> can apply should be tested
-        separately and the results should be recorded separately. If
-        @multiple                             is set to false, the test
-        results of such instances should be combined.
-        If the checking system does not combine these results
-        automatically, the                             results of each
-        instance should be ANDed together to produce a single
-        result. If the benchmark consumer cannot perform multiple
-        instantiation,                             or if multiple
-        instantiation of the <xccdf:Rule> is not applicable
-        for the target system, then the benchmark consumer may ignore
-        this                             attribute.
-    """
-
-    class Meta:
-        name = "ruleType"
 
     ident: List[IdentType] = field(
         default_factory=list,
@@ -4094,43 +3661,21 @@ class RuleType(SelectableItemType):
 
 
 @dataclass
-class Rule(RuleType):
-    """The <xccdf:Rule> element contains the description for a single
-    item of guidance or constraint. <xccdf:Rule> elements form the basis
-    for testing a target platform for compliance with an.
+class Group(SelectableItem):
+    """
 
-    <xccdf:Benchmark>, for scoring, and for conveying descriptive
-    prose, identifiers, references, and remediation information.
+    An item that can hold other items. It allows an author to collect related items into a common structure and
+    provide descriptive text and references about them.
+
+    :ivar value: <xccdf:Value> elements that belong to this <xccdf:Group>.
+    :ivar group: Sub-<xccdf:Groups> under this <xccdf:Group>.
+    :ivar rule: <xccdf:Rule> elements that belong to this <xccdf:Group>.
+    :ivar signature: A digital signature asserting authorship and allowing verification of the integrity of the <xccdf:Group>.
+    :ivar id: Unique element identifier; used by other elements to refer to this element.
     """
 
     class Meta:
         namespace = "http://checklists.nist.gov/xccdf/1.2"
-
-
-@dataclass
-class GroupType(SelectableItemType):
-    """Data type for the <xccdf:Group> element. A.
-
-    <xccdf:Group> element contains descriptive information about a
-    portion of an <xccdf:Benchmark>, as well as
-    <xccdf:Rule>, <xccdf:Value>, and/or other
-    <xccdf:Group> elements
-
-    :ivar value: <xccdf:Value> elements that
-        belong to this <xccdf:Group>.
-    :ivar group: Sub-<xccdf:Groups> under this
-        <xccdf:Group>.
-    :ivar rule: <xccdf:Rule> elements that
-        belong to this <xccdf:Group>.
-    :ivar signature: A digital signature asserting
-        authorship and allowing verification of the integrity of the
-        <xccdf:Group>.
-    :ivar id: Unique element identifier; used by other
-        elements to refer to this element.
-    """
-
-    class Meta:
-        name = "groupType"
 
     value: List[Value] = field(
         default_factory=list,
@@ -4172,18 +3717,6 @@ class GroupType(SelectableItemType):
             "pattern": r"xccdf_[^_]+_group_.+",
         }
     )
-
-
-@dataclass
-class Group(GroupType):
-    """An item that can hold other items.
-
-    It allows an author to collect related items into a common structure
-    and provide descriptive text and references about them.
-    """
-
-    class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
 
 
 @dataclass
