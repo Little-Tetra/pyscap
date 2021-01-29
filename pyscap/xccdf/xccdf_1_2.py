@@ -61,17 +61,17 @@ class BenchmarkReferenceType:
     )
 
 
-class CcOperatorEnumType(Enum):
+class ComplexCheckOperator(Enum):
     """
 
     The type for the allowed @operator names for the <xccdf:complex-check> operator attribute. Only AND and OR
     operators are supported. (The <xccdf:complex-check> has a separate mechanism for negation.)
 
-    :cvar OR_VALUE: The logical OR of the component terms
-    :cvar AND_VALUE: The logical AND of the component terms
+    :cvar OR: The logical OR of the component terms
+    :cvar AND: The logical AND of the component terms
     """
-    OR_VALUE = "OR"
-    AND_VALUE = "AND"
+    OR = "OR"
+    AND = "AND"
 
 
 @dataclass
@@ -251,7 +251,7 @@ class DcStatusType:
     )
 
 
-class FixStrategyEnumType(Enum):
+class FixStrategy(Enum):
     """
 
     Allowed @strategy keyword values for an <xccdf:Rule> element's <xccdf:fix> or <xccdf:fixtext> elements. The
@@ -487,7 +487,7 @@ class InstanceResultType:
     )
 
 
-class InterfaceHintType(Enum):
+class InterfaceHint(Enum):
     """
 
     Allowed interface hint values. <xccdf:Value> elements may contain a hint or recommendation to a benchmark
@@ -533,7 +533,7 @@ class MetadataType:
     )
 
 
-class MsgSevEnumType(Enum):
+class MessageSeverity(Enum):
     """
 
     Allowed values to indicate the severity of messages from the checking engine. These values don't affect scoring
@@ -679,7 +679,7 @@ class ProfileSetValueType:
     )
 
 
-class RatingEnumType(Enum):
+class Rating(Enum):
     """
 
     This type enumerates allowed rating values the disruption and complexity properties of an <xccdf:Rule> element's
@@ -735,33 +735,33 @@ class ReferenceType:
     )
 
 
-class ResultEnumType(Enum):
+class Result(Enum):
     """
 
     Allowed result indicators for a test.
 
-    :cvar PASS_VALUE: The target system or system component satisfied all the conditions of the <xccdf:Rule>.
+    :cvar PASS: The target system or system component satisfied all the conditions of the <xccdf:Rule>.
     :cvar FAIL: The target system or system component did not satisfy all the conditions of the <xccdf:Rule>.
     :cvar ERROR: The checking engine could not complete the evaluation; therefore the status of the target’s compliance with the <xccdf:Rule> is not certain. This could happen, for example, if a testing tool was run with insufficient privileges and could not gather all of the necessary information.
     :cvar UNKNOWN: The testing tool encountered some problem and the result is unknown. For example, a result of ‘unknown’ might be given if the testing tool was unable to interpret the output of the checking engine (the output has no meaning to the testing tool).
-    :cvar NOTAPPLICABLE: The <xccdf:Rule> was not applicable to the target of the test. For example, the <xccdf:Rule> might have been specific to a different version of the target OS, or it might have been a test against a platform feature that was not installed.
-    :cvar NOTCHECKED: The <xccdf:Rule> was not evaluated by the checking engine. This status is designed for <xccdf:Rule> elements that have no check. It may also correspond to a status returned by a checking engine if the checking engine does not support the indicated check code.
-    :cvar NOTSELECTED: The <xccdf:Rule> was not selected in the <xccdf:Benchmark>.
+    :cvar NOT_APPLICABLE: The <xccdf:Rule> was not applicable to the target of the test. For example, the <xccdf:Rule> might have been specific to a different version of the target OS, or it might have been a test against a platform feature that was not installed.
+    :cvar NOT_CHECKED: The <xccdf:Rule> was not evaluated by the checking engine. This status is designed for <xccdf:Rule> elements that have no check. It may also correspond to a status returned by a checking engine if the checking engine does not support the indicated check code.
+    :cvar NOT_SELECTED: The <xccdf:Rule> was not selected in the <xccdf:Benchmark>.
     :cvar INFORMATIONAL: The <xccdf:Rule> was checked, but the output from the checking engine is simply information for auditors or administrators; it is not a compliance category. This status value is designed for <xccdf:Rule> elements whose main purpose is to extract information from the target rather than test the target.
     :cvar FIXED: The <xccdf:Rule> had failed, but was then fixed (possibly by a tool that can automatically apply remediation, or possibly by the human auditor).
     """
-    PASS_VALUE = "pass"
+    PASS = "pass"
     FAIL = "fail"
     ERROR = "error"
     UNKNOWN = "unknown"
-    NOTAPPLICABLE = "notapplicable"
-    NOTCHECKED = "notchecked"
-    NOTSELECTED = "notselected"
+    NOT_APPLICABLE = "notapplicable"
+    NOT_CHECKED = "notchecked"
+    NOT_SELECTED = "notselected"
     INFORMATIONAL = "informational"
     FIXED = "fixed"
 
 
-class RoleEnumType(Enum):
+class Role(Enum):
     """
 
     Allowed checking and scoring roles for an <xccdf:Rule>.
@@ -854,7 +854,7 @@ class SelStringType:
     )
 
 
-class SeverityEnumType(Enum):
+class Severity(Enum):
     """
 
     Allowed severity values for the @severity attribute of an <xccdf:Rule>. The value of this attribute provides an
@@ -896,10 +896,10 @@ class SignatureType:
     )
 
 
-class StatusType(Enum):
+class StatusValue(Enum):
     """
 
-    The statusType represents the possible levels of maturity or consensus level for its parent element as recorded
+    The statusValue represents the possible levels of maturity or consensus level for its parent element as recorded
     by an <xccdf:status> element.
 
     :cvar ACCEPTED: Released as final
@@ -915,7 +915,7 @@ class StatusType(Enum):
     INTERIM = "interim"
 
 
-class SubUseEnumType(Enum):
+class SubUse(Enum):
     """
 
     This holds the possible values of the @use attribute within an <xccdf:sub> element. The @use attribute is only
@@ -1091,7 +1091,7 @@ class UriRefType:
     )
 
 
-class ValueOperatorType(Enum):
+class ValueOperator(Enum):
     """
 
     This type enumerates allowed values of the @operator property of <xccdf:Value> elements. The specific
@@ -1106,7 +1106,7 @@ class ValueOperatorType(Enum):
     PATTERN_MATCH = "pattern match"
 
 
-class ValueTypeType(Enum):
+class ValueType(Enum):
     """
 
     Allowed data types for <xccdf:Value> elements, string, numeric, and boolean. A tool may choose any convenient
@@ -1157,7 +1157,7 @@ class VersionType:
     )
 
 
-class WarningCategoryEnumType(Enum):
+class WarningCategory(Enum):
     """
 
     Allowed warning category keywords for the <xccdf:warning> element used in <xccdf:Rule> elements.
@@ -1302,8 +1302,8 @@ class FactType:
             "required": True,
         }
     )
-    type: ValueTypeType = field(
-        default=ValueTypeType.BOOLEAN,
+    type: ValueType = field(
+        default=ValueType.BOOLEAN,
         metadata={
             "type": "Attribute",
         }
@@ -1327,7 +1327,7 @@ class MessageType:
     value: Optional[str] = field(
         default=None,
     )
-    severity: Optional[MsgSevEnumType] = field(
+    severity: Optional[MessageSeverity] = field(
         default=None,
         metadata={
             "type": "Attribute",
@@ -1390,7 +1390,7 @@ class OverrideType:
     class Meta:
         name = "overrideType"
 
-    old_result: Optional[ResultEnumType] = field(
+    old_result: Optional[Result] = field(
         default=None,
         metadata={
             "name": "old-result",
@@ -1398,7 +1398,7 @@ class OverrideType:
             "required": True,
         }
     )
-    new_result: Optional[ResultEnumType] = field(
+    new_result: Optional[Result] = field(
         default=None,
         metadata={
             "name": "new-result",
@@ -1499,13 +1499,13 @@ class ProfileRefineRuleType:
             "type": "Attribute",
         }
     )
-    severity: Optional[SeverityEnumType] = field(
+    severity: Optional[Severity] = field(
         default=None,
         metadata={
             "type": "Attribute",
         }
     )
-    role: Optional[RoleEnumType] = field(
+    role: Optional[Role] = field(
         default=None,
         metadata={
             "type": "Attribute",
@@ -1548,7 +1548,7 @@ class ProfileRefineValueType:
             "type": "Attribute",
         }
     )
-    operator: Optional[ValueOperatorType] = field(
+    operator: Optional[ValueOperator] = field(
         default=None,
         metadata={
             "type": "Attribute",
@@ -1698,7 +1698,7 @@ class Status:
         name = "status"
         namespace = "http://checklists.nist.gov/xccdf/1.2"
 
-    value: Optional[StatusType] = field(
+    value: Optional[StatusValue] = field(
         default=None,
     )
     date: Optional[XmlDate] = field(
@@ -1726,8 +1726,8 @@ class SubType(IdrefType):
     class Meta:
         name = "subType"
 
-    use: SubUseEnumType = field(
-        default=SubUseEnumType.VALUE,
+    use: SubUse = field(
+        default=SubUse.VALUE,
         metadata={
             "type": "Attribute",
         }
@@ -1785,7 +1785,7 @@ class ComplexCheckType:
             "type": "Element",
         }
     )
-    operator: Optional[CcOperatorEnumType] = field(
+    operator: Optional[ComplexCheckOperator] = field(
         default=None,
         metadata={
             "type": "Attribute",
@@ -1855,20 +1855,20 @@ class FixType:
             "type": "Attribute",
         }
     )
-    strategy: FixStrategyEnumType = field(
-        default=FixStrategyEnumType.UNKNOWN,
+    strategy: FixStrategy = field(
+        default=FixStrategy.UNKNOWN,
         metadata={
             "type": "Attribute",
         }
     )
-    disruption: RatingEnumType = field(
-        default=RatingEnumType.UNKNOWN,
+    disruption: Rating = field(
+        default=Rating.UNKNOWN,
         metadata={
             "type": "Attribute",
         }
     )
-    complexity: RatingEnumType = field(
-        default=RatingEnumType.UNKNOWN,
+    complexity: Rating = field(
+        default=Rating.UNKNOWN,
         metadata={
             "type": "Attribute",
         }
@@ -2087,20 +2087,20 @@ class FixTextType(HtmlTextWithSubType):
             "type": "Attribute",
         }
     )
-    strategy: FixStrategyEnumType = field(
-        default=FixStrategyEnumType.UNKNOWN,
+    strategy: FixStrategy = field(
+        default=FixStrategy.UNKNOWN,
         metadata={
             "type": "Attribute",
         }
     )
-    disruption: RatingEnumType = field(
-        default=RatingEnumType.UNKNOWN,
+    disruption: Rating = field(
+        default=Rating.UNKNOWN,
         metadata={
             "type": "Attribute",
         }
     )
-    complexity: RatingEnumType = field(
-        default=RatingEnumType.UNKNOWN,
+    complexity: Rating = field(
+        default=Rating.UNKNOWN,
         metadata={
             "type": "Attribute",
         }
@@ -2134,7 +2134,7 @@ class RuleResultType:
     class Meta:
         name = "ruleResultType"
 
-    result: Optional[ResultEnumType] = field(
+    result: Optional[Result] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -2197,13 +2197,13 @@ class RuleResultType:
             "required": True,
         }
     )
-    role: Optional[RoleEnumType] = field(
+    role: Optional[Role] = field(
         default=None,
         metadata={
             "type": "Attribute",
         }
     )
-    severity: Optional[SeverityEnumType] = field(
+    severity: Optional[Severity] = field(
         default=None,
         metadata={
             "type": "Attribute",
@@ -2253,8 +2253,8 @@ class WarningType(HtmlTextWithSubType):
             "mixed": True,
         }
     )
-    category: WarningCategoryEnumType = field(
-        default=WarningCategoryEnumType.GENERAL,
+    category: WarningCategory = field(
+        default=WarningCategory.GENERAL,
         metadata={
             "type": "Attribute",
         }
@@ -3045,14 +3045,14 @@ class Value(Item):
             "pattern": r"xccdf_[^_]+_value_.+",
         }
     )
-    type: ValueTypeType = field(
-        default=ValueTypeType.STRING,
+    type: ValueType = field(
+        default=ValueType.STRING,
         metadata={
             "type": "Attribute",
         }
     )
-    operator: ValueOperatorType = field(
-        default=ValueOperatorType.EQUALS,
+    operator: ValueOperator = field(
+        default=ValueOperator.EQUALS,
         metadata={
             "type": "Attribute",
         }
@@ -3063,7 +3063,7 @@ class Value(Item):
             "type": "Attribute",
         }
     )
-    interface_hint: Optional[InterfaceHintType] = field(
+    interface_hint: Optional[InterfaceHint] = field(
         default=None,
         metadata={
             "name": "interfaceHint",
@@ -3156,14 +3156,14 @@ class Rule(SelectableItem):
             "pattern": r"xccdf_[^_]+_rule_.+",
         }
     )
-    role: RoleEnumType = field(
-        default=RoleEnumType.FULL,
+    role: Role = field(
+        default=Role.FULL,
         metadata={
             "type": "Attribute",
         }
     )
-    severity: SeverityEnumType = field(
-        default=SeverityEnumType.UNKNOWN,
+    severity: Severity = field(
+        default=Severity.UNKNOWN,
         metadata={
             "type": "Attribute",
         }
