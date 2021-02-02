@@ -11,7 +11,7 @@ from ..cpe import PlatformSpecification
 
 
 @dataclass
-class Cpe2IdrefType:
+class Cpe2Idref:
     """
 
     Data type for <xccdf:platform> elements that do not need @override attributes. (I.e., <xccdf:platform> elements
@@ -34,7 +34,7 @@ class Cpe2IdrefType:
 
 
 @dataclass
-class BenchmarkReferenceType:
+class BenchmarkReference:
     """
 
     Type for a reference to the <xccdf:Benchmark> document.
@@ -75,7 +75,7 @@ class ComplexCheckOperator(Enum):
 
 
 @dataclass
-class CheckContentRefType:
+class CheckContentRef:
     """
 
     Data type for the <xccdf:check-content-ref> element, which points to the code for a detached check in another
@@ -105,7 +105,7 @@ class CheckContentRefType:
 
 
 @dataclass
-class CheckContentType:
+class CheckContent:
     """
 
     Data type for the <xccdf:check-content> element. The body of this element holds the actual code of a check,
@@ -128,7 +128,7 @@ class CheckContentType:
 
 
 @dataclass
-class CheckExportType:
+class CheckExport:
     """
 
     Data type for the <xccdf:check-export> element, which specifies a mapping from an <xccdf:Value> element to a
@@ -164,7 +164,7 @@ class CheckExportType:
 
 
 @dataclass
-class CheckImportType:
+class CheckImport:
     """
 
     Data type for the <xccdf:check-import> element, which specifies a value that the <xccdf:Benchmark> author wishes
@@ -209,7 +209,7 @@ class CheckImportType:
 
 
 @dataclass
-class ComplexValueType:
+class ComplexValue:
     """
 
     Data type that supports values that are lists of simple types. Each element in the list is represented by an
@@ -231,7 +231,7 @@ class ComplexValueType:
 
 
 @dataclass
-class DcStatusType:
+class DcStatus:
     """
 
     Data type element for the <xccdf:dc-status> element, which holds status information about its parent element
@@ -279,7 +279,7 @@ class FixStrategy(Enum):
 
 
 @dataclass
-class HtmlTextType:
+class HtmlText:
     """
 
     The type for a string with optional XHTML elements and an @xml:lang attribute.
@@ -316,7 +316,7 @@ class HtmlTextType:
 
 
 @dataclass
-class IdentType:
+class Ident:
     """
 
     Data type for the <xccdf:ident> element, a globally meaningful identifier for an <xccdf:Rule>. The body of
@@ -353,7 +353,7 @@ class IdentType:
 
 
 @dataclass
-class IdentityType:
+class Identity:
     """
 
     Type for an <xccdf:identity> element in an <xccdf:TestResult>. It contains information about the system identity
@@ -388,7 +388,7 @@ class IdentityType:
 
 
 @dataclass
-class IdrefListType:
+class IdrefList:
     """
 
     Data type for elements contain list of references to other XCCDF elements.
@@ -410,7 +410,7 @@ class IdrefListType:
 
 
 @dataclass
-class IdrefType:
+class Idref:
     """
 
     Data type for elements that contain a reference to another XCCDF element.
@@ -431,7 +431,7 @@ class IdrefType:
 
 
 @dataclass
-class InstanceFixType:
+class InstanceFix:
     """
 
     Type for an <xccdf:instance> element which may appear in an <xccdf:fix> element. The <xccdf:instance> element
@@ -453,7 +453,7 @@ class InstanceFixType:
 
 
 @dataclass
-class InstanceResultType:
+class InstanceResult:
     """
 
     Type for an <xccdf:instance> element in an <xccdf:rule-result>. The content is a string, but the element may also
@@ -508,7 +508,7 @@ class InterfaceHint(Enum):
 
 
 @dataclass
-class MetadataType:
+class Metadata:
     """
 
     Data type that supports inclusion of metadata about a document or element. This is particularly useful for
@@ -550,7 +550,7 @@ class MessageSeverity(Enum):
 
 
 @dataclass
-class NoticeType:
+class Notice:
     """
 
     Data type for an <xccdf:notice> element. <xccdf:notice> elements are used to include legal notices (licensing
@@ -598,7 +598,7 @@ class NoticeType:
 
 
 @dataclass
-class ParamType:
+class Param:
     """
 
     Type for a parameter used in the <xccdf:model> element, which records scoring model information. The contents of
@@ -626,7 +626,7 @@ class ParamType:
 
 
 @dataclass
-class PlainTextType:
+class PlainText:
     """
 
     The data type for an <xccdf:plain-text> element, which is a reusable text block for reference by the <xccdf:sub>
@@ -653,7 +653,7 @@ class PlainTextType:
 
 
 @dataclass
-class ProfileSetValueType:
+class ProfileSetValue:
     """
 
     Type for the <xccdf:set-value> element in an <xccdf:Profile>. This element upports the direct specification of
@@ -697,7 +697,7 @@ class Rating(Enum):
 
 
 @dataclass
-class ReferenceType:
+class Reference:
     """
 
     This element provides supplementary descriptive text for a XCCDF elements. When used, it has either a simple
@@ -776,7 +776,7 @@ class Role(Enum):
 
 
 @dataclass
-class ScoreType:
+class Score:
     """
 
     Type for a score value in an <xccdf:TestResult>.
@@ -807,7 +807,7 @@ class ScoreType:
 
 
 @dataclass
-class SelNumType:
+class SelNum:
     """
 
     This type is for an element that has numeric content and a @selector attribute for use during tailoring.
@@ -831,7 +831,7 @@ class SelNumType:
 
 
 @dataclass
-class SelStringType:
+class SelString:
     """
 
     This type is for an element that has string content and a @selector attribute for use in tailoring.
@@ -875,7 +875,7 @@ class Severity(Enum):
 
 
 @dataclass
-class SignatureType:
+class Signature:
     """
 
     The type of an <XMLDSig:signature> element, which holds an enveloped digital signature asserting authorship and
@@ -931,7 +931,7 @@ class SubUse(Enum):
 
 
 @dataclass
-class TailoringReferenceType:
+class TailoringReference:
     """
 
     Type for the <xccdf:tailoring> element within an <xccdf:TestResult>. This element is used to indicate the
@@ -977,7 +977,7 @@ class TailoringReferenceType:
 
 
 @dataclass
-class TailoringVersionType:
+class TailoringVersion:
     """
 
     Type for version information about an <xccdf:Tailoring> element.
@@ -1002,7 +1002,7 @@ class TailoringVersionType:
 
 
 @dataclass
-class TargetIdRefType:
+class TargetIdRef:
     """
 
     Type for an <xccdf:target-id-ref> element in an <xccdf:TestResult> element. This element contains references to
@@ -1039,7 +1039,7 @@ class TargetIdRefType:
 
 
 @dataclass
-class TextType:
+class Text:
     """
 
     Type for a simple text string with an @override attribute for controlling inheritance.
@@ -1071,7 +1071,7 @@ class TextType:
 
 
 @dataclass
-class UriRefType:
+class UriRef:
     """
 
     Data type for elements that have no content and a single @uri attribute.
@@ -1127,7 +1127,7 @@ class ValueType(Enum):
 
 
 @dataclass
-class VersionType:
+class Version:
     """
 
     Type for most <xccdf:version> elements.
@@ -1184,7 +1184,7 @@ class WarningCategory(Enum):
 
 
 @dataclass
-class CheckType:
+class Check:
     """
 
     Data type for the <xccdf:check> element. The <xccdf:check> element identifies instructions for tests to determine
@@ -1206,28 +1206,28 @@ class CheckType:
     class Meta:
         name = "checkType"
 
-    check_import: List[CheckImportType] = field(
+    check_import: List[CheckImport] = field(
         default_factory=list,
         metadata={
             "name": "check-import",
             "type": "Element",
         }
     )
-    check_export: List[CheckExportType] = field(
+    check_export: List[CheckExport] = field(
         default_factory=list,
         metadata={
             "name": "check-export",
             "type": "Element",
         }
     )
-    check_content_ref: List[CheckContentRefType] = field(
+    check_content_ref: List[CheckContentRef] = field(
         default_factory=list,
         metadata={
             "name": "check-content-ref",
             "type": "Element",
         }
     )
-    check_content: Optional[CheckContentType] = field(
+    check_content: Optional[CheckContent] = field(
         default=None,
         metadata={
             "name": "check-content",
@@ -1276,7 +1276,7 @@ class CheckType:
 
 
 @dataclass
-class FactType:
+class Fact:
     """
 
     Data type for an <xccdf:fact> element, which holds information about a target system: a name-value pair with a
@@ -1311,7 +1311,7 @@ class FactType:
 
 
 @dataclass
-class MessageType:
+class Message:
     """
 
     Type for a message generated by the checking engine or XCCDF tool during <xccdf:Benchmark> testing. The message
@@ -1354,7 +1354,7 @@ class Model:
         name = "model"
         namespace = "http://checklists.nist.gov/xccdf/1.2"
 
-    param: List[ParamType] = field(
+    param: List[Param] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -1370,7 +1370,7 @@ class Model:
 
 
 @dataclass
-class OverrideType:
+class Override:
     """
 
     Type for an <xccdf:override> element in an <xccdf:rule-result>. This element is used to record manual
@@ -1406,7 +1406,7 @@ class OverrideType:
             "required": True,
         }
     )
-    remark: Optional[TextType] = field(
+    remark: Optional[Text] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -1430,7 +1430,7 @@ class OverrideType:
 
 
 @dataclass
-class OverrideableCpe2IdrefType(Cpe2IdrefType):
+class OverrideableCpe2Idref(Cpe2Idref):
     """
 
     Data type for <xccdf:platform> elements that need @override attributes. (I.e., <xccdf:platform> elements that are
@@ -1452,7 +1452,7 @@ class OverrideableCpe2IdrefType(Cpe2IdrefType):
 
 
 @dataclass
-class ProfileRefineRuleType:
+class ProfileRefineRule:
     """
 
     Type for the <xccdf:refine-rule> element in an <xccdf:Profile>. A <xccdf:refine-rule> element allows the author
@@ -1472,7 +1472,7 @@ class ProfileRefineRuleType:
     class Meta:
         name = "profileRefineRuleType"
 
-    remark: List[TextType] = field(
+    remark: List[Text] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -1514,7 +1514,7 @@ class ProfileRefineRuleType:
 
 
 @dataclass
-class ProfileRefineValueType:
+class ProfileRefineValue:
     """
 
     Type for the <xccdf:refine-value> element in an <xccdf:Profile>. This element designates the <xccdf:Value>
@@ -1529,7 +1529,7 @@ class ProfileRefineValueType:
     class Meta:
         name = "profileRefineValueType"
 
-    remark: List[TextType] = field(
+    remark: List[Text] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -1557,7 +1557,7 @@ class ProfileRefineValueType:
 
 
 @dataclass
-class ProfileSelectType:
+class ProfileSelect:
     """
 
     Type for the <xccdf:select> element in an <xccdf:Profile>. This element designates an <xccdf:Rule>,
@@ -1572,7 +1572,7 @@ class ProfileSelectType:
     class Meta:
         name = "profileSelectType"
 
-    remark: List[TextType] = field(
+    remark: List[Text] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -1595,7 +1595,7 @@ class ProfileSelectType:
 
 
 @dataclass
-class ProfileSetComplexValueType(ComplexValueType):
+class ProfileSetComplexValue(ComplexValue):
     """
 
     Type for the <xccdf:set-complex-value> element in an <xccdf:Profile>. This element supports the direct
@@ -1619,7 +1619,7 @@ class ProfileSetComplexValueType(ComplexValueType):
 
 
 @dataclass
-class SelChoicesType:
+class SelChoices:
     """
 
     The type of the <xccdf:choice> element, which specifies a list of legal or suggested choices for an <xccdf:Value> object.
@@ -1639,7 +1639,7 @@ class SelChoicesType:
             "type": "Element",
         }
     )
-    complex_choice: List[ComplexValueType] = field(
+    complex_choice: List[ComplexValue] = field(
         default_factory=list,
         metadata={
             "name": "complex-choice",
@@ -1662,7 +1662,7 @@ class SelChoicesType:
 
 
 @dataclass
-class SelComplexValueType(ComplexValueType):
+class SelComplexValue(ComplexValue):
     """
 
     Data type that supports values that are lists of simple types with an associated @selector attribute used in tailoring.
@@ -1710,7 +1710,7 @@ class Status:
 
 
 @dataclass
-class SubType(IdrefType):
+class Sub(Idref):
     """
 
     The type used for <xccdf:sub> elements. The <xccdf:sub> element identifies replacement content that should appear
@@ -1735,7 +1735,7 @@ class SubType(IdrefType):
 
 
 @dataclass
-class TailoringBenchmarkReferenceType(BenchmarkReferenceType):
+class TailoringBenchmarkReference(BenchmarkReference):
     """
 
     Identifies the <xccdf:Benchmark> to which an <xccdf:Tailoring> element applies.
@@ -1755,7 +1755,7 @@ class TailoringBenchmarkReferenceType(BenchmarkReferenceType):
 
 
 @dataclass
-class ComplexCheckType:
+class ComplexCheck:
     """
 
     The type for an element that contains a boolean combination of <xccdf:checks>. This element can have only
@@ -1772,13 +1772,13 @@ class ComplexCheckType:
     class Meta:
         name = "complexCheckType"
 
-    check: List[CheckType] = field(
+    check: List[Check] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    complex_check: List["ComplexCheckType"] = field(
+    complex_check: List["ComplexCheck"] = field(
         default_factory=list,
         metadata={
             "name": "complex-check",
@@ -1801,7 +1801,7 @@ class ComplexCheckType:
 
 
 @dataclass
-class FixType:
+class Fix:
     """
 
     Data type for the <xccdf:fix> element. The body of this element contains a command string, script,
@@ -1831,13 +1831,13 @@ class FixType:
             "mixed": True,
         }
     )
-    sub: List[SubType] = field(
+    sub: List[Sub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    instance: List[InstanceFixType] = field(
+    instance: List[InstanceFix] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -1888,7 +1888,7 @@ class FixType:
 
 
 @dataclass
-class HtmlTextWithSubType:
+class HtmlTextWithSub:
     """
 
     The type for a string with optional XHTML elements, and an @xml:lang attribute.
@@ -1902,7 +1902,7 @@ class HtmlTextWithSubType:
     class Meta:
         name = "htmlTextWithSubType"
 
-    sub: List[SubType] = field(
+    sub: List[Sub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -1932,7 +1932,7 @@ class HtmlTextWithSubType:
 
 
 @dataclass
-class ProfileNoteType:
+class ProfileNote:
     """
 
     Type for an <xccdf:profile-note> within an <xccdf:Rule>. This element contains text that describes special
@@ -1950,7 +1950,7 @@ class ProfileNoteType:
     class Meta:
         name = "profileNoteType"
 
-    sub: List[SubType] = field(
+    sub: List[Sub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -1981,7 +1981,7 @@ class ProfileNoteType:
 
 
 @dataclass
-class TargetFactsType:
+class TargetFacts:
     """
 
     Data type for the <xccdf:target-facts> elements in <xccdf:TestResult> elements. A <xccdf:target-facts> element
@@ -1996,7 +1996,7 @@ class TargetFactsType:
     class Meta:
         name = "targetFactsType"
 
-    fact: List[FactType] = field(
+    fact: List[Fact] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -2005,7 +2005,7 @@ class TargetFactsType:
 
 
 @dataclass
-class TextWithSubType:
+class TextWithSub:
     """
 
     Type for a string with embedded <xccdf:Value> substitutions and an @override attribute to help manage inheritance.
@@ -2027,7 +2027,7 @@ class TextWithSubType:
             "mixed": True,
         }
     )
-    sub: List[SubType] = field(
+    sub: List[Sub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -2049,7 +2049,7 @@ class TextWithSubType:
 
 
 @dataclass
-class FixTextType(HtmlTextWithSubType):
+class FixText(HtmlTextWithSub):
     """
 
     Data type for the <xccdf:fixtext> element, which contains data that describes how to bring a target system into
@@ -2108,7 +2108,7 @@ class FixTextType(HtmlTextWithSubType):
 
 
 @dataclass
-class RuleResultType:
+class RuleResult:
     """
 
     Type for the <xccdf:rule-result> element within an <xccdf:TestResult>. An <xccdf:rule-result> holds the result of
@@ -2141,49 +2141,49 @@ class RuleResultType:
             "required": True,
         }
     )
-    override: List[OverrideType] = field(
+    override: List[Override] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    ident: List[IdentType] = field(
+    ident: List[Ident] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    metadata: List[MetadataType] = field(
+    metadata: List[Metadata] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    message: List[MessageType] = field(
+    message: List[Message] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    instance: List[InstanceResultType] = field(
+    instance: List[InstanceResult] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    fix: List[FixType] = field(
+    fix: List[Fix] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    check: List[CheckType] = field(
+    check: List[Check] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    complex_check: Optional[ComplexCheckType] = field(
+    complex_check: Optional[ComplexCheck] = field(
         default=None,
         metadata={
             "name": "complex-check",
@@ -2232,7 +2232,7 @@ class RuleResultType:
 
 
 @dataclass
-class WarningType(HtmlTextWithSubType):
+class WarningType(HtmlTextWithSub):
     """
 
     Data type for the <xccdf:warning> element under the <xccdf:Rule> element. This element holds a note or caveat
@@ -2302,52 +2302,52 @@ class Profile:
             "namespace": "http://checklists.nist.gov/xccdf/1.2",
         }
     )
-    dc_status: List[DcStatusType] = field(
+    dc_status: List[DcStatus] = field(
         default_factory=list,
         metadata={
             "name": "dc-status",
             "type": "Element",
         }
     )
-    version: Optional[VersionType] = field(
+    version: Optional[Version] = field(
         default=None,
         metadata={
             "type": "Element",
         }
     )
-    title: List[TextWithSubType] = field(
+    title: List[TextWithSub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
             "min_occurs": 1,
         }
     )
-    description: List[HtmlTextWithSubType] = field(
+    description: List[HtmlTextWithSub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    reference: List[ReferenceType] = field(
+    reference: List[Reference] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    platform: List[OverrideableCpe2IdrefType] = field(
+    platform: List[OverrideableCpe2Idref] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    select: List[ProfileSelectType] = field(
+    select: List[ProfileSelect] = field(
         default_factory=list,
         metadata={
             "type": "Element",
             "sequential": True,
         }
     )
-    set_complex_value: List[ProfileSetComplexValueType] = field(
+    set_complex_value: List[ProfileSetComplexValue] = field(
         default_factory=list,
         metadata={
             "name": "set-complex-value",
@@ -2355,7 +2355,7 @@ class Profile:
             "sequential": True,
         }
     )
-    set_value: List[ProfileSetValueType] = field(
+    set_value: List[ProfileSetValue] = field(
         default_factory=list,
         metadata={
             "name": "set-value",
@@ -2363,7 +2363,7 @@ class Profile:
             "sequential": True,
         }
     )
-    refine_value: List[ProfileRefineValueType] = field(
+    refine_value: List[ProfileRefineValue] = field(
         default_factory=list,
         metadata={
             "name": "refine-value",
@@ -2371,7 +2371,7 @@ class Profile:
             "sequential": True,
         }
     )
-    refine_rule: List[ProfileRefineRuleType] = field(
+    refine_rule: List[ProfileRefineRule] = field(
         default_factory=list,
         metadata={
             "name": "refine-rule",
@@ -2379,13 +2379,13 @@ class Profile:
             "sequential": True,
         }
     )
-    metadata: List[MetadataType] = field(
+    metadata: List[Metadata] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    signature: Optional[SignatureType] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -2479,26 +2479,26 @@ class Item:
             "namespace": "http://checklists.nist.gov/xccdf/1.2",
         }
     )
-    dc_status: List[DcStatusType] = field(
+    dc_status: List[DcStatus] = field(
         default_factory=list,
         metadata={
             "name": "dc-status",
             "type": "Element",
         }
     )
-    version: Optional[VersionType] = field(
+    version: Optional[Version] = field(
         default=None,
         metadata={
             "type": "Element",
         }
     )
-    title: List[TextWithSubType] = field(
+    title: List[TextWithSub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    description: List[HtmlTextWithSubType] = field(
+    description: List[HtmlTextWithSub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -2510,19 +2510,19 @@ class Item:
             "type": "Element",
         }
     )
-    question: List[TextType] = field(
+    question: List[Text] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    reference: List[ReferenceType] = field(
+    reference: List[Reference] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    metadata: List[MetadataType] = field(
+    metadata: List[Metadata] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -2623,26 +2623,26 @@ class TestResult:
     class Meta:
         namespace = "http://checklists.nist.gov/xccdf/1.2"
 
-    benchmark: Optional[BenchmarkReferenceType] = field(
+    benchmark: Optional[BenchmarkReference] = field(
         default=None,
         metadata={
             "type": "Element",
         }
     )
-    tailoring_file: Optional[TailoringReferenceType] = field(
+    tailoring_file: Optional[TailoringReference] = field(
         default=None,
         metadata={
             "name": "tailoring-file",
             "type": "Element",
         }
     )
-    title: List[TextType] = field(
+    title: List[Text] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    remark: List[TextType] = field(
+    remark: List[Text] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -2654,13 +2654,13 @@ class TestResult:
             "type": "Element",
         }
     )
-    identity: Optional[IdentityType] = field(
+    identity: Optional[Identity] = field(
         default=None,
         metadata={
             "type": "Element",
         }
     )
-    profile: Optional[IdrefType] = field(
+    profile: Optional[Idref] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -2680,14 +2680,14 @@ class TestResult:
             "type": "Element",
         }
     )
-    target_facts: Optional[TargetFactsType] = field(
+    target_facts: Optional[TargetFacts] = field(
         default=None,
         metadata={
             "name": "target-facts",
             "type": "Element",
         }
     )
-    target_id_ref: List[TargetIdRefType] = field(
+    target_id_ref: List[TargetIdRef] = field(
         default_factory=list,
         metadata={
             "name": "target-id-ref",
@@ -2703,13 +2703,13 @@ class TestResult:
             "sequential": True,
         }
     )
-    platform: List[Cpe2IdrefType] = field(
+    platform: List[Cpe2Idref] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    set_value: List[ProfileSetValueType] = field(
+    set_value: List[ProfileSetValue] = field(
         default_factory=list,
         metadata={
             "name": "set-value",
@@ -2717,7 +2717,7 @@ class TestResult:
             "sequential": True,
         }
     )
-    set_complex_value: List[ProfileSetComplexValueType] = field(
+    set_complex_value: List[ProfileSetComplexValue] = field(
         default_factory=list,
         metadata={
             "name": "set-complex-value",
@@ -2725,27 +2725,27 @@ class TestResult:
             "sequential": True,
         }
     )
-    rule_result: List[RuleResultType] = field(
+    rule_result: List[RuleResult] = field(
         default_factory=list,
         metadata={
             "name": "rule-result",
             "type": "Element",
         }
     )
-    score: List[ScoreType] = field(
+    score: List[Score] = field(
         default_factory=list,
         metadata={
             "type": "Element",
             "min_occurs": 1,
         }
     )
-    metadata: List[MetadataType] = field(
+    metadata: List[Metadata] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    signature: Optional[SignatureType] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -2813,25 +2813,25 @@ class SelectableItem(Item):
     class Meta:
         name = "selectableItem"
 
-    rationale: List[HtmlTextWithSubType] = field(
+    rationale: List[HtmlTextWithSub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    platform: List[OverrideableCpe2IdrefType] = field(
+    platform: List[OverrideableCpe2Idref] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    requires: List[IdrefListType] = field(
+    requires: List[IdrefList] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    conflicts: List[IdrefType] = field(
+    conflicts: List[Idref] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -2877,7 +2877,7 @@ class Tailoring:
     class Meta:
         namespace = "http://checklists.nist.gov/xccdf/1.2"
 
-    benchmark: Optional[TailoringBenchmarkReferenceType] = field(
+    benchmark: Optional[TailoringBenchmarkReference] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -2890,21 +2890,21 @@ class Tailoring:
             "namespace": "http://checklists.nist.gov/xccdf/1.2",
         }
     )
-    dc_status: List[DcStatusType] = field(
+    dc_status: List[DcStatus] = field(
         default_factory=list,
         metadata={
             "name": "dc-status",
             "type": "Element",
         }
     )
-    version: Optional[TailoringVersionType] = field(
+    version: Optional[TailoringVersion] = field(
         default=None,
         metadata={
             "type": "Element",
             "required": True,
         }
     )
-    metadata: List[MetadataType] = field(
+    metadata: List[Metadata] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -2919,7 +2919,7 @@ class Tailoring:
             "min_occurs": 1,
         }
     )
-    signature: Optional[SignatureType] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -2969,14 +2969,14 @@ class Value(Item):
     class Meta:
         namespace = "http://checklists.nist.gov/xccdf/1.2"
 
-    value: List[SelStringType] = field(
+    value: List[SelString] = field(
         default_factory=list,
         metadata={
             "type": "Element",
             "sequential": True,
         }
     )
-    complex_value: List[SelComplexValueType] = field(
+    complex_value: List[SelComplexValue] = field(
         default_factory=list,
         metadata={
             "name": "complex-value",
@@ -2984,14 +2984,14 @@ class Value(Item):
             "sequential": True,
         }
     )
-    default: List[SelStringType] = field(
+    default: List[SelString] = field(
         default_factory=list,
         metadata={
             "type": "Element",
             "sequential": True,
         }
     )
-    complex_default: List[SelComplexValueType] = field(
+    complex_default: List[SelComplexValue] = field(
         default_factory=list,
         metadata={
             "name": "complex-default",
@@ -2999,39 +2999,39 @@ class Value(Item):
             "sequential": True,
         }
     )
-    match: List[SelStringType] = field(
+    match: List[SelString] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    lower_bound: List[SelNumType] = field(
+    lower_bound: List[SelNum] = field(
         default_factory=list,
         metadata={
             "name": "lower-bound",
             "type": "Element",
         }
     )
-    upper_bound: List[SelNumType] = field(
+    upper_bound: List[SelNum] = field(
         default_factory=list,
         metadata={
             "name": "upper-bound",
             "type": "Element",
         }
     )
-    choices: List[SelChoicesType] = field(
+    choices: List[SelChoices] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    source: List[UriRefType] = field(
+    source: List[UriRef] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    signature: Optional[SignatureType] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -3097,7 +3097,7 @@ class Rule(SelectableItem):
     class Meta:
         namespace = "http://checklists.nist.gov/xccdf/1.2"
 
-    ident: List[IdentType] = field(
+    ident: List[Ident] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -3110,39 +3110,39 @@ class Rule(SelectableItem):
             "type": "Element",
         }
     )
-    profile_note: List[ProfileNoteType] = field(
+    profile_note: List[ProfileNote] = field(
         default_factory=list,
         metadata={
             "name": "profile-note",
             "type": "Element",
         }
     )
-    fixtext: List[FixTextType] = field(
+    fixtext: List[FixText] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    fix: List[FixType] = field(
+    fix: List[Fix] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    check: List[CheckType] = field(
+    check: List[Check] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    complex_check: Optional[ComplexCheckType] = field(
+    complex_check: Optional[ComplexCheck] = field(
         default=None,
         metadata={
             "name": "complex-check",
             "type": "Element",
         }
     )
-    signature: Optional[SignatureType] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -3219,7 +3219,7 @@ class Group(SelectableItem):
             "sequential": True,
         }
     )
-    signature: Optional[SignatureType] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -3283,52 +3283,52 @@ class Benchmark:
             "min_occurs": 1,
         }
     )
-    dc_status: List[DcStatusType] = field(
+    dc_status: List[DcStatus] = field(
         default_factory=list,
         metadata={
             "name": "dc-status",
             "type": "Element",
         }
     )
-    title: List[TextType] = field(
+    title: List[Text] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    description: List[HtmlTextWithSubType] = field(
+    description: List[HtmlTextWithSub] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    notice: List[NoticeType] = field(
+    notice: List[Notice] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    front_matter: List[HtmlTextWithSubType] = field(
+    front_matter: List[HtmlTextWithSub] = field(
         default_factory=list,
         metadata={
             "name": "front-matter",
             "type": "Element",
         }
     )
-    rear_matter: List[HtmlTextWithSubType] = field(
+    rear_matter: List[HtmlTextWithSub] = field(
         default_factory=list,
         metadata={
             "name": "rear-matter",
             "type": "Element",
         }
     )
-    reference: List[ReferenceType] = field(
+    reference: List[Reference] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    plain_text: List[PlainTextType] = field(
+    plain_text: List[PlainText] = field(
         default_factory=list,
         metadata={
             "name": "plain-text",
@@ -3343,20 +3343,20 @@ class Benchmark:
             "namespace": "http://cpe.mitre.org/language/2.0",
         }
     )
-    platform: List[Cpe2IdrefType] = field(
+    platform: List[Cpe2Idref] = field(
         default_factory=list,
         metadata={
             "type": "Element",
         }
     )
-    version: Optional[VersionType] = field(
+    version: Optional[Version] = field(
         default=None,
         metadata={
             "type": "Element",
             "required": True,
         }
     )
-    metadata: List[MetadataType] = field(
+    metadata: List[Metadata] = field(
         default_factory=list,
         metadata={
             "type": "Element",
@@ -3405,7 +3405,7 @@ class Benchmark:
             "type": "Element",
         }
     )
-    signature: Optional[SignatureType] = field(
+    signature: Optional[Signature] = field(
         default=None,
         metadata={
             "type": "Element",
