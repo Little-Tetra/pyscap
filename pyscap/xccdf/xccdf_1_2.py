@@ -5,9 +5,10 @@ from typing import Dict, List, Optional
 
 from xsdata.models.datatype import XmlDate, XmlDateTime
 
-from .namespaces import XCCDF_NAMESPACE_MAP
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 from ..cpe import PlatformSpecification
+
+XCCDF_NAMESPACE = "http://checklists.nist.gov/xccdf/1.2"
 
 
 @dataclass
@@ -1352,7 +1353,7 @@ class Model:
 
     class Meta:
         name = "model"
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     param: List[Param] = field(
         default_factory=list,
@@ -1696,7 +1697,7 @@ class Status:
 
     class Meta:
         name = "status"
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     value: Optional[StatusValue] = field(
         default=None,
@@ -2293,13 +2294,13 @@ class Profile:
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     status: List[Status] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+            "namespace": XCCDF_NAMESPACE,
         }
     )
     dc_status: List[DcStatus] = field(
@@ -2470,13 +2471,13 @@ class Item:
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     status: List[Status] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+            "namespace": XCCDF_NAMESPACE,
         }
     )
     dc_status: List[DcStatus] = field(
@@ -2621,7 +2622,7 @@ class TestResult:
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     benchmark: Optional[BenchmarkReference] = field(
         default=None,
@@ -2875,7 +2876,7 @@ class Tailoring:
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     benchmark: Optional[TailoringBenchmarkReference] = field(
         default=None,
@@ -2887,7 +2888,7 @@ class Tailoring:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+            "namespace": XCCDF_NAMESPACE,
         }
     )
     dc_status: List[DcStatus] = field(
@@ -2915,7 +2916,7 @@ class Tailoring:
         metadata={
             "name": "Profile",
             "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+            "namespace": XCCDF_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2967,7 +2968,7 @@ class Value(Item):
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     value: List[SelString] = field(
         default_factory=list,
@@ -3095,7 +3096,7 @@ class Rule(SelectableItem):
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     ident: List[Ident] = field(
         default_factory=list,
@@ -3191,14 +3192,14 @@ class Group(SelectableItem):
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     value: List[Value] = field(
         default_factory=list,
         metadata={
             "name": "Value",
             "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+            "namespace": XCCDF_NAMESPACE,
         }
     )
     group: List["Group"] = field(
@@ -3206,7 +3207,7 @@ class Group(SelectableItem):
         metadata={
             "name": "Group",
             "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+            "namespace": XCCDF_NAMESPACE,
             "sequential": True,
         }
     )
@@ -3215,7 +3216,7 @@ class Group(SelectableItem):
         metadata={
             "name": "Rule",
             "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+            "namespace": XCCDF_NAMESPACE,
             "sequential": True,
         }
     )
@@ -3274,7 +3275,7 @@ class Benchmark:
     """
 
     class Meta:
-        namespace = "http://checklists.nist.gov/xccdf/1.2"
+        namespace = XCCDF_NAMESPACE
 
     status: List[Status] = field(
         default_factory=list,
@@ -3467,7 +3468,7 @@ class Benchmark:
 
     def dump(self, file):
         with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self, ns_map=XCCDF_NAMESPACE_MAP)
+            scap_serializer.write(fp, self)
 
     def dump_json(self, file):
         with open(file, "w", encoding="utf8") as fp:
