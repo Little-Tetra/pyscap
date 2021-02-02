@@ -1,5 +1,5 @@
-from .namespaces import OCIL_2_NAMESPACE
 from .ocil_2_0 import (
+    OCIL_2_NAMESPACE,
     ArtifactRefType,
     ArtifactValueType,
     BooleanQuestionModelType,

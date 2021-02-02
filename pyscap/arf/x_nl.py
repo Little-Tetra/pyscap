@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
+X_NL_NAMESPACE = "urn:oasis:names:tc:ciq:xsdschema:xNL:2.0"
+
 
 @dataclass
 class Function:
@@ -16,7 +18,7 @@ class Function:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xNL:2.0"
+        namespace = X_NL_NAMESPACE
 
     content: List[object] = field(
         default_factory=list,
@@ -123,7 +125,7 @@ class OrganisationNameDetails:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xNL:2.0"
+        namespace = X_NL_NAMESPACE
 
     name_line: List[NameLineType] = field(
         default_factory=list,
@@ -715,7 +717,7 @@ class PersonName:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xNL:2.0"
+        namespace = X_NL_NAMESPACE
 
     name_line: List[NameLineType] = field(
         default_factory=list,
@@ -2767,7 +2769,7 @@ class JointPersonName:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xNL:2.0"
+        namespace = X_NL_NAMESPACE
 
     name_line: List[NameLineType] = field(
         default_factory=list,
@@ -2853,7 +2855,7 @@ class NameDetails:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xNL:2.0"
+        namespace = X_NL_NAMESPACE
 
     name_line: List[NameLineType] = field(
         default_factory=list,
@@ -3085,7 +3087,7 @@ class XNl:
 
     class Meta:
         name = "xNL"
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xNL:2.0"
+        namespace = X_NL_NAMESPACE
 
     name_details: List[NameDetails] = field(
         default_factory=list,

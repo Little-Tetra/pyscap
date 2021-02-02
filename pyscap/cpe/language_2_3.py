@@ -2,6 +2,8 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import List, Optional
 
+CPE_LANGUAGE_2_NAMESPACE = "http://cpe.mitre.org/language/2.0"
+
 
 @dataclass
 class FactRefType:
@@ -45,6 +47,7 @@ class CpefactRefType(FactRefType):
     """
     A reference to a CPE Name that always evaluates to a Boolean result.
     """
+
     class Meta:
         name = "CPEFactRefType"
 
@@ -101,14 +104,14 @@ class CheckFactRefType(FactRefType):
 class CheckFactRef(CheckFactRefType):
     class Meta:
         name = "check-fact-ref"
-        namespace = "http://cpe.mitre.org/language/2.0"
+        namespace = CPE_LANGUAGE_2_NAMESPACE
 
 
 @dataclass
 class FactRef(CpefactRefType):
     class Meta:
         name = "fact-ref"
-        namespace = "http://cpe.mitre.org/language/2.0"
+        namespace = CPE_LANGUAGE_2_NAMESPACE
 
 
 @dataclass
@@ -153,7 +156,7 @@ class LogicalTestType:
         metadata={
             "name": "fact-ref",
             "type": "Element",
-            "namespace": "http://cpe.mitre.org/language/2.0",
+            "namespace": CPE_LANGUAGE_2_NAMESPACE,
         }
     )
     check_fact_ref: List[CheckFactRef] = field(
@@ -161,7 +164,7 @@ class LogicalTestType:
         metadata={
             "name": "check-fact-ref",
             "type": "Element",
-            "namespace": "http://cpe.mitre.org/language/2.0",
+            "namespace": CPE_LANGUAGE_2_NAMESPACE,
         }
     )
     operator: Optional[OperatorEnumeration] = field(
@@ -184,7 +187,7 @@ class LogicalTestType:
 class LogicalTest(LogicalTestType):
     class Meta:
         name = "logical-test"
-        namespace = "http://cpe.mitre.org/language/2.0"
+        namespace = CPE_LANGUAGE_2_NAMESPACE
 
 
 @dataclass
@@ -222,7 +225,7 @@ class PlatformBaseType:
         metadata={
             "name": "logical-test",
             "type": "Element",
-            "namespace": "http://cpe.mitre.org/language/2.0",
+            "namespace": CPE_LANGUAGE_2_NAMESPACE,
             "required": True,
         }
     )
@@ -249,14 +252,14 @@ class PlatformType(PlatformBaseType):
 class PlatformConfiguration(PlatformBaseType):
     class Meta:
         name = "platform-configuration"
-        namespace = "http://cpe.mitre.org/language/2.0"
+        namespace = CPE_LANGUAGE_2_NAMESPACE
 
 
 @dataclass
 class Platform(PlatformType):
     class Meta:
         name = "platform"
-        namespace = "http://cpe.mitre.org/language/2.0"
+        namespace = CPE_LANGUAGE_2_NAMESPACE
 
 
 @dataclass
@@ -268,7 +271,7 @@ class PlatformSpecificationType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://cpe.mitre.org/language/2.0",
+            "namespace": CPE_LANGUAGE_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -280,6 +283,7 @@ class PlatformSpecification(PlatformSpecificationType):
     This element is the root element of a CPE Applicability Language XML
     document and therefore acts as a container for child platform definitions.
     """
+
     class Meta:
         name = "platform-specification"
-        namespace = "http://cpe.mitre.org/language/2.0"
+        namespace = CPE_LANGUAGE_2_NAMESPACE

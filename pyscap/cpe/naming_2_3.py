@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Optional
 
+CPE_NAMING_2_NAMESPACE = "http://cpe.mitre.org/naming/2.0"
 
 @dataclass
 class Cpe22Type:

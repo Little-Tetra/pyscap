@@ -1,4 +1,5 @@
 from .common import (
+    OVAL_COMMON_5_NAMESPACE,
     CheckEnumeration,
     ClassEnumeration,
     ComplexDatatypeEnumeration,
@@ -21,6 +22,7 @@ from .common import (
     ElementMapping
 )
 from .definitions import (
+    OVAL_DEFINITIONS_5_NAMESPACE,
     ArithmeticEnumeration,
     CriterionType,
     DateTimeFormatEnumeration,
@@ -107,16 +109,9 @@ from .definitions import (
     VariablesType,
     OvalDefinitions
 )
-from .directives import OvalDirectives
-from .namespaces import (
-    OVAL_COMMON_5_NAMESPACE,
-    OVAL_DEFINITIONS_5_NAMESPACE,
-    OVAL_DIRECTIVES_5_NAMESPACE,
-    OVAL_RESULTS_5_NAMESPACE,
-    OVAL_SYSTEM_CHARACTERISTICS_5_NAMESPACE,
-    OVAL_VARIABLES_5_NAMESPACE
-)
+from .directives import OVAL_DIRECTIVES_5_NAMESPACE, OvalDirectives
 from .results import (
+    OVAL_RESULTS_5_NAMESPACE,
     ContentEnumeration,
     ResultEnumeration,
     TestedVariableType,
@@ -137,6 +132,7 @@ from .results import (
     OvalResults
 )
 from .system_characteristics import (
+    OVAL_SYSTEM_CHARACTERISTICS_5_NAMESPACE,
     EntityItemIpaddressStringTypeDatatype,
     FlagEnumeration,
     InterfaceType,
@@ -170,6 +166,7 @@ from .system_characteristics import (
     OvalSystemCharacteristics
 )
 from .variables import (
+    OVAL_VARIABLES_5_NAMESPACE,
     VariableType,
     VariablesType,
     OvalVariables

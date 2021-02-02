@@ -18,6 +18,8 @@ from .x_nl import (
     PersonName,
 )
 
+AI_1_1_NAMESPACE = "http://scap.nist.gov/schema/asset-identification/1.1"
+
 
 @dataclass
 class Cpe:
@@ -28,7 +30,7 @@ class Cpe:
 
     class Meta:
         name = "cpe"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     value: Optional[str] = field(
         default=None,
@@ -40,14 +42,14 @@ class Cpe:
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     timestamp: Optional[XmlDateTime] = field(
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     other_attributes: Dict = field(
@@ -67,7 +69,7 @@ class EmailAddress:
 
     class Meta:
         name = "email-address"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     value: Optional[str] = field(
         default=None,
@@ -76,14 +78,14 @@ class EmailAddress:
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     timestamp: Optional[XmlDateTime] = field(
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     other_attributes: Dict = field(
@@ -103,7 +105,7 @@ class Fqdn:
 
     class Meta:
         name = "fqdn"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     value: Optional[str] = field(
         default=None,
@@ -112,14 +114,14 @@ class Fqdn:
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     timestamp: Optional[XmlDateTime] = field(
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     other_attributes: Dict = field(
@@ -163,14 +165,14 @@ class IpAddressType:
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -193,14 +195,14 @@ class IpAddressType:
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -216,7 +218,7 @@ class IpAddressType:
 class Location:
     class Meta:
         name = "location"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     any_element: Optional[object] = field(
         default=None,
@@ -250,7 +252,7 @@ class LocationPoint:
 
     class Meta:
         name = "location-point"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     latitude: Optional[Decimal] = field(
         default=None,
@@ -287,14 +289,14 @@ class LocationPoint:
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     timestamp: Optional[XmlDateTime] = field(
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     other_attributes: Dict = field(
@@ -314,7 +316,7 @@ class LocationRegion:
 
     class Meta:
         name = "location-region"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     value: Optional[str] = field(
         default=None,
@@ -323,14 +325,14 @@ class LocationRegion:
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     timestamp: Optional[XmlDateTime] = field(
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     other_attributes: Dict = field(
@@ -353,7 +355,7 @@ class SyntheticId:
 
     class Meta:
         name = "synthetic-id"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     resource: Optional[str] = field(
         default=None,
@@ -384,7 +386,7 @@ class TelephoneNumber:
 
     class Meta:
         name = "telephone-number"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     value: Optional[str] = field(
         default=None,
@@ -396,14 +398,14 @@ class TelephoneNumber:
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     timestamp: Optional[XmlDateTime] = field(
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     other_attributes: Dict = field(
@@ -423,7 +425,7 @@ class WebsiteUrl:
 
     class Meta:
         name = "website-url"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     value: Optional[str] = field(
         default=None,
@@ -432,14 +434,14 @@ class WebsiteUrl:
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     timestamp: Optional[XmlDateTime] = field(
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     other_attributes: Dict = field(
@@ -459,7 +461,7 @@ class IpAddress(IpAddressType):
 
     class Meta:
         name = "ip-address"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -494,7 +496,7 @@ class LocationAddress:
 
     class Meta:
         name = "location-address"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     postal_service_elements: Optional["LocationAddress.PostalServiceElements"] = field(
         default=None,
@@ -1307,7 +1309,7 @@ class Locations:
 
     class Meta:
         name = "locations"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
     location_region: List[LocationRegion] = field(
         default_factory=list,
@@ -1363,7 +1365,7 @@ class NetworkInterfaceType:
         metadata={
             "name": "ip-address",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     mac_address: Optional["NetworkInterfaceType.MacAddress"] = field(
@@ -1406,14 +1408,14 @@ class NetworkInterfaceType:
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -1433,14 +1435,14 @@ class NetworkInterfaceType:
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -1471,14 +1473,14 @@ class AssetType:
         metadata={
             "name": "synthetic-id",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     locations: Optional[Locations] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     extended_information: Optional["AssetType.ExtendedInformation"] = field(
@@ -1492,7 +1494,7 @@ class AssetType:
         default=None,
         metadata={
             "type": "Attribute",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
 
@@ -1516,7 +1518,7 @@ class Asset(AssetType):
 
     class Meta:
         name = "asset"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -1549,7 +1551,7 @@ class OrganizationType(AssetType):
         metadata={
             "name": "email-address",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     telephone_number: List[TelephoneNumber] = field(
@@ -1557,7 +1559,7 @@ class OrganizationType(AssetType):
         metadata={
             "name": "telephone-number",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     website_url: List[WebsiteUrl] = field(
@@ -1565,7 +1567,7 @@ class OrganizationType(AssetType):
         metadata={
             "name": "website-url",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
 
@@ -1595,7 +1597,7 @@ class PersonType(AssetType):
         metadata={
             "name": "email-address",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     telephone_number: List[TelephoneNumber] = field(
@@ -1603,7 +1605,7 @@ class PersonType(AssetType):
         metadata={
             "name": "telephone-number",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     birthdate: Optional["PersonType.Birthdate"] = field(
@@ -1622,14 +1624,14 @@ class PersonType(AssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -1667,14 +1669,14 @@ class CircuitType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -1716,7 +1718,7 @@ class ComputingDeviceType(ItAssetType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     connections: Optional["ComputingDeviceType.Connections"] = field(
@@ -1729,7 +1731,7 @@ class ComputingDeviceType(ItAssetType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     hostname: Optional["ComputingDeviceType.Hostname"] = field(
@@ -1755,14 +1757,14 @@ class ComputingDeviceType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -1798,14 +1800,14 @@ class ComputingDeviceType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -1825,14 +1827,14 @@ class ComputingDeviceType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -1854,7 +1856,7 @@ class Data(DataType):
 
     class Meta:
         name = "data"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -1884,14 +1886,14 @@ class DatabaseType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -1911,7 +1913,7 @@ class ItAsset(ItAssetType):
 
     class Meta:
         name = "it-asset"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -1958,14 +1960,14 @@ class NetworkType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2012,14 +2014,14 @@ class NetworkType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2039,7 +2041,7 @@ class Organization(OrganizationType):
 
     class Meta:
         name = "organization"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2050,7 +2052,7 @@ class Person(PersonType):
 
     class Meta:
         name = "person"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2098,7 +2100,7 @@ class ServiceType(ItAssetType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         ip_address: Optional[IpAddress] = field(
@@ -2106,7 +2108,7 @@ class ServiceType(ItAssetType):
             metadata={
                 "name": "ip-address",
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
 
@@ -2123,14 +2125,14 @@ class ServiceType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2167,14 +2169,14 @@ class ServiceType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2194,14 +2196,14 @@ class ServiceType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2237,7 +2239,7 @@ class SoftwareType(ItAssetType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
         }
     )
     license: List["SoftwareType.License"] = field(
@@ -2256,14 +2258,14 @@ class SoftwareType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2283,14 +2285,14 @@ class SoftwareType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2338,14 +2340,14 @@ class SystemType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2365,14 +2367,14 @@ class SystemType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2419,14 +2421,14 @@ class WebsiteType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2449,14 +2451,14 @@ class WebsiteType(ItAssetType):
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         timestamp: Optional[XmlDateTime] = field(
             default=None,
             metadata={
                 "type": "Attribute",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
             }
         )
         other_attributes: Dict = field(
@@ -2476,7 +2478,7 @@ class Circuit(CircuitType):
 
     class Meta:
         name = "circuit"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2487,7 +2489,7 @@ class ComputingDevice(ComputingDeviceType):
 
     class Meta:
         name = "computing-device"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2498,7 +2500,7 @@ class Database(DatabaseType):
 
     class Meta:
         name = "database"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2509,7 +2511,7 @@ class Network(NetworkType):
 
     class Meta:
         name = "network"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2520,7 +2522,7 @@ class ServedBy(ServiceType):
 
     class Meta:
         name = "served-by"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2531,7 +2533,7 @@ class Service(ServiceType):
 
     class Meta:
         name = "service"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2542,7 +2544,7 @@ class Software(SoftwareType):
 
     class Meta:
         name = "software"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2553,7 +2555,7 @@ class System(SystemType):
 
     class Meta:
         name = "system"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2564,7 +2566,7 @@ class Website(WebsiteType):
 
     class Meta:
         name = "website"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
@@ -2576,7 +2578,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2584,7 +2586,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2592,7 +2594,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2600,7 +2602,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2608,7 +2610,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2616,7 +2618,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2624,7 +2626,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2632,7 +2634,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2640,7 +2642,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2649,7 +2651,7 @@ class AssetsType(RelationshipsContainerType):
         metadata={
             "name": "computing-device",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2657,7 +2659,7 @@ class AssetsType(RelationshipsContainerType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2666,7 +2668,7 @@ class AssetsType(RelationshipsContainerType):
         metadata={
             "name": "it-asset",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+            "namespace": AI_1_1_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2703,7 +2705,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2711,7 +2713,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2719,7 +2721,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2727,7 +2729,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2735,7 +2737,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2743,7 +2745,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2751,7 +2753,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2759,7 +2761,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2767,7 +2769,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2776,7 +2778,7 @@ class AssetsType(RelationshipsContainerType):
             metadata={
                 "name": "computing-device",
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2784,7 +2786,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2793,7 +2795,7 @@ class AssetsType(RelationshipsContainerType):
             metadata={
                 "name": "it-asset",
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2801,7 +2803,7 @@ class AssetsType(RelationshipsContainerType):
             default=None,
             metadata={
                 "type": "Element",
-                "namespace": "http://scap.nist.gov/schema/asset-identification/1.1",
+                "namespace": AI_1_1_NAMESPACE,
                 "required": True,
             }
         )
@@ -2840,11 +2842,11 @@ class AssetIdentificationType(AssetsType):
 class Assets(AssetsType):
     class Meta:
         name = "assets"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE
 
 
 @dataclass
 class AssetRelated(AssetIdentificationType):
     class Meta:
         name = "asset-related"
-        namespace = "http://scap.nist.gov/schema/asset-identification/1.1"
+        namespace = AI_1_1_NAMESPACE

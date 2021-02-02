@@ -4,6 +4,8 @@ from typing import List, Optional
 
 from xsdata.models.datatype import XmlDateTime
 
+OVAL_COMMON_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-common-5"
+
 
 class CheckEnumeration(Enum):
     """The CheckEnumeration simple type defines acceptable check values, which
@@ -1061,7 +1063,7 @@ class DeprecatedInfo(DeprecatedInfoType):
 
     class Meta:
         name = "deprecated_info"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-common-5"
+        namespace = OVAL_COMMON_5_NAMESPACE
 
 
 @dataclass
@@ -1072,7 +1074,7 @@ class Notes(NotesType):
 
     class Meta:
         name = "notes"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-common-5"
+        namespace = OVAL_COMMON_5_NAMESPACE
 
 
 @dataclass
@@ -1086,4 +1088,4 @@ class ElementMapping(ElementMapType):
 
     class Meta:
         name = "element_mapping"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-common-5"
+        namespace = OVAL_COMMON_5_NAMESPACE

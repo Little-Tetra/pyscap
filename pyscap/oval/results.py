@@ -11,10 +11,11 @@ from .common import (
     OperatorEnumeration,
 )
 from .definitions import OvalDefinitions
-from .namespaces import OVAL_NAMESPACE_MAP
 from .system_characteristics import OvalSystemCharacteristics
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 from ..common.xmldsig import Signature
+
+OVAL_RESULTS_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-results-5"
 
 
 class ContentEnumeration(Enum):
@@ -884,7 +885,7 @@ class OvalResults:
 
     class Meta:
         name = "oval_results"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-results-5"
+        namespace = OVAL_RESULTS_5_NAMESPACE
 
     generator: Optional[GeneratorType] = field(
         default=None,
@@ -944,7 +945,7 @@ class OvalResults:
 
     def dump(self, file):
         with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+            scap_serializer.write(fp, self)
 
     def dump_json(self, file):
         with open(file, "w", encoding="utf8") as fp:

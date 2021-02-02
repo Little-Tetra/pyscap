@@ -1,12 +1,5 @@
-from .arf_1_1 import (
-    ObjectRef,
-    RemoteResource,
-    ReportRequestType,
-    ReportType,
-    AssetReportCollection
-)
-
-from .asset_identification_1_1 import (
+from .ai_1_1 import (
+    AI_1_1_NAMESPACE,
     Cpe,
     EmailAddress,
     Fqdn,
@@ -53,20 +46,22 @@ from .asset_identification_1_1 import (
     Assets,
     AssetRelated
 )
-
-from .namespaces import (
+from .arf_1_1 import (
     ARF_1_1_NAMESPACE,
-    ASSET_IDENTIFICATION_1_1_NAMESPACE,
-    REPORTING_CORE_1_1_NAMESPACE,
-    X_AL_NAMESPACE,
-    X_NL_NAMESPACE
+    ObjectRef,
+    RemoteResource,
+    ReportRequestType,
+    ReportType,
+    AssetReportCollection
 )
 from .reporting_core_1_1 import (
+    REPORTING_CORE_1_1_NAMESPACE,
     RelationshipTypeScope,
     RelationshipType,
     RelationshipsContainerType
 )
 from .x_al import (
+    X_AL_NAMESPACE,
     AddressLine,
     BuildingNameType,
     CountryName,
@@ -100,6 +95,7 @@ from .x_al import (
     XAl
 )
 from .x_nl import (
+    X_NL_NAMESPACE,
     Function,
     NameLineType,
     OrganisationNameDetails,

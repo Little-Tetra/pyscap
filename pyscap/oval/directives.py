@@ -2,10 +2,11 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 
 from .common import GeneratorType
-from .namespaces import OVAL_NAMESPACE_MAP
 from .results import ClassDirectivesType, DefaultDirectivesType
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 from ..common.xmldsig import Signature
+
+OVAL_DIRECTIVES_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-directives-5"
 
 
 @dataclass
@@ -46,7 +47,7 @@ class OvalDirectives:
 
     class Meta:
         name = "oval_directives"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-directives-5"
+        namespace = OVAL_DIRECTIVES_5_NAMESPACE
 
     generator: Optional[GeneratorType] = field(
         default=None,
@@ -92,7 +93,7 @@ class OvalDirectives:
 
     def dump(self, file):
         with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+            scap_serializer.write(fp, self)
 
     def dump_json(self, file):
         with open(file, "w", encoding="utf8") as fp:

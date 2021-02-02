@@ -14,9 +14,10 @@ from .common import (
     SimpleDatatypeEnumeration,
     Notes as CommonNotes,
 )
-from .namespaces import OVAL_NAMESPACE_MAP
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 from ..common.xmldsig import Signature
+
+OVAL_DEFINITIONS_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
 
 
 class ArithmeticEnumeration(Enum):
@@ -859,7 +860,7 @@ class Notes:
 
     class Meta:
         name = "notes"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
     note: List[str] = field(
         default_factory=list,
@@ -2806,7 +2807,7 @@ class ObjectType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
         }
     )
     oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
@@ -2909,7 +2910,7 @@ class StateType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
         }
     )
     oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
@@ -2980,7 +2981,7 @@ class TestType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
         }
     )
     oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
@@ -3089,7 +3090,7 @@ class VariableType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
         }
     )
     oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
@@ -3150,7 +3151,7 @@ class Filter:
 
     class Meta:
         name = "filter"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
     value: Optional[str] = field(
         default=None,
@@ -3553,7 +3554,7 @@ class ConstantVariable(VariableType):
 
     class Meta:
         name = "constant_variable"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
     value: List[object] = field(
         default_factory=list,
@@ -3585,7 +3586,7 @@ class Object(ObjectType):
 
     class Meta:
         name = "object"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
 
 @dataclass
@@ -3625,7 +3626,7 @@ class Set:
 
     class Meta:
         name = "set"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
     set: List["Set"] = field(
         default_factory=list,
@@ -3674,7 +3675,7 @@ class State(StateType):
 
     class Meta:
         name = "state"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
 
 @dataclass
@@ -3693,7 +3694,7 @@ class Test(TestType):
 
     class Meta:
         name = "test"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
 
 @dataclass
@@ -3725,7 +3726,7 @@ class Variable(VariableType):
 
     class Meta:
         name = "variable"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
 
 @dataclass
@@ -3910,7 +3911,7 @@ class DefinitionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
         }
     )
     oval_mitre_org_xmlschema_oval_common_5_notes: Optional[CommonNotes] = field(
@@ -4465,7 +4466,7 @@ class ObjectsType:
     #     default_factory=list,
     #     metadata={
     #         "type": "Element",
-    #         "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+    #         "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
     #         "min_occurs": 1,
     #     }
     # )
@@ -4494,7 +4495,7 @@ class StatesType:
     #     default_factory=list,
     #     metadata={
     #         "type": "Element",
-    #         "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+    #         "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
     #         "min_occurs": 1,
     #     }
     # )
@@ -4522,7 +4523,7 @@ class TestsType:
     #     default_factory=list,
     #     metadata={
     #         "type": "Element",
-    #         "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+    #         "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
     #         "min_occurs": 1,
     #     }
     # )
@@ -4554,7 +4555,7 @@ class ExternalVariable(VariableType):
 
     class Meta:
         name = "external_variable"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
     possible_value: List[PossibleValueType] = field(
         default_factory=list,
@@ -4708,7 +4709,7 @@ class Definition(DefinitionType):
 
     class Meta:
         name = "definition"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
 
 @dataclass
@@ -4724,7 +4725,7 @@ class DefinitionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -5857,7 +5858,7 @@ class LocalVariable(VariableType):
 
     class Meta:
         name = "local_variable"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
     object_component: Optional[ObjectComponentType] = field(
         default=None,
@@ -5963,7 +5964,7 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -5971,7 +5972,7 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -5979,7 +5980,7 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -5987,7 +5988,7 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://oval.mitre.org/XMLSchema/oval-definitions-5",
+            "namespace": OVAL_DEFINITIONS_5_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -6020,7 +6021,7 @@ class OvalDefinitions:
 
     class Meta:
         name = "oval_definitions"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
+        namespace = OVAL_DEFINITIONS_5_NAMESPACE
 
     generator: Optional[GeneratorType] = field(
         default=None,
@@ -6082,7 +6083,7 @@ class OvalDefinitions:
 
     def dump(self, file):
         with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+            scap_serializer.write(fp, self)
 
     def dump_json(self, file):
         with open(file, "w", encoding="utf8") as fp:

@@ -4,6 +4,8 @@ from typing import List, Optional
 
 from xsdata.models.datatype import XmlDateTime
 
+CPE_DICTIONARY_2_NAMESPACE = "http://cpe.mitre.org/dictionary/2.0"
+
 
 @dataclass
 class CheckType:
@@ -273,7 +275,7 @@ class CpeItem(ItemType):
 
     class Meta:
         name = "cpe-item"
-        namespace = "http://cpe.mitre.org/dictionary/2.0"
+        namespace = CPE_DICTIONARY_2_NAMESPACE
 
 
 @dataclass
@@ -299,7 +301,7 @@ class ListType:
         metadata={
             "name": "cpe-item",
             "type": "Element",
-            "namespace": "http://cpe.mitre.org/dictionary/2.0",
+            "namespace": CPE_DICTIONARY_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -323,4 +325,4 @@ class CpeList(ListType):
 
     class Meta:
         name = "cpe-list"
-        namespace = "http://cpe.mitre.org/dictionary/2.0"
+        namespace = CPE_DICTIONARY_2_NAMESPACE

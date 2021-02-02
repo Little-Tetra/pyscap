@@ -6,9 +6,10 @@ from .common import (
     NotesType,
     SimpleDatatypeEnumeration,
 )
-from .namespaces import OVAL_NAMESPACE_MAP
 from ..common.utils import scap_json_parser, scap_serializer, scap_json_serializer, scap_parser
 from ..common.xmldsig import Signature
+
+OVAL_VARIABLES_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-variables-5"
 
 
 @dataclass
@@ -108,7 +109,7 @@ class OvalVariables:
 
     class Meta:
         name = "oval_variables"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-variables-5"
+        namespace = OVAL_VARIABLES_5_NAMESPACE
 
     generator: Optional[GeneratorType] = field(
         default=None,
@@ -146,7 +147,7 @@ class OvalVariables:
 
     def dump(self, file):
         with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+            scap_serializer.write(fp, self)
 
     def dump_json(self, file):
         with open(file, "w", encoding="utf8") as fp:

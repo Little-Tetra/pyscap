@@ -3,6 +3,8 @@ from enum import Enum
 from typing import Dict, List, Optional
 from xml.etree.ElementTree import QName
 
+REPORTING_CORE_1_1_NAMESPACE = "http://scap.nist.gov/schema/reporting-core/1.1"
+
 
 class RelationshipTypeScope(Enum):
     INCLUSIVE = "inclusive"
@@ -57,7 +59,7 @@ class RelationshipType:
         metadata={
             "type": "Element",
             "min_occurs": 1,
-            "namespace": "http://scap.nist.gov/schema/reporting-core/1.1"
+            "namespace": REPORTING_CORE_1_1_NAMESPACE
         }
     )
     type: Optional[QName] = field(
@@ -102,7 +104,7 @@ class RelationshipsContainerType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/reporting-core/1.1"
+            "namespace": REPORTING_CORE_1_1_NAMESPACE
         }
     )
 
@@ -113,6 +115,6 @@ class RelationshipsContainerType:
             metadata={
                 "type": "Element",
                 "min_occurs": 1,
-                "namespace": "http://scap.nist.gov/schema/reporting-core/1.1"
+                "namespace": REPORTING_CORE_1_1_NAMESPACE
             }
         )

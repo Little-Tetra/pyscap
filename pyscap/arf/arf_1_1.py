@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 
 from xsdata.models.datatype import XmlDate
 
-from .asset_identification_1_1 import (
+from .ai_1_1 import (
     Asset,
     Circuit,
     ComputingDevice,
@@ -22,6 +22,8 @@ from .reporting_core_1_1 import RelationshipsContainerType
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 from ..common.xlink import TypeType
 
+ARF_1_1_NAMESPACE = "http://scap.nist.gov/schema/asset-reporting-format/1.1"
+
 
 @dataclass
 class ObjectRef:
@@ -35,7 +37,7 @@ class ObjectRef:
 
     class Meta:
         name = "object-ref"
-        namespace = "http://scap.nist.gov/schema/asset-reporting-format/1.1"
+        namespace = ARF_1_1_NAMESPACE
 
     ref_id: Optional[str] = field(
         default=None,
@@ -61,7 +63,7 @@ class RemoteResource:
 
     class Meta:
         name = "remote-resource"
-        namespace = "http://scap.nist.gov/schema/asset-reporting-format/1.1"
+        namespace = ARF_1_1_NAMESPACE
 
     type: TypeType = field(
         init=False,
@@ -109,7 +111,7 @@ class ReportRequestType:
         metadata={
             "name": "remote-resource",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-reporting-format/1.1",
+            "namespace": ARF_1_1_NAMESPACE,
         }
     )
     id: Optional[str] = field(
@@ -171,7 +173,7 @@ class ReportType:
         metadata={
             "name": "remote-resource",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/asset-reporting-format/1.1",
+            "namespace": ARF_1_1_NAMESPACE,
         }
     )
     id: Optional[str] = field(
@@ -249,7 +251,7 @@ class AssetReportCollection(RelationshipsContainerType):
 
     class Meta:
         name = "asset-report-collection"
-        namespace = "http://scap.nist.gov/schema/asset-reporting-format/1.1"
+        namespace = ARF_1_1_NAMESPACE
 
     report_requests: Optional["AssetReportCollection.ReportRequests"] = field(
         default=None,

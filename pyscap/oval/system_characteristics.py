@@ -8,9 +8,10 @@ from .common import (
     MessageType,
     SimpleDatatypeEnumeration,
 )
-from .namespaces import OVAL_NAMESPACE_MAP
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 from ..common.xmldsig import Signature
+
+OVAL_SYSTEM_CHARACTERISTICS_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"
 
 
 class EntityItemIpaddressStringTypeDatatype(Enum):
@@ -1815,7 +1816,7 @@ class Item(ItemType):
 
     class Meta:
         name = "item"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"
+        namespace = OVAL_SYSTEM_CHARACTERISTICS_5_NAMESPACE
 
 
 @dataclass
@@ -1838,7 +1839,7 @@ class SystemDataType:
     #     default_factory=list,
     #     metadata={
     #         "type": "Element",
-    #         "namespace": "http://oval.mitre.org/XMLSchema/oval-system-characteristics-5",
+    #         "namespace": OVAL_SYSTEM_CHARACTERISTICS_5_NAMESPACE,
     #         "min_occurs": 1,
     #     }
     # )
@@ -1874,7 +1875,7 @@ class OvalSystemCharacteristics:
 
     class Meta:
         name = "oval_system_characteristics"
-        namespace = "http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"
+        namespace = OVAL_SYSTEM_CHARACTERISTICS_5_NAMESPACE
 
     generator: Optional[GeneratorType] = field(
         default=None,
@@ -1925,7 +1926,7 @@ class OvalSystemCharacteristics:
 
     def dump(self, file):
         with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self, ns_map=OVAL_NAMESPACE_MAP)
+            scap_serializer.write(fp, self)
 
     def dump_json(self, file):
         with open(file, "w", encoding="utf8") as fp:

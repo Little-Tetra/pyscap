@@ -12,6 +12,8 @@ from ..ocil import Ocil
 from ..oval import OvalDefinitions
 from ..xccdf import Benchmark, Tailoring
 
+SDS_1_2_NAMESPACE = "http://scap.nist.gov/schema/scap/source/1.2"
+
 
 @dataclass
 class Component:
@@ -30,7 +32,7 @@ class Component:
 
     class Meta:
         name = "component"
-        namespace = "http://scap.nist.gov/schema/scap/source/1.2"
+        namespace = SDS_1_2_NAMESPACE
 
     benchmark: Optional[Benchmark] = field(
         default=None,
@@ -100,7 +102,7 @@ class ComponentRef:
 
     class Meta:
         name = "component-ref"
-        namespace = "http://scap.nist.gov/schema/scap/source/1.2"
+        namespace = SDS_1_2_NAMESPACE
 
     catalog: Optional[Catalog] = field(
         default=None,
@@ -162,7 +164,7 @@ class ExtendedComponent:
 
     class Meta:
         name = "extended-component"
-        namespace = "http://scap.nist.gov/schema/scap/source/1.2"
+        namespace = SDS_1_2_NAMESPACE
 
     other_element: Optional[object] = field(
         default=None,
@@ -213,7 +215,7 @@ class RefListType:
         metadata={
             "name": "component-ref",
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/scap/source/1.2",
+            "namespace": SDS_1_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -246,7 +248,7 @@ class DataStream:
 
     class Meta:
         name = "data-stream"
-        namespace = "http://scap.nist.gov/schema/scap/source/1.2"
+        namespace = SDS_1_2_NAMESPACE
 
     dictionaries: Optional[RefListType] = field(
         default=None,
@@ -322,7 +324,7 @@ class DataStreamCollection:
 
     class Meta:
         name = "data-stream-collection"
-        namespace = "http://scap.nist.gov/schema/scap/source/1.2"
+        namespace = SDS_1_2_NAMESPACE
 
     data_stream: List[DataStream] = field(
         default_factory=list,

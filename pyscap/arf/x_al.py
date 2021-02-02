@@ -2,6 +2,8 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Optional
 
+X_AL_NAMESPACE = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+
 
 @dataclass
 class AddressLine:
@@ -19,7 +21,7 @@ class AddressLine:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     content: List[object] = field(
         default_factory=list,
@@ -118,7 +120,7 @@ class CountryName:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     content: List[object] = field(
         default_factory=list,
@@ -173,7 +175,7 @@ class PremiseNumber:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     content: List[object] = field(
         default_factory=list,
@@ -261,7 +263,7 @@ class PremiseNumberPrefix:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     value: Optional[str] = field(
         default=None,
@@ -311,7 +313,7 @@ class PremiseNumberSuffix:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     content: List[object] = field(
         default_factory=list,
@@ -450,7 +452,7 @@ class ThoroughfareNumber:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     content: List[object] = field(
         default_factory=list,
@@ -540,7 +542,7 @@ class ThoroughfareNumberPrefix:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     content: List[object] = field(
         default_factory=list,
@@ -596,7 +598,7 @@ class ThoroughfareNumberSuffix:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     content: List[object] = field(
         default_factory=list,
@@ -763,7 +765,7 @@ class AddressLinesType:
         metadata={
             "name": "AddressLine",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -798,7 +800,7 @@ class MailStopType:
         metadata={
             "name": "AddressLine",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     mail_stop_name: Optional["MailStopType.MailStopName"] = field(
@@ -806,7 +808,7 @@ class MailStopType:
         metadata={
             "name": "MailStopName",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     mail_stop_number: Optional["MailStopType.MailStopNumber"] = field(
@@ -814,7 +816,7 @@ class MailStopType:
         metadata={
             "name": "MailStopNumber",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     other_element: List[object] = field(
@@ -941,7 +943,7 @@ class PostalCode:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_line: List[AddressLine] = field(
         default_factory=list,
@@ -1214,7 +1216,7 @@ class Department:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_line: List[AddressLine] = field(
         default_factory=list,
@@ -1324,7 +1326,7 @@ class FirmType:
         metadata={
             "name": "AddressLine",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     firm_name: List["FirmType.FirmName"] = field(
@@ -1332,7 +1334,7 @@ class FirmType:
         metadata={
             "name": "FirmName",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     department: List[Department] = field(
@@ -1340,7 +1342,7 @@ class FirmType:
         metadata={
             "name": "Department",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     mail_stop: Optional[MailStopType] = field(
@@ -1348,7 +1350,7 @@ class FirmType:
         metadata={
             "name": "MailStop",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     postal_code: Optional[PostalCode] = field(
@@ -1356,7 +1358,7 @@ class FirmType:
         metadata={
             "name": "PostalCode",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     other_element: List[object] = field(
@@ -1449,7 +1451,7 @@ class PostBox:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_line: List[AddressLine] = field(
         default_factory=list,
@@ -1716,7 +1718,7 @@ class SubPremiseType:
         metadata={
             "name": "AddressLine",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     sub_premise_name: List["SubPremiseType.SubPremiseName"] = field(
@@ -1724,7 +1726,7 @@ class SubPremiseType:
         metadata={
             "name": "SubPremiseName",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     sub_premise_location: Optional["SubPremiseType.SubPremiseLocation"] = field(
@@ -1732,7 +1734,7 @@ class SubPremiseType:
         metadata={
             "name": "SubPremiseLocation",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     sub_premise_number: List["SubPremiseType.SubPremiseNumber"] = field(
@@ -1740,7 +1742,7 @@ class SubPremiseType:
         metadata={
             "name": "SubPremiseNumber",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     sub_premise_number_prefix: List["SubPremiseType.SubPremiseNumberPrefix"] = field(
@@ -1748,7 +1750,7 @@ class SubPremiseType:
         metadata={
             "name": "SubPremiseNumberPrefix",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     sub_premise_number_suffix: List["SubPremiseType.SubPremiseNumberSuffix"] = field(
@@ -1756,7 +1758,7 @@ class SubPremiseType:
         metadata={
             "name": "SubPremiseNumberSuffix",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     building_name: List[BuildingNameType] = field(
@@ -1764,7 +1766,7 @@ class SubPremiseType:
         metadata={
             "name": "BuildingName",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     firm: Optional[FirmType] = field(
@@ -1772,7 +1774,7 @@ class SubPremiseType:
         metadata={
             "name": "Firm",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     mail_stop: Optional[MailStopType] = field(
@@ -1780,7 +1782,7 @@ class SubPremiseType:
         metadata={
             "name": "MailStop",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     postal_code: Optional[PostalCode] = field(
@@ -1788,7 +1790,7 @@ class SubPremiseType:
         metadata={
             "name": "PostalCode",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     sub_premise: Optional["SubPremiseType"] = field(
@@ -1796,7 +1798,7 @@ class SubPremiseType:
         metadata={
             "name": "SubPremise",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     other_element: List[object] = field(
@@ -2092,7 +2094,7 @@ class PostalRouteType:
         metadata={
             "name": "AddressLine",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     postal_route_name: List["PostalRouteType.PostalRouteName"] = field(
@@ -2100,7 +2102,7 @@ class PostalRouteType:
         metadata={
             "name": "PostalRouteName",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     postal_route_number: Optional["PostalRouteType.PostalRouteNumber"] = field(
@@ -2108,7 +2110,7 @@ class PostalRouteType:
         metadata={
             "name": "PostalRouteNumber",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     post_box: Optional[PostBox] = field(
@@ -2116,7 +2118,7 @@ class PostalRouteType:
         metadata={
             "name": "PostBox",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     other_element: List[object] = field(
@@ -2258,7 +2260,7 @@ class Premise:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_line: List[AddressLine] = field(
         default_factory=list,
@@ -2651,7 +2653,7 @@ class PostOffice:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_line: List[AddressLine] = field(
         default_factory=list,
@@ -2857,7 +2859,7 @@ class DependentLocalityType:
         metadata={
             "name": "AddressLine",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     dependent_locality_name: List["DependentLocalityType.DependentLocalityName"] = field(
@@ -2865,7 +2867,7 @@ class DependentLocalityType:
         metadata={
             "name": "DependentLocalityName",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     dependent_locality_number: Optional["DependentLocalityType.DependentLocalityNumber"] = field(
@@ -2873,7 +2875,7 @@ class DependentLocalityType:
         metadata={
             "name": "DependentLocalityNumber",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     post_box: Optional[PostBox] = field(
@@ -2881,7 +2883,7 @@ class DependentLocalityType:
         metadata={
             "name": "PostBox",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     large_mail_user: Optional["LargeMailUserType"] = field(
@@ -2889,7 +2891,7 @@ class DependentLocalityType:
         metadata={
             "name": "LargeMailUser",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     post_office: Optional[PostOffice] = field(
@@ -2897,7 +2899,7 @@ class DependentLocalityType:
         metadata={
             "name": "PostOffice",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     postal_route: Optional[PostalRouteType] = field(
@@ -2905,7 +2907,7 @@ class DependentLocalityType:
         metadata={
             "name": "PostalRoute",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     thoroughfare: Optional["Thoroughfare"] = field(
@@ -2913,7 +2915,7 @@ class DependentLocalityType:
         metadata={
             "name": "Thoroughfare",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     premise: Optional[Premise] = field(
@@ -2921,7 +2923,7 @@ class DependentLocalityType:
         metadata={
             "name": "Premise",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     dependent_locality: Optional["DependentLocalityType"] = field(
@@ -2929,7 +2931,7 @@ class DependentLocalityType:
         metadata={
             "name": "DependentLocality",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     postal_code: Optional[PostalCode] = field(
@@ -2937,7 +2939,7 @@ class DependentLocalityType:
         metadata={
             "name": "PostalCode",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     other_element: List[object] = field(
@@ -3122,7 +3124,7 @@ class Thoroughfare:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_line: List[AddressLine] = field(
         default_factory=list,
@@ -3637,7 +3639,7 @@ class LargeMailUserType:
         metadata={
             "name": "AddressLine",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     large_mail_user_name: List["LargeMailUserType.LargeMailUserName"] = field(
@@ -3645,7 +3647,7 @@ class LargeMailUserType:
         metadata={
             "name": "LargeMailUserName",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     large_mail_user_identifier: Optional["LargeMailUserType.LargeMailUserIdentifier"] = field(
@@ -3653,7 +3655,7 @@ class LargeMailUserType:
         metadata={
             "name": "LargeMailUserIdentifier",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     building_name: List[BuildingNameType] = field(
@@ -3661,7 +3663,7 @@ class LargeMailUserType:
         metadata={
             "name": "BuildingName",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     department: Optional[Department] = field(
@@ -3669,7 +3671,7 @@ class LargeMailUserType:
         metadata={
             "name": "Department",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     post_box: Optional[PostBox] = field(
@@ -3677,7 +3679,7 @@ class LargeMailUserType:
         metadata={
             "name": "PostBox",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     thoroughfare: Optional[Thoroughfare] = field(
@@ -3685,7 +3687,7 @@ class LargeMailUserType:
         metadata={
             "name": "Thoroughfare",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     postal_code: Optional[PostalCode] = field(
@@ -3693,7 +3695,7 @@ class LargeMailUserType:
         metadata={
             "name": "PostalCode",
             "type": "Element",
-            "namespace": "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0",
+            "namespace": X_AL_NAMESPACE,
         }
     )
     other_element: List[object] = field(
@@ -3843,7 +3845,7 @@ class Locality:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_line: List[AddressLine] = field(
         default_factory=list,
@@ -4018,7 +4020,7 @@ class AdministrativeArea:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_line: List[AddressLine] = field(
         default_factory=list,
@@ -4298,7 +4300,7 @@ class AddressDetails:
     """
 
     class Meta:
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     postal_service_elements: Optional["AddressDetails.PostalServiceElements"] = field(
         default=None,
@@ -5086,7 +5088,7 @@ class XAl:
 
     class Meta:
         name = "xAL"
-        namespace = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+        namespace = X_AL_NAMESPACE
 
     address_details: List[AddressDetails] = field(
         default_factory=list,

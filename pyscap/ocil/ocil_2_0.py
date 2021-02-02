@@ -7,6 +7,8 @@ from xsdata.models.datatype import XmlDateTime
 
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 
+OCIL_2_NAMESPACE = "http://scap.nist.gov/schema/ocil/2.0"
+
 
 @dataclass
 class ArtifactRefType:
@@ -127,7 +129,7 @@ class DocumentType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -135,14 +137,14 @@ class DocumentType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     notice: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -200,7 +202,7 @@ class ItemBaseType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     revision: int = field(
@@ -337,7 +339,7 @@ class SetExpressionBaseType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -472,7 +474,7 @@ class ArtifactRefsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -503,7 +505,7 @@ class ArtifactType(ItemBaseType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -511,7 +513,7 @@ class ArtifactType(ItemBaseType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -551,7 +553,7 @@ class ChoiceGroupType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -598,7 +600,7 @@ class NamedItemBaseType(ItemBaseType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -626,7 +628,7 @@ class OperationType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -697,7 +699,7 @@ class QuestionTextType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -715,14 +717,14 @@ class RangeType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     max: Optional[RangeValueType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -739,7 +741,7 @@ class ReferenceArtifactValueType(ArtifactValueType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -864,7 +866,7 @@ class VariableType(ItemBaseType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     id: Optional[str] = field(
@@ -893,7 +895,7 @@ class ArtifactValue(ArtifactValueType):
 
     class Meta:
         name = "artifact_value"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -905,7 +907,7 @@ class Expression(SetExpressionBaseType):
 
     class Meta:
         name = "expression"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -916,7 +918,7 @@ class TestAction(ItemBaseType):
 
     class Meta:
         name = "test_action"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -929,7 +931,7 @@ class WhenBoolean(SetExpressionBooleanType):
 
     class Meta:
         name = "when_boolean"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -946,7 +948,7 @@ class ArtifactsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -964,7 +966,7 @@ class BinaryArtifactValueType(EmbeddedArtifactValueType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
             "format": "base64",
         }
@@ -986,7 +988,7 @@ class BooleanQuestionResultType(QuestionResultType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
             "nillable": True,
         }
@@ -1007,7 +1009,7 @@ class ChoiceQuestionResultType(QuestionResultType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
             "nillable": True,
         }
@@ -1027,7 +1029,7 @@ class ConstantVariableType(VariableType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -1083,7 +1085,7 @@ class LocalVariableType(VariableType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     question_ref: Optional[str] = field(
@@ -1110,7 +1112,7 @@ class NumericQuestionResultType(QuestionResultType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
             "nillable": True,
         }
@@ -1130,7 +1132,7 @@ class ReferencesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1164,21 +1166,21 @@ class StepType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     reference: List[ReferenceType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     step: List["StepType"] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     is_done: bool = field(
@@ -1209,7 +1211,7 @@ class StringQuestionResultType(QuestionResultType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
             "nillable": True,
         }
@@ -1236,21 +1238,21 @@ class SystemTargetType(NamedItemBaseType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     ipaddress: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     description: Optional[TextType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -1277,21 +1279,21 @@ class TestActionConditionType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     test_action_ref: Optional[TestActionRefType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     artifact_refs: Optional[ArtifactRefsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -1309,7 +1311,7 @@ class TextArtifactValueType(EmbeddedArtifactValueType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -1334,21 +1336,21 @@ class UserType(NamedItemBaseType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     position: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     email: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -1365,7 +1367,7 @@ class QuestionResult(QuestionResultType):
 
     class Meta:
         name = "question_result"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1377,7 +1379,7 @@ class ReferenceArtifactValue(ReferenceArtifactValueType):
 
     class Meta:
         name = "reference_artifact_value"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1393,7 +1395,7 @@ class Target(NamedItemBaseType):
 
     class Meta:
         name = "target"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1405,7 +1407,7 @@ class Variable(VariableType):
 
     class Meta:
         name = "variable"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1419,7 +1421,7 @@ class WhenChoice(SetExpressionChoiceType):
 
     class Meta:
         name = "when_choice"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1432,7 +1434,7 @@ class WhenPattern(SetExpressionPatternType):
 
     class Meta:
         name = "when_pattern"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1446,7 +1448,7 @@ class WhenRange(SetExpressionRangeType):
 
     class Meta:
         name = "when_range"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1463,7 +1465,7 @@ class ChoiceTestActionConditionType(TestActionConditionType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
             "pattern": r"ocil:[A-Za-z0-9_\-\.]+:choice:[1-9][0-9]*",
         }
@@ -1492,28 +1494,28 @@ class CompoundTestActionType(ItemBaseType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     description: Optional[TextType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     references: Optional[ReferencesType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     actions: Optional[OperationType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -1533,7 +1535,7 @@ class EqualsTestActionConditionType(TestActionConditionType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1580,28 +1582,28 @@ class GeneratorType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     product_version: Optional[str] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     author: List[UserType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     schema_version: Optional[Decimal] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -1609,7 +1611,7 @@ class GeneratorType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -1617,7 +1619,7 @@ class GeneratorType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -1637,7 +1639,7 @@ class InstructionsType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -1645,7 +1647,7 @@ class InstructionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1666,7 +1668,7 @@ class PatternTestActionConditionType(TestActionConditionType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1703,35 +1705,35 @@ class QuestionTestActionType(ItemBaseType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     when_unknown: Optional[TestActionConditionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     when_not_tested: Optional[TestActionConditionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     when_not_applicable: Optional[TestActionConditionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     when_error: Optional[TestActionConditionType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     question_ref: Optional[str] = field(
@@ -1766,7 +1768,7 @@ class RangeTestActionConditionType(TestActionConditionType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1796,7 +1798,7 @@ class VariableSetType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1804,7 +1806,7 @@ class VariableSetType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1812,7 +1814,7 @@ class VariableSetType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1820,7 +1822,7 @@ class VariableSetType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1828,7 +1830,7 @@ class VariableSetType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -1843,7 +1845,7 @@ class BinaryArtifactValue(BinaryArtifactValueType):
 
     class Meta:
         name = "binary_artifact_value"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1856,7 +1858,7 @@ class BooleanQuestionResult(BooleanQuestionResultType):
 
     class Meta:
         name = "boolean_question_result"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1868,7 +1870,7 @@ class ChoiceQuestionResult(ChoiceQuestionResultType):
 
     class Meta:
         name = "choice_question_result"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1880,7 +1882,7 @@ class ConstantVariable(ConstantVariableType):
 
     class Meta:
         name = "constant_variable"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1892,7 +1894,7 @@ class ExternalVariable(ExternalVariableType):
 
     class Meta:
         name = "external_variable"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1905,7 +1907,7 @@ class LocalVariable(LocalVariableType):
 
     class Meta:
         name = "local_variable"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1918,7 +1920,7 @@ class NumericQuestionResult(NumericQuestionResultType):
 
     class Meta:
         name = "numeric_question_result"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1931,7 +1933,7 @@ class StringQuestionResult(StringQuestionResultType):
 
     class Meta:
         name = "string_question_result"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1944,7 +1946,7 @@ class System(SystemTargetType):
 
     class Meta:
         name = "system"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1956,7 +1958,7 @@ class TextArtifactValue(TextArtifactValueType):
 
     class Meta:
         name = "text_artifact_value"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1968,7 +1970,7 @@ class User(UserType):
 
     class Meta:
         name = "user"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -1998,7 +2000,7 @@ class ArtifactResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -2006,7 +2008,7 @@ class ArtifactResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -2014,7 +2016,7 @@ class ArtifactResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -2022,7 +2024,7 @@ class ArtifactResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -2030,7 +2032,7 @@ class ArtifactResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
             "pattern": r"ocil:[A-Za-z0-9_\-\.]+:user:[1-9][0-9]*|ocil:[A-Za-z0-9_\-\.]+:system:[1-9][0-9]*",
         }
@@ -2039,7 +2041,7 @@ class ArtifactResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -2076,7 +2078,7 @@ class BooleanQuestionTestActionType(QuestionTestActionType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -2084,7 +2086,7 @@ class BooleanQuestionTestActionType(QuestionTestActionType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -2104,7 +2106,7 @@ class ChoiceQuestionTestActionType(QuestionTestActionType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2127,14 +2129,14 @@ class NumericQuestionTestActionType(QuestionTestActionType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     when_range: List[RangeTestActionConditionType] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -2161,7 +2163,7 @@ class QuestionResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2169,7 +2171,7 @@ class QuestionResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2177,7 +2179,7 @@ class QuestionResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2185,7 +2187,7 @@ class QuestionResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2193,7 +2195,7 @@ class QuestionResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2219,7 +2221,7 @@ class QuestionType(ItemBaseType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2227,7 +2229,7 @@ class QuestionType(ItemBaseType):
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     id: Optional[str] = field(
@@ -2298,7 +2300,7 @@ class StringQuestionTestActionType(QuestionTestActionType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2324,7 +2326,7 @@ class TargetsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2332,7 +2334,7 @@ class TargetsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2340,7 +2342,7 @@ class TargetsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2362,7 +2364,7 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2370,7 +2372,7 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2378,7 +2380,7 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2386,7 +2388,7 @@ class VariablesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2408,7 +2410,7 @@ class QuestionTestAction(QuestionTestActionType):
 
     class Meta:
         name = "question_test_action"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2425,7 +2427,7 @@ class ArtifactResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2485,14 +2487,14 @@ class ChoiceQuestionType(QuestionType):
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     choice_group_ref: List[str] = field(
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "pattern": r"ocil:[A-Za-z0-9_\-\.]+:choicegroup:[1-9][0-9]*",
         }
     )
@@ -2542,7 +2544,7 @@ class QuestionnairesType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2574,7 +2576,7 @@ class BooleanQuestionTestAction(BooleanQuestionTestActionType):
 
     class Meta:
         name = "boolean_question_test_action"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2586,7 +2588,7 @@ class ChoiceQuestionTestAction(ChoiceQuestionTestActionType):
 
     class Meta:
         name = "choice_question_test_action"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2599,7 +2601,7 @@ class NumericQuestionTestAction(NumericQuestionTestActionType):
 
     class Meta:
         name = "numeric_question_test_action"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2613,7 +2615,7 @@ class Question(QuestionType):
 
     class Meta:
         name = "question"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2626,7 +2628,7 @@ class StringQuestionTestAction(StringQuestionTestActionType):
 
     class Meta:
         name = "string_question_test_action"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2646,7 +2648,7 @@ class QuestionnaireResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     questionnaire_ref: Optional[str] = field(
@@ -2684,7 +2686,7 @@ class TestActionResultType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     test_action_ref: Optional[str] = field(
@@ -2726,7 +2728,7 @@ class TestActionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2734,7 +2736,7 @@ class TestActionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2742,7 +2744,7 @@ class TestActionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2750,7 +2752,7 @@ class TestActionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2758,7 +2760,7 @@ class TestActionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2766,7 +2768,7 @@ class TestActionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2781,7 +2783,7 @@ class BooleanQuestion(BooleanQuestionType):
 
     class Meta:
         name = "boolean_question"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2799,7 +2801,7 @@ class ChoiceQuestion(ChoiceQuestionType):
 
     class Meta:
         name = "choice_question"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2813,7 +2815,7 @@ class NumericQuestion(NumericQuestionType):
 
     class Meta:
         name = "numeric_question"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2825,7 +2827,7 @@ class StringQuestion(StringQuestionType):
 
     class Meta:
         name = "string_question"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
 
 @dataclass
@@ -2842,7 +2844,7 @@ class QuestionnaireResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2872,7 +2874,7 @@ class QuestionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2880,7 +2882,7 @@ class QuestionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2888,7 +2890,7 @@ class QuestionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2896,7 +2898,7 @@ class QuestionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2904,7 +2906,7 @@ class QuestionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2912,7 +2914,7 @@ class QuestionsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -2932,7 +2934,7 @@ class TestActionResultsType:
         default_factory=list,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "min_occurs": 1,
         }
     )
@@ -2972,42 +2974,42 @@ class ResultsType:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     questionnaire_results: Optional[QuestionnaireResultsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     test_action_results: Optional[TestActionResultsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     question_results: Optional[QuestionResultsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     artifact_results: Optional[ArtifactResultsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     targets: Optional[TargetsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     start_time: Optional[XmlDateTime] = field(
@@ -3064,7 +3066,7 @@ class Ociltype:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -3072,14 +3074,14 @@ class Ociltype:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     questionnaires: Optional[QuestionnairesType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -3087,7 +3089,7 @@ class Ociltype:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -3095,7 +3097,7 @@ class Ociltype:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
             "required": True,
         }
     )
@@ -3103,21 +3105,21 @@ class Ociltype:
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     variables: Optional[VariablesType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
     results: Optional[ResultsType] = field(
         default=None,
         metadata={
             "type": "Element",
-            "namespace": "http://scap.nist.gov/schema/ocil/2.0",
+            "namespace": OCIL_2_NAMESPACE,
         }
     )
 
@@ -3132,7 +3134,7 @@ class Ocil(Ociltype):
 
     class Meta:
         name = "ocil"
-        namespace = "http://scap.nist.gov/schema/ocil/2.0"
+        namespace = OCIL_2_NAMESPACE
 
     @classmethod
     def load(cls, file):

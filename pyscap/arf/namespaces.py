@@ -1,5 +1,0 @@
-ARF_1_1_NAMESPACE = "http://scap.nist.gov/schema/asset-reporting-format/1.1"
-ASSET_IDENTIFICATION_1_1_NAMESPACE = "http://scap.nist.gov/schema/asset-identification/1.1"
-REPORTING_CORE_1_1_NAMESPACE = "http://scap.nist.gov/schema/reporting-core/1.1"
-X_AL_NAMESPACE = "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
-X_NL_NAMESPACE = "urn:oasis:names:tc:ciq:xsdschema:xNL:2.0"
