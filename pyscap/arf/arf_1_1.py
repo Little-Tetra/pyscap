@@ -21,6 +21,9 @@ from .ai_1_1 import (
 from .reporting_core_1_1 import RelationshipsContainerType
 from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
 from ..common.xlink import TypeType
+from ..oval import OvalResults, OVAL_RESULTS_5_NAMESPACE
+from ..sds import DataStreamCollection, SDS_1_2_NAMESPACE
+from ..xccdf import TestResult, XCCDF_NAMESPACE
 
 ARF_1_1_NAMESPACE = "http://scap.nist.gov/schema/asset-reporting-format/1.1"
 
@@ -100,34 +103,6 @@ class ReportRequestType:
     :ivar other_attributes: A placeholder so that content creators can
         add attributes as desired.
     """
-    content: Optional["ReportRequestType.Content"] = field(
-        default=None,
-        metadata={
-            "type": "Element",
-        }
-    )
-    remote_resource: Optional[RemoteResource] = field(
-        default=None,
-        metadata={
-            "name": "remote-resource",
-            "type": "Element",
-            "namespace": ARF_1_1_NAMESPACE,
-        }
-    )
-    id: Optional[str] = field(
-        default=None,
-        metadata={
-            "type": "Attribute",
-            "required": True,
-        }
-    )
-    other_attributes: Dict = field(
-        default_factory=dict,
-        metadata={
-            "type": "Attributes",
-            "namespace": "##other",
-        }
-    )
 
     @dataclass
     class Content:
@@ -139,8 +114,19 @@ class ReportRequestType:
         other_element: Optional[object] = field(
             default=None,
             metadata={
-                "type": "Wildcard",
-                "namespace": "##other",
+                "type": "Elements",
+                "choices": (
+                    {
+                        "name": "data-stream-collection",
+                        "type": DataStreamCollection,
+                        "namespace": SDS_1_2_NAMESPACE
+                    },
+                    {
+                        "type": object,
+                        "namespace": "##other",
+                        "wildcard": True
+                    }
+                ),
                 "required": True,
             }
         )
@@ -152,17 +138,7 @@ class ReportRequestType:
             }
         )
 
-
-@dataclass
-class ReportType:
-    """
-    :ivar content: Contains the content of the report.
-    :ivar remote_resource:
-    :ivar id: An internal ID to identify this report.
-    :ivar other_attributes: A placeholder so that content creators can
-        add attributes as desired.
-    """
-    content: Optional["ReportType.Content"] = field(
+    content: Optional[Content] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -190,6 +166,17 @@ class ReportType:
             "namespace": "##other",
         }
     )
+
+
+@dataclass
+class ReportType:
+    """
+    :ivar content: Contains the content of the report.
+    :ivar remote_resource:
+    :ivar id: An internal ID to identify this report.
+    :ivar other_attributes: A placeholder so that content creators can
+        add attributes as desired.
+    """
 
     @dataclass
     class Content:
@@ -203,8 +190,24 @@ class ReportType:
         other_element: Optional[object] = field(
             default=None,
             metadata={
-                "type": "Wildcard",
-                "namespace": "##other",
+                "type": "Elements",
+                "choices": (
+                    {
+                        "name": "TestResult",
+                        "type": TestResult,
+                        "namespace": XCCDF_NAMESPACE
+                    },
+                    {
+                        "name": "oval_results",
+                        "type": OvalResults,
+                        "namespace": OVAL_RESULTS_5_NAMESPACE
+                    },
+                    {
+                        "type": object,
+                        "namespace": "##other",
+                        "wildcard": True
+                    }
+                ),
                 "required": True,
             }
         )
@@ -230,60 +233,25 @@ class ReportType:
             }
         )
 
-
-@dataclass
-class AssetReportCollection(RelationshipsContainerType):
-    """
-    The top-level report element.
-
-    :ivar report_requests: Contains one or more requests for reports.
-        Each report request must be referenced in a relationship on a
-        report in the same asset-report-collection.
-    :ivar assets: Contains the representation of one or more assets
-        represented using the Asset Identification format.
-    :ivar reports: Contains one or more reports.
-    :ivar extended_infos: Contain other information elements.  Used as
-        an extension point.
-    :ivar id: The id for this collection.
-    :ivar other_attributes: A placeholder so that content creators can
-        add attributes as desired.
-    """
-
-    class Meta:
-        name = "asset-report-collection"
-        namespace = ARF_1_1_NAMESPACE
-
-    report_requests: Optional["AssetReportCollection.ReportRequests"] = field(
-        default=None,
-        metadata={
-            "name": "report-requests",
-            "type": "Element",
-        }
-    )
-    assets: Optional["AssetReportCollection.Assets"] = field(
+    content: Optional[Content] = field(
         default=None,
         metadata={
             "type": "Element",
         }
     )
-    reports: Optional["AssetReportCollection.Reports"] = field(
+    remote_resource: Optional[RemoteResource] = field(
         default=None,
         metadata={
+            "name": "remote-resource",
             "type": "Element",
-            "required": True,
-        }
-    )
-    extended_infos: Optional["AssetReportCollection.ExtendedInfos"] = field(
-        default=None,
-        metadata={
-            "name": "extended-infos",
-            "type": "Element",
+            "namespace": ARF_1_1_NAMESPACE,
         }
     )
     id: Optional[str] = field(
         default=None,
         metadata={
             "type": "Attribute",
+            "required": True,
         }
     )
     other_attributes: Dict = field(
@@ -293,6 +261,25 @@ class AssetReportCollection(RelationshipsContainerType):
             "namespace": "##other",
         }
     )
+
+
+@dataclass
+class AssetReportCollection(RelationshipsContainerType):
+    """
+
+    The top-level report element.
+
+    :ivar report_requests: Contains one or more requests for reports. Each report request must be referenced in a relationship on a report in the same asset-report-collection.
+    :ivar assets: Contains the representation of one or more assets represented using the Asset Identification format.
+    :ivar reports: Contains one or more reports.
+    :ivar extended_infos: Contain other information elements.  Used as an extension point.
+    :ivar id: The id for this collection.
+    :ivar other_attributes: A placeholder so that content creators can add attributes as desired.
+    """
+
+    class Meta:
+        name = "asset-report-collection"
+        namespace = ARF_1_1_NAMESPACE
 
     @dataclass
     class ReportRequests:
@@ -307,14 +294,6 @@ class AssetReportCollection(RelationshipsContainerType):
 
     @dataclass
     class Assets:
-        asset: List["AssetReportCollection.Assets.Asset"] = field(
-            default_factory=list,
-            metadata={
-                "type": "Element",
-                "min_occurs": 1,
-            }
-        )
-
         @dataclass
         class Asset:
             """
@@ -452,6 +431,14 @@ class AssetReportCollection(RelationshipsContainerType):
                 }
             )
 
+        asset: List[Asset] = field(
+            default_factory=list,
+            metadata={
+                "type": "Element",
+                "min_occurs": 1,
+            }
+        )
+
     @dataclass
     class Reports:
         """
@@ -473,14 +460,6 @@ class AssetReportCollection(RelationshipsContainerType):
             extension point for data that does not fall into the
             categories defined in asset-report-collection.
         """
-        extended_info: List["AssetReportCollection.ExtendedInfos.ExtendedInfo"] = field(
-            default_factory=list,
-            metadata={
-                "name": "extended-info",
-                "type": "Element",
-                "min_occurs": 1,
-            }
-        )
 
         @dataclass
         class ExtendedInfo:
@@ -512,6 +491,56 @@ class AssetReportCollection(RelationshipsContainerType):
                     "namespace": "##other",
                 }
             )
+
+        extended_info: List[ExtendedInfo] = field(
+            default_factory=list,
+            metadata={
+                "name": "extended-info",
+                "type": "Element",
+                "min_occurs": 1,
+            }
+        )
+
+    report_requests: Optional[ReportRequests] = field(
+        default=None,
+        metadata={
+            "name": "report-requests",
+            "type": "Element",
+        }
+    )
+    assets: Optional[Assets] = field(
+        default=None,
+        metadata={
+            "type": "Element",
+        }
+    )
+    reports: Optional[Reports] = field(
+        default=None,
+        metadata={
+            "type": "Element",
+            "required": True,
+        }
+    )
+    extended_infos: Optional[ExtendedInfos] = field(
+        default=None,
+        metadata={
+            "name": "extended-infos",
+            "type": "Element",
+        }
+    )
+    id: Optional[str] = field(
+        default=None,
+        metadata={
+            "type": "Attribute",
+        }
+    )
+    other_attributes: Dict = field(
+        default_factory=dict,
+        metadata={
+            "type": "Attributes",
+            "namespace": "##other",
+        }
+    )
 
     @classmethod
     def load(cls, file):
