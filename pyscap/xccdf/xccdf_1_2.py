@@ -23,7 +23,7 @@ class Cpe2Idref:
     """
 
     class Meta:
-        name = "CPE2idrefType"
+        name = "CPE2idref"
 
     idref: Optional[str] = field(
         default=None,
@@ -45,7 +45,7 @@ class BenchmarkReference:
     """
 
     class Meta:
-        name = "benchmarkReferenceType"
+        name = "benchmarkReference"
 
     href: Optional[str] = field(
         default=None,
@@ -88,7 +88,7 @@ class CheckContentRef:
     """
 
     class Meta:
-        name = "checkContentRefType"
+        name = "checkContentRef"
 
     href: Optional[str] = field(
         default=None,
@@ -116,7 +116,7 @@ class CheckContent:
     """
 
     class Meta:
-        name = "checkContentType"
+        name = "checkContent"
 
     other_element: List[object] = field(
         default_factory=list,
@@ -144,7 +144,7 @@ class CheckExport:
     """
 
     class Meta:
-        name = "checkExportType"
+        name = "checkExport"
 
     value_id: Optional[str] = field(
         default=None,
@@ -182,7 +182,7 @@ class CheckImport:
     """
 
     class Meta:
-        name = "checkImportType"
+        name = "checkImport"
 
     any_element: List[object] = field(
         default_factory=list,
@@ -221,7 +221,7 @@ class ComplexValue:
     """
 
     class Meta:
-        name = "complexValueType"
+        name = "complexValue"
 
     item: List[str] = field(
         default_factory=list,
@@ -240,7 +240,7 @@ class DcStatus:
     """
 
     class Meta:
-        name = "dc-statusType"
+        name = "dc-status"
 
     purl_org_dc_elements_1_1_element: List[object] = field(
         default_factory=list,
@@ -291,7 +291,7 @@ class HtmlText:
     """
 
     class Meta:
-        name = "htmlTextType"
+        name = "htmlText"
 
     w3_org_1999_xhtml_element: List[object] = field(
         default_factory=list,
@@ -332,7 +332,7 @@ class Ident:
     """
 
     class Meta:
-        name = "identType"
+        name = "ident"
 
     value: Optional[str] = field(
         default=None,
@@ -367,7 +367,7 @@ class Identity:
     """
 
     class Meta:
-        name = "identityType"
+        name = "identity"
 
     value: Optional[str] = field(
         default=None,
@@ -398,7 +398,7 @@ class IdrefList:
     """
 
     class Meta:
-        name = "idrefListType"
+        name = "idrefList"
 
     idref: List[str] = field(
         default_factory=list,
@@ -420,7 +420,7 @@ class Idref:
     """
 
     class Meta:
-        name = "idrefType"
+        name = "idref"
 
     idref: Optional[str] = field(
         default=None,
@@ -443,7 +443,7 @@ class InstanceFix:
     """
 
     class Meta:
-        name = "instanceFixType"
+        name = "instanceFix"
 
     context: str = field(
         default="undefined",
@@ -468,7 +468,7 @@ class InstanceResult:
     """
 
     class Meta:
-        name = "instanceResultType"
+        name = "instanceResult"
 
     value: Optional[str] = field(
         default=None,
@@ -522,7 +522,7 @@ class Metadata:
     """
 
     class Meta:
-        name = "metadataType"
+        name = "metadata"
 
     other_element: List[object] = field(
         default_factory=list,
@@ -566,7 +566,7 @@ class Notice:
     """
 
     class Meta:
-        name = "noticeType"
+        name = "notice"
 
     w3_org_1999_xhtml_element: List[object] = field(
         default_factory=list,
@@ -612,7 +612,7 @@ class Param:
     """
 
     class Meta:
-        name = "paramType"
+        name = "param"
 
     value: Optional[str] = field(
         default=None,
@@ -639,7 +639,7 @@ class PlainText:
     """
 
     class Meta:
-        name = "plainTextType"
+        name = "plainText"
 
     value: Optional[str] = field(
         default=None,
@@ -666,7 +666,7 @@ class ProfileSetValue:
     """
 
     class Meta:
-        name = "profileSetValueType"
+        name = "profileSetValue"
 
     value: Optional[str] = field(
         default=None,
@@ -712,7 +712,7 @@ class Reference:
     """
 
     class Meta:
-        name = "referenceType"
+        name = "reference"
 
     purl_org_dc_elements_1_1_element: List[object] = field(
         default_factory=list,
@@ -788,7 +788,7 @@ class Score:
     """
 
     class Meta:
-        name = "scoreType"
+        name = "score"
 
     value: Optional[Decimal] = field(
         default=None,
@@ -818,7 +818,7 @@ class SelNum:
     """
 
     class Meta:
-        name = "selNumType"
+        name = "selNum"
 
     value: Optional[Decimal] = field(
         default=None,
@@ -842,7 +842,7 @@ class SelString:
     """
 
     class Meta:
-        name = "selStringType"
+        name = "selString"
 
     value: Optional[str] = field(
         default=None,
@@ -885,7 +885,7 @@ class Signature:
     """
 
     class Meta:
-        name = "signatureType"
+        name = "signature"
 
     w3_org_2000_09_xmldsig_element: Optional[object] = field(
         default=None,
@@ -945,7 +945,7 @@ class TailoringReference:
     """
 
     class Meta:
-        name = "tailoringReferenceType"
+        name = "tailoringReference"
 
     href: Optional[str] = field(
         default=None,
@@ -988,7 +988,7 @@ class TailoringVersion:
     """
 
     class Meta:
-        name = "tailoringVersionType"
+        name = "tailoringVersion"
 
     value: Optional[str] = field(
         default=None,
@@ -1015,7 +1015,7 @@ class TargetIdRef:
     """
 
     class Meta:
-        name = "targetIdRefType"
+        name = "targetIdRef"
 
     system: Optional[str] = field(
         default=None,
@@ -1051,7 +1051,7 @@ class Text:
     """
 
     class Meta:
-        name = "textType"
+        name = "text"
 
     value: Optional[str] = field(
         default=None,
@@ -1081,7 +1081,7 @@ class UriRef:
     """
 
     class Meta:
-        name = "uriRefType"
+        name = "uriRef"
 
     uri: Optional[str] = field(
         default=None,
@@ -1139,7 +1139,7 @@ class Version:
     """
 
     class Meta:
-        name = "versionType"
+        name = "version"
 
     value: Optional[str] = field(
         default=None,
@@ -1205,7 +1205,7 @@ class Check:
     """
 
     class Meta:
-        name = "checkType"
+        name = "check"
 
     check_import: List[CheckImport] = field(
         default_factory=list,
@@ -1291,7 +1291,7 @@ class Fact:
     """
 
     class Meta:
-        name = "factType"
+        name = "fact"
 
     value: Optional[str] = field(
         default=None,
@@ -1323,7 +1323,7 @@ class Message:
     """
 
     class Meta:
-        name = "messageType"
+        name = "message"
 
     value: Optional[str] = field(
         default=None,
@@ -1389,7 +1389,7 @@ class Override:
     """
 
     class Meta:
-        name = "overrideType"
+        name = "override"
 
     old_result: Optional[Result] = field(
         default=None,
@@ -1442,7 +1442,7 @@ class OverrideableCpe2Idref(Cpe2Idref):
     """
 
     class Meta:
-        name = "overrideableCPE2idrefType"
+        name = "overrideableCPE2idref"
 
     override: bool = field(
         default=False,
@@ -1471,7 +1471,7 @@ class ProfileRefineRule:
     """
 
     class Meta:
-        name = "profileRefineRuleType"
+        name = "profileRefineRule"
 
     remark: List[Text] = field(
         default_factory=list,
@@ -1528,7 +1528,7 @@ class ProfileRefineValue:
     """
 
     class Meta:
-        name = "profileRefineValueType"
+        name = "profileRefineValue"
 
     remark: List[Text] = field(
         default_factory=list,
@@ -1571,7 +1571,7 @@ class ProfileSelect:
     """
 
     class Meta:
-        name = "profileSelectType"
+        name = "profileSelect"
 
     remark: List[Text] = field(
         default_factory=list,
@@ -1608,7 +1608,7 @@ class ProfileSetComplexValue(ComplexValue):
     """
 
     class Meta:
-        name = "profileSetComplexValueType"
+        name = "profileSetComplexValue"
 
     idref: Optional[str] = field(
         default=None,
@@ -1632,7 +1632,7 @@ class SelChoices:
     """
 
     class Meta:
-        name = "selChoicesType"
+        name = "selChoices"
 
     choice: List[str] = field(
         default_factory=list,
@@ -1672,7 +1672,7 @@ class SelComplexValue(ComplexValue):
     """
 
     class Meta:
-        name = "selComplexValueType"
+        name = "selComplexValue"
 
     selector: str = field(
         default="",
@@ -1725,7 +1725,7 @@ class Sub(Idref):
     """
 
     class Meta:
-        name = "subType"
+        name = "sub"
 
     use: SubUse = field(
         default=SubUse.VALUE,
@@ -1745,7 +1745,7 @@ class TailoringBenchmarkReference(BenchmarkReference):
     """
 
     class Meta:
-        name = "tailoringBenchmarkReferenceType"
+        name = "tailoringBenchmarkReference"
 
     version: Optional[str] = field(
         default=None,
@@ -1771,7 +1771,7 @@ class ComplexCheck:
     """
 
     class Meta:
-        name = "complexCheckType"
+        name = "complexCheck"
 
     check: List[Check] = field(
         default_factory=list,
@@ -1822,7 +1822,7 @@ class Fix:
     """
 
     class Meta:
-        name = "fixType"
+        name = "fix"
 
     content: List[object] = field(
         default_factory=list,
@@ -1901,7 +1901,7 @@ class HtmlTextWithSub:
     """
 
     class Meta:
-        name = "htmlTextWithSubType"
+        name = "htmlTextWithSub"
 
     sub: List[Sub] = field(
         default_factory=list,
@@ -1949,7 +1949,7 @@ class ProfileNote:
     """
 
     class Meta:
-        name = "profileNoteType"
+        name = "profileNote"
 
     sub: List[Sub] = field(
         default_factory=list,
@@ -1995,7 +1995,7 @@ class TargetFacts:
     """
 
     class Meta:
-        name = "targetFactsType"
+        name = "targetFacts"
 
     fact: List[Fact] = field(
         default_factory=list,
@@ -2018,7 +2018,7 @@ class TextWithSub:
     """
 
     class Meta:
-        name = "textWithSubType"
+        name = "textWithSub"
 
     content: List[object] = field(
         default_factory=list,
@@ -2066,7 +2066,7 @@ class FixText(HtmlTextWithSub):
     """
 
     class Meta:
-        name = "fixTextType"
+        name = "fixtext"
 
     content: List[object] = field(
         default_factory=list,
@@ -2133,7 +2133,7 @@ class RuleResult:
     """
 
     class Meta:
-        name = "ruleResultType"
+        name = "ruleResult"
 
     result: Optional[Result] = field(
         default=None,
@@ -2244,7 +2244,7 @@ class WarningType(HtmlTextWithSub):
     """
 
     class Meta:
-        name = "warningType"
+        name = "warning"
 
     content: List[object] = field(
         default_factory=list,
