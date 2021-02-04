@@ -50,8 +50,8 @@ from .arf_1_1 import (
     ARF_1_1_NAMESPACE,
     ObjectRef,
     RemoteResource,
-    ReportRequestType,
-    ReportType,
+    ReportRequest,
+    Report,
     AssetReportCollection
 )
 from .reporting_core_1_1 import (
