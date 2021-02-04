@@ -1,5 +1,5 @@
 from .xccdf_1_2 import (
-    XCCDF_NAMESPACE,
+    XCCDF_1_2_NAMESPACE,
     Cpe2Idref,
     BenchmarkReference,
     ComplexCheckOperator,
