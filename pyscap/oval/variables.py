@@ -6,7 +6,7 @@ from .common import (
     NotesType,
     SimpleDatatypeEnumeration,
 )
-from ..common.utils import scap_json_parser, scap_serializer, scap_json_serializer, scap_parser
+from ..common.utils import ParsableElement
 from ..common.xmldsig import Signature
 
 OVAL_VARIABLES_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-variables-5"
@@ -93,7 +93,7 @@ class VariablesType:
 
 
 @dataclass
-class OvalVariables:
+class OvalVariables(ParsableElement):
     """The oval_variables element is the root of an OVAL Variable Document.
 
     Its purpose is to bind together the different variables contained in
@@ -132,23 +132,3 @@ class OvalVariables:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            variables = scap_parser.parse(fp, cls)
-        return variables
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            variables = scap_json_parser.parse(fp, cls)
-        return variables
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)

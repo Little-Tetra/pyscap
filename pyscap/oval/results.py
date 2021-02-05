@@ -12,7 +12,7 @@ from .common import (
 )
 from .definitions import OvalDefinitions
 from .system_characteristics import OvalSystemCharacteristics
-from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.utils import ParsableElement
 from ..common.xmldsig import Signature
 
 OVAL_RESULTS_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-results-5"
@@ -848,7 +848,7 @@ class ResultsType:
 
 
 @dataclass
-class OvalResults:
+class OvalResults(ParsableElement):
     """The oval_results element is the root of an OVAL Results Document.
 
     Its purpose is to bind together the four major sections of a results document - generator, directives, oval_definitions, and results - which are the children of the root element. It must contain exactly one generator section, one directives section, and one results section.
@@ -930,23 +930,3 @@ class OvalResults:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            results = scap_parser.parse(fp, cls)
-        return results
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            results = scap_json_parser.parse(fp, cls)
-        return results
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)

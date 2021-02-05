@@ -19,7 +19,7 @@ from .ai_1_1 import (
     Website,
 )
 from .reporting_core_1_1 import RelationshipsContainerType
-from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.utils import ParsableElement
 from ..common.xlink import TypeType
 from ..oval import OvalResults, OVAL_RESULTS_5_NAMESPACE
 from ..sds import DataStreamCollection, SDS_1_2_NAMESPACE
@@ -485,7 +485,7 @@ class ExtendedInfos:
 
 
 @dataclass
-class AssetReportCollection(RelationshipsContainerType):
+class AssetReportCollection(RelationshipsContainerType, ParsableElement):
     """
 
     The top-level report element.
@@ -542,23 +542,3 @@ class AssetReportCollection(RelationshipsContainerType):
             "namespace": "##other",
         }
     )
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            asset_report_collection = scap_parser.parse(fp, cls)
-        return asset_report_collection
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            asset_report_collection = scap_json_parser.parse(fp, cls)
-        return asset_report_collection
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)

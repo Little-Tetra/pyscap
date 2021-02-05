@@ -5,7 +5,7 @@ from typing import List, Optional
 
 from xsdata.models.datatype import XmlDateTime
 
-from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.utils import ParsableElement
 
 OCIL_2_NAMESPACE = "http://scap.nist.gov/schema/ocil/2.0"
 
@@ -3125,7 +3125,7 @@ class Ociltype:
 
 
 @dataclass
-class Ocil(Ociltype):
+class Ocil(Ociltype, ParsableElement):
     """The ocil element is the root XML element of an OCIL document.
 
     It contains information about one or more questionnaires. It may
@@ -3135,23 +3135,3 @@ class Ocil(Ociltype):
     class Meta:
         name = "ocil"
         namespace = OCIL_2_NAMESPACE
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            ocil = scap_parser.parse(fp, cls)
-        return ocil
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            ocil = scap_json_parser.parse(fp, cls)
-        return ocil
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)

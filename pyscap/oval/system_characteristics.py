@@ -8,7 +8,7 @@ from .common import (
     MessageType,
     SimpleDatatypeEnumeration,
 )
-from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.utils import ParsableElement
 from ..common.xmldsig import Signature
 
 OVAL_SYSTEM_CHARACTERISTICS_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"
@@ -1846,7 +1846,7 @@ class SystemDataType:
 
 
 @dataclass
-class OvalSystemCharacteristics:
+class OvalSystemCharacteristics(ParsableElement):
     """The system_characteristics element is the root of an OVAL System
     Characteristics Document, and must occur exactly once.
 
@@ -1911,23 +1911,3 @@ class OvalSystemCharacteristics:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            system_characteristics = scap_parser.parse(fp, cls)
-        return system_characteristics
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            system_characteristics = scap_json_parser.parse(fp, cls)
-        return system_characteristics
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)

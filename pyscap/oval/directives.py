@@ -3,14 +3,14 @@ from typing import List, Optional
 
 from .common import GeneratorType
 from .results import ClassDirectivesType, DefaultDirectivesType
-from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.utils import ParsableElement
 from ..common.xmldsig import Signature
 
 OVAL_DIRECTIVES_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-directives-5"
 
 
 @dataclass
-class OvalDirectives:
+class OvalDirectives(ParsableElement):
     """The oval_directives element is the root of an OVAL Directive Document.
 
     Its purpose is to bind together the generator and the set of
@@ -78,23 +78,3 @@ class OvalDirectives:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            directives = scap_parser.parse(fp, cls)
-        return directives
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            directives = scap_json_parser.parse(fp, cls)
-        return directives
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)

@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 from xsdata.models.datatype import XmlDateTime
 
 from ..common.catalog import Catalog
-from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.utils import ParsableElement
 from ..common.xmldsig import Signature
 from ..cpe import CpeList
 from ..ocil import Ocil
@@ -309,7 +309,7 @@ class DataStream:
 
 
 @dataclass
-class DataStreamCollection:
+class DataStreamCollection(ParsableElement):
     """
     Holds a collection of data streams and components.
 
@@ -372,23 +372,3 @@ class DataStreamCollection:
             "required": True,
         }
     )
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            data_stream_collection = scap_parser.parse(fp, cls)
-        return data_stream_collection
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            data_stream_collection = scap_json_parser.parse(fp, cls)
-        return data_stream_collection
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)

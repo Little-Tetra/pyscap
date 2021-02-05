@@ -14,7 +14,7 @@ from .common import (
     SimpleDatatypeEnumeration,
     Notes as CommonNotes,
 )
-from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.utils import ParsableElement
 from ..common.xmldsig import Signature
 
 OVAL_DEFINITIONS_5_NAMESPACE = "http://oval.mitre.org/XMLSchema/oval-definitions-5"
@@ -5995,7 +5995,7 @@ class VariablesType:
 
 
 @dataclass
-class OvalDefinitions:
+class OvalDefinitions(ParsableElement):
     """The oval_definitions element is the root of an OVAL Definition Document.
 
     Its purpose is to bind together the major sections of a document - generator, definitions, tests, objects, states, and variables - which are the children of the root element.
@@ -6068,23 +6068,3 @@ class OvalDefinitions:
             "namespace": "http://www.w3.org/2000/09/xmldsig#",
         }
     )
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            definitions = scap_parser.parse(fp, cls)
-        return definitions
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            definitions = scap_json_parser.parse(fp, cls)
-        return definitions
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)

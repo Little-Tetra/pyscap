@@ -5,7 +5,7 @@ from typing import Dict, List, Optional
 
 from xsdata.models.datatype import XmlDate, XmlDateTime
 
-from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_json_serializer
+from ..common.utils import ParsableElement
 from ..cpe import PlatformSpecification
 
 XCCDF_1_2_NAMESPACE = "http://checklists.nist.gov/xccdf/1.2"
@@ -3237,7 +3237,7 @@ class Group(SelectableItem):
 
 
 @dataclass
-class Benchmark:
+class Benchmark(ParsableElement):
     """
 
     This is the root element of the XCCDF document; it must appear exactly once. It encloses the entire benchmark,
@@ -3453,23 +3453,3 @@ class Benchmark:
             "namespace": "http://www.w3.org/XML/1998/namespace",
         }
     )
-
-    @classmethod
-    def load(cls, file):
-        with open(file, "rb") as fp:
-            benchmark = scap_parser.parse(fp, cls)
-        return benchmark
-
-    @classmethod
-    def load_json(cls, file):
-        with open(file, "rb") as fp:
-            benchmark = scap_json_parser.parse(fp, cls)
-        return benchmark
-
-    def dump(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_serializer.write(fp, self)
-
-    def dump_json(self, file):
-        with open(file, "w", encoding="utf8") as fp:
-            scap_json_serializer.write(fp, self)
