@@ -23,7 +23,7 @@ from ..common.utils import scap_parser, scap_json_parser, scap_serializer, scap_
 from ..common.xlink import TypeType
 from ..oval import OvalResults, OVAL_RESULTS_5_NAMESPACE
 from ..sds import DataStreamCollection, SDS_1_2_NAMESPACE
-from ..xccdf import TestResult, XCCDF_NAMESPACE
+from ..xccdf import TestResult, XCCDF_1_2_NAMESPACE
 
 ARF_1_1_NAMESPACE = "http://scap.nist.gov/schema/asset-reporting-format/1.1"
 
@@ -195,7 +195,7 @@ class ReportContent:
                 {
                     "name": "TestResult",
                     "type": TestResult,
-                    "namespace": XCCDF_NAMESPACE
+                    "namespace": XCCDF_1_2_NAMESPACE
                 },
                 {
                     "name": "oval_results",
