@@ -12,10 +12,6 @@ setup(
     name='pyscap',
     version=get_version(),
     packages=find_packages(),
-    url='https://github.com/Little-Tetra/pyscap',
-    license='MIT',
-    author='Kevin Ju',
-    description='Python package for handling Security Content Automation Protocol.',
     install_requires=[
         "xsdata"
     ]
