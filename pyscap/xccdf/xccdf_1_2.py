@@ -3235,6 +3235,16 @@ class Group(SelectableItem):
         }
     )
 
+    def find_rule(self, rule_id):
+        for rule in self.rule:
+            if rule.id == rule_id:
+                return rule
+        for group in self.group:
+            result = group.find_rule(rule_id)
+            if result is not None:
+                return result
+        return None
+
 
 @dataclass
 class Benchmark(ParsableElement):
@@ -3453,3 +3463,13 @@ class Benchmark(ParsableElement):
             "namespace": "http://www.w3.org/XML/1998/namespace",
         }
     )
+
+    def find_rule(self, rule_id):
+        for rule in self.rule:
+            if rule.id == rule_id:
+                return rule
+        for group in self.group:
+            result = group.find_rule(rule_id)
+            if result is not None:
+                return result
+        return None
