@@ -1,3 +1,11 @@
+Version 0.1.2
+-------------
+
+Released 2021-02-09
+
+- Implement OCIL, SDS, ARF classes.
+- Simplify XCCDF class names.
+
 Version 0.1.1
 -------------
 
