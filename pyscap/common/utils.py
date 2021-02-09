@@ -25,7 +25,7 @@ class ParsableElement:
         if isinstance(data, bytes):
             return parser.from_bytes(data, cls)
         else:
-            return parser.from_path(Path(data))
+            return parser.from_path(Path(data), cls)
 
     def write(self, file, data_format="xml"):
         if data_format == "xml":
