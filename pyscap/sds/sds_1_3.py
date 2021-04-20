@@ -10,7 +10,8 @@ from ..common.xmldsig import Signature
 from ..cpe import CpeList
 from ..ocil import Ocil
 from ..oval import OvalDefinitions
-from ..xccdf import Benchmark, Tailoring
+from ..xccdf import Benchmark, Tailoring, XCCDF_1_2_NAMESPACE
+from ..xccdf.xccdf_1_1 import XCCDF_1_1_NAMESPACE, Benchmark as Benchmark_1_1
 
 SDS_1_2_NAMESPACE = "http://scap.nist.gov/schema/scap/source/1.2"
 
@@ -34,12 +35,22 @@ class Component:
         name = "component"
         namespace = SDS_1_2_NAMESPACE
 
-    benchmark: Optional[Benchmark] = field(
+    benchmark: Optional[object] = field(
         default=None,
         metadata={
-            "name": "Benchmark",
-            "type": "Element",
-            "namespace": "http://checklists.nist.gov/xccdf/1.2",
+            "type": "Elements",
+            "choices": (
+                {
+                    "name": "Benchmark",
+                    "namespace": XCCDF_1_2_NAMESPACE,
+                    "type": Benchmark
+                },
+                {
+                    "name": "Benchmark",
+                    "namespace": XCCDF_1_1_NAMESPACE,
+                    "type": Benchmark_1_1
+                }
+            )
         }
     )
     oval_definitions: Optional[OvalDefinitions] = field(

@@ -24,6 +24,7 @@ from ..common.xlink import TypeType
 from ..oval import OvalResults, OVAL_RESULTS_5_NAMESPACE
 from ..sds import DataStreamCollection, SDS_1_2_NAMESPACE
 from ..xccdf import TestResult, XCCDF_1_2_NAMESPACE
+from ..xccdf.xccdf_1_1 import TestResult as TestResult_1_1, XCCDF_1_1_NAMESPACE
 
 ARF_1_1_NAMESPACE = "http://scap.nist.gov/schema/asset-reporting-format/1.1"
 
@@ -201,6 +202,11 @@ class ReportContent:
                     "name": "oval_results",
                     "type": OvalResults,
                     "namespace": OVAL_RESULTS_5_NAMESPACE
+                },
+                {
+                    "name": "TestResult",
+                    "type": TestResult_1_1,
+                    "namespace": XCCDF_1_1_NAMESPACE
                 },
                 {
                     "type": object,
