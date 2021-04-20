@@ -1,3 +1,10 @@
+Version 0.1.3
+-------------
+
+Released 2021-04-20
+
+- Add XCCDF 1.1 support.
+
 Version 0.1.2
 -------------
 

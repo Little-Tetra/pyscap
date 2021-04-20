@@ -1,3 +1,3 @@
 from . import arf, cpe, ocil, oval, sds, xccdf
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
