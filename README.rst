@@ -19,9 +19,15 @@ Features
 
 * Load and dump SCAP strings or files as pythonic objects.
 
+  * XCCDF(WIP)
   * OVAL(WIP)
   * OCIL(WIP)
-  * XCCDF(WIP)
+  * CPE(WIP)
+  * SWID(WIP)
+  * CCE(WIP)
+  * CVE(WIP)
+  * CVSS(WIP)
+  * CCSS(WIP)
   * DS(WIP)
   * ARF(WIP)
 
