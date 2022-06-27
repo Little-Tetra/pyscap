@@ -17,20 +17,26 @@ Install and update using pip:
 Features
 --------
 
-* Load and dump SCAP files.
+* Load and dump SCAP strings or files as pythonic objects.
 
-  * OVAL
-  * OCIL
-  * XCCDF
-  * DS
-  * ARF
+  * OVAL(WIP)
+  * OCIL(WIP)
+  * XCCDF(WIP)
+  * DS(WIP)
+  * ARF(WIP)
+
+* Load and dump SCAP objects in JSON format(unofficial).
+
+* Provide SCAP-related utils.
+
 
 Usage
 -----
 
 .. code-block:: python
 
-  import pyscap
+  from pyscap import xccdf
 
-  my_benchmark = pyscap.xccdf.Benchmark.parse("my_benchmark.xml")
-  print(my_benchmark.title)
+  with open("my_benchmark.xml", "r") as f:
+    my_benchmark = xccdf.Benchmark.load(f)
+    print(my_benchmark.title)

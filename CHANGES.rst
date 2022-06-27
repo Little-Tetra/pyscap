@@ -1,3 +1,10 @@
+Version 0.2.0
+-------------
+
+Released 2022-06-20
+
+- Redevelop based on pydantic (WIP).
+
 Version 0.1.2
 -------------
 
